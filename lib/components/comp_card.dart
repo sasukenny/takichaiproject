@@ -100,7 +100,7 @@ class comp_card extends StatelessWidget {
           print("Click event on Container");
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => login()),
+            MaterialPageRoute(builder: (context) => act_Login()),
           );
         },
       );
