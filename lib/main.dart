@@ -62,9 +62,9 @@ class MyApp extends StatelessWidget {
           margin: const EdgeInsets.only(top: 40),
           child: Column(
             children: const [
-            SongCard(),
-            SongCard(),
-            SongCard(),
+            SongCard(time: "1:12"),
+            SongCard(time: "4:23"),
+            SongCard(time: "3:20"),
           ],
           ),
         )
@@ -74,9 +74,13 @@ class MyApp extends StatelessWidget {
 }
 
 class SongCard extends StatelessWidget {
+
   const SongCard({
     Key? key,
+    this.time="0:00" ,
   }) : super(key: key);
+  
+  final String time;
 
   @override
   Widget build(BuildContext context) {
@@ -97,9 +101,9 @@ class SongCard extends StatelessWidget {
           Flex( // Columna 1
             direction: Axis.vertical,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text("Time", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-              Text("3:53", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10))
+            children: [
+              const Text("Time", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              Text(time, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 10))
             ],
           ),
           Flex( // Columna 2
