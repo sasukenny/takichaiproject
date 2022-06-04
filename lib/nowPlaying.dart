@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'components/header.dart';
-import 'components/songDisplay.dart';
-import 'components/musicButtons.dart';
+import 'components/comp_header.dart';
+import 'components/comp_songDisplay.dart';
+import 'components/comp_musicButtons.dart';
 
 class NowPlayingPage extends StatefulWidget {
   const NowPlayingPage({Key? key, required this.title}) : super(key: key);
