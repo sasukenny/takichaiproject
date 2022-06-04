@@ -1,76 +1,83 @@
 import 'package:flutter/material.dart';
 
-class login extends StatefulWidget {
+class act_Login extends StatefulWidget {
   @override
   _loginState createState() => _loginState();
 }
 
-class _loginState extends State<login> {
+class _loginState extends State<act_Login> {
   TextEditingController email = new TextEditingController();
   TextEditingController password = new TextEditingController();
 
+  final _formkey=GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        margin: EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 50),
-        child: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Image.asset('../assets/music.jpg', height: 200), //cambia el nombre de tu imagen
+    return Form(
+      key: _formkey,
+      child: Column(
+          children:<Widget> [
             Container(
-                margin: EdgeInsets.fromLTRB(50,50,50,50),
-                padding: EdgeInsets.fromLTRB(50,0,50,0),
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(245, 245, 245, 1),
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                child: TextEmail()
-            ),
-            Container(
-                margin: EdgeInsets.fromLTRB(50,0,50,0),
-                padding: EdgeInsets.fromLTRB(50,0,50,0),
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(245, 245, 245, 1),
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                child: TextPassword()
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 70),
-              decoration: BoxDecoration(
-                color: Colors.black54,
-                borderRadius: BorderRadius.circular(50),
+              margin: EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 50),
+              child: Center(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('../assets/music.jpg', height: 200),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(50,50,50,50),
+                          padding: EdgeInsets.fromLTRB(50,0,50,0),
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(245, 245, 245, 1),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: TextFormField(
+                              decoration: InputDecoration(
+                                hintText: "Correo",
+                              ),
+                              validator:(value) {
+                                if(value!.isEmpty)
+                                {
+                                  return 'Ingrese el email';
+                                }
+                              }
+                          ),
+                        ),
+
+                        Container(
+                          margin: EdgeInsets.fromLTRB(50,0,50,0),
+                          padding: EdgeInsets.fromLTRB(50,0,50,0),
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(245, 245, 245, 1),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: TextFormField(
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                hintText: "Contraseña",
+                              ),
+                              validator:(value) {
+                                if(value!.isEmpty)
+                                {
+                                  return 'Ingrese la contraseña';
+                                }
+                              }
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 70),
+                          decoration: BoxDecoration(
+                            color: Colors.black54,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          padding: EdgeInsets.fromLTRB(60,0,60,0),
+                          child: Button(),
+                        ),
+                      ]
+                  )
               ),
-              padding: EdgeInsets.fromLTRB(60,0,60,0),
-              child: Button(),
             ),
-            SizedBox(
-              height: 50,
-            ),
-            Text("¿Nuevo usuario? Crea una cuenta !")
-          ]),
-        ),
-      ),
-    );
-  }
-
-  Widget TextEmail() {
-    return TextField(
-      controller: email,
-      decoration: InputDecoration(
-        hintText: "Correo",
-      ),
-
-    );
-  }
-
-  Widget TextPassword(){
-    return TextField(
-      controller: password,
-      obscureText: true,
-      decoration: InputDecoration(
-          hintText: "Contraseña"
+          ]
       ),
     );
   }
@@ -86,7 +93,15 @@ class _loginState extends State<login> {
           fontFamily: 'Montserrat',
         ),
       ),
-      onPressed: () {},
+      onPressed: ()
+      {
+        if(_formkey.currentState!.validate())
+        {
+          Scaffold.of(context).showSnackBar(
+              SnackBar(content:Text("Accesando al Sistema"))
+          );
+        }
+      },
     );
   }
 }
