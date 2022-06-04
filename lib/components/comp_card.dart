@@ -1,93 +1,115 @@
+import 'dart:js';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Container component1( {Key? key,
-  required String titulo,
-  required int flexText,
-  String img="",
+import '../activities/act_Login.dart';
 
-})  {
-  int InvertflexText = 10 - flexText;
-  return
-    Container(
-        height: 100.0,
-        width: double.infinity,
-        margin: const EdgeInsets.all(5.0),
-        padding: const EdgeInsets.all(3.0),
-        decoration: BoxDecoration(
-          color: Color.fromRGBO(24, 24, 24, 1),
-          //border: Border.all(color: Colors.blueAccent),
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
-        ),
-        child:
-        new Row(
-          children: [
-            Expanded(
-              flex: flexText,
-              child: Container(
-                  margin: const EdgeInsets.all(3.0),
-                  padding: const EdgeInsets.all(3.0),
-                  alignment: Alignment(0.0, 1.0),
-                  decoration: BoxDecoration(
-                    //border: Border.all(color: Colors.blueAccent)
-                  ),
-                  child:
-                  new Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(3.0),
-                        padding: const EdgeInsets.all(3.0),
-                        alignment: Alignment(-1.0, 1.0),
-                        child: Text(
-                          titulo,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontFamily: 'Montserrat',
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.all(3.0),
-                        padding: const EdgeInsets.all(3.0),
-                        alignment: Alignment(-1.0, 1.0),
-                        child: Text(
-                          'Encuentra nueva música que te puede gustar',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 5,
-                            fontFamily: 'Montserrat',
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
+class comp_card extends StatelessWidget {
+  const comp_card({Key? key,
+        String img="",
+        required this.titulo,
+        required this.flexText}) : super(key: key);
+  final String titulo;
+  final int flexText;
+  final String img="";
 
+  @override
+  Widget build(BuildContext context) {
+    int InvertflexText = 10 - flexText;
+    return
+      InkWell(
+        child: Container(
+            height: 100.0,
+            width: double.infinity,
+            margin: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(3.0),
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(24, 24, 24, 1),
+              //border: Border.all(color: Colors.blueAccent),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
               ),
             ),
-            Expanded(
-              flex: InvertflexText,
-              child: !img.isEmpty?logo(img):Container(
-                margin: const EdgeInsets.all(3.0),
-                padding: const EdgeInsets.all(3.0),
-                alignment: Alignment(0.0, 1.0),
-                decoration: BoxDecoration(
-                  //border: Border.all(color: Colors.blueAccent)
+            child:
+            new Row(
+              children: [
+                Expanded(
+                  flex: flexText,
+                  child: Container(
+                      margin: const EdgeInsets.all(3.0),
+                      padding: const EdgeInsets.all(3.0),
+                      alignment: Alignment(0.0, 1.0),
+                      decoration: BoxDecoration(
+                        //border: Border.all(color: Colors.blueAccent)
+                      ),
+                      child:
+                      new Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.all(3.0),
+                            padding: const EdgeInsets.all(3.0),
+                            alignment: Alignment(-1.0, 1.0),
+                            child: Text(
+                              titulo,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontFamily: 'Montserrat',
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.all(3.0),
+                            padding: const EdgeInsets.all(3.0),
+                            alignment: Alignment(-1.0, 1.0),
+                            child: Text(
+                              'Encuentra nueva música que te puede gustar',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 5,
+                                fontFamily: 'Montserrat',
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+
+                  ),
+                ),
+                Expanded(
+                  flex: InvertflexText,
+                  child: !img.isEmpty?logo(img):Container(
+                    margin: const EdgeInsets.all(3.0),
+                    padding: const EdgeInsets.all(3.0),
+                    alignment: Alignment(0.0, 1.0),
+                    decoration: BoxDecoration(
+                      //border: Border.all(color: Colors.blueAccent)
+                    ),
+
+                  ),
                 ),
 
-              ),
-            ),
-
-          ],
-        )
-    );
-
+              ],
+            )
+        ),
+        onTap: () {
+          print("Click event on Container");
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => login()),
+          );
+        },
+      );
+    throw UnimplementedError();
+  }
 }
+
+
+
 Container logo(String img){
   return
     Container(

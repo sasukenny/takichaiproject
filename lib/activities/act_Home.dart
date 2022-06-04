@@ -26,10 +26,10 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    Container FristComponent = component1(titulo: 'Descubre', flexText: 7, img: "assets/images/heart.png");
-    Container SecondComponent = component1(titulo: 'Mis favoritos', flexText: 9);
-    Container ThirdComponent = component1(titulo: 'Sube tu música', flexText: 9);
-    Container FourthComponent = component1(titulo: 'Sobre TakiChai', flexText: 7);
+    comp_card FristComponent = comp_card(titulo: 'Descubre', flexText: 7, img: "assets/images/heart.png");
+    comp_card SecondComponent = comp_card(titulo: 'Mis favoritos', flexText: 9);
+    comp_card ThirdComponent = comp_card(titulo: 'Sube tu música', flexText: 9) ;
+    comp_card FourthComponent = comp_card(titulo: 'Sobre TakiChai', flexText: 7) ;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
                       margin: const EdgeInsets.all(1.0),
                       padding: const EdgeInsets.all(1.0),
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blueAccent)
+                          //border: Border.all(color: Colors.blueAccent)
                       ),
                       child:
                       new Row(
