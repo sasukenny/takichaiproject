@@ -5,6 +5,9 @@ import '../components/comp_header.dart';
 import '../components/comp_songDisplay.dart';
 import '../components/comp_musicButtons.dart';
 
+import '../components/comp_playingBar.dart';
+import '../util/playingTime.dart';
+
 class NowPlayingPage extends StatefulWidget {
   const NowPlayingPage({Key? key, required this.title}) : super(key: key);
 
@@ -30,9 +33,9 @@ class _NowPlayingPageState extends State<NowPlayingPage> {
             ,
             const songDisplay(songTitle: 'Namastute', songArtist: 'Seedhe Maut', songImage: 'https://i.scdn.co/image/ab67616d0000b273d65e2670b7176415b9d88a59'),
             Expanded(
-              child: Text(
-                'Acá iría el reproductor de música',
-                style: Theme.of(context).textTheme.headline6,
+              child: playingBar(
+                timePlayed: PlayingTime(0,3,0),
+                songDuration: PlayingTime(0,4,10)
               ),
             ),
             const musicButtons()

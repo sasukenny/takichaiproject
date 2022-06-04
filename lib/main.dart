@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:takichaiproject/activities/act_musiclist.dart';
 import 'activities/act_nowPlaying.dart';
 import 'activities/act_musiclist.dart';
-import 'createMaterialColor.dart';
+import 'util/createMaterialColor.dart';
 
 import 'components/comp_card.dart';
 
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         )
       ),
       // home: const NowPlayingPage(title: 'Now Playing'),
-      home: const MusicList(title: 'Music List'),
+      home: NowPlayingPage(title: "Now Playing",),
     );
   }
 }
