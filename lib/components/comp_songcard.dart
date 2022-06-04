@@ -6,9 +6,11 @@ class SongCard extends StatelessWidget {
   const SongCard({
     Key? key,
     this.time="0:00" ,
+    this.title="0:00" ,
   }) : super(key: key);
   
   final String time;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class SongCard extends StatelessWidget {
             direction: Axis.vertical,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("Time", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white)),
+              Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
               Text(time, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 10, color: Colors.white))
             ],
           ),
