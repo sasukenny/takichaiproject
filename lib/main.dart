@@ -3,7 +3,7 @@ import 'package:takichaiproject/activities/act_musiclist.dart';
 import 'activities/act_Home.dart';
 import 'activities/act_nowPlaying.dart';
 import 'activities/act_musiclist.dart';
-import 'createMaterialColor.dart';
+import 'util/createMaterialColor.dart';
 
 import 'components/comp_card.dart';
 
@@ -27,9 +27,8 @@ class MyApp extends StatelessWidget {
           headline6: TextStyle(color: Color(0xFF000000),fontFamily: 'Montserrat',fontSize: 20.0, fontWeight: FontWeight.w100),
         )
       ),
-      home: const Home(title: 'Now Playing'),
-      //home: const NowPlayingPage(title: 'Now Playing'),
-      //home: const MusicList(title: 'Music List'),
+      // home: const NowPlayingPage(title: 'Now Playing'),
+      home: NowPlayingPage(title: "Now Playing",),
     );
   }
 }
