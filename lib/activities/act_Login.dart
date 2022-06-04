@@ -32,15 +32,23 @@ class _loginState extends State<act_Login> {
                             borderRadius: BorderRadius.circular(50),
                           ),
                           child: TextFormField(
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: "Correo",
                               ),
                               validator:(value) {
+                                RegExp regExp = RegExp(
+                                  r"/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g",
+                                  caseSensitive: false,
+                                  multiLine: false,
+                                );
                                 if(value!.isEmpty)
                                 {
                                   return 'Ingrese el email';
                                 }
-                              }
+                                if(!regExp.hasMatch(value)){
+                                  return 'No es un correo electónico';
+                                }
+                              },
                           ),
                         ),
 
