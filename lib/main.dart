@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:takichaiproject/activities/act_musiclist.dart';
+import 'Wrapper/wrapper.dart';
 import 'activities/act_Home.dart';
 import 'activities/act_nowPlaying.dart';
 import 'activities/act_musiclist.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         )
       ),
       home: const Home(title: 'Now Playing'),
+      //home: const Wrapper(title: 'Now Playing'),
       //home: const NowPlayingPage(title: 'Now Playing'),
       //home: const MusicList(title: 'Music List'),
     );
