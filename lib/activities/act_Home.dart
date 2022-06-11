@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import '../Wrapper/wrapper.dart';
+import '../components/comp_bottomNavBar.dart';
 import '../components/comp_card.dart';
+import 'act_musiclist.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key, required this.title}) : super(key: key);
@@ -11,88 +14,70 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    comp_card FristComponent = comp_card(titulo: 'Descubre', flexText: 7, img: "assets/images/heart.png");
-    comp_card SecondComponent = comp_card(titulo: 'Mis favoritos', flexText: 9);
-    comp_card ThirdComponent = comp_card(titulo: 'Sube tu música', flexText: 9) ;
-    comp_card FourthComponent = comp_card(titulo: 'Sobre TakiChai', flexText: 7) ;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
+    return
+      Wrapper(title: widget.title, activitieChild: elements());
+  }
 
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
 
-              const Text(
-                'Bienvenido Xocrona!!',
-                style: TextStyle(
-                  //color: Colors.white,
-                  fontSize: 24,
-                  fontFamily: 'Montserrat',
-                ),
+  Container elements(){
+    comp_card firstComponent = const comp_card(titulo: 'Descubre', flexText: 7, img: "assets/images/heart.png", newRoute: MusicList(title: 'hola') ,);
+    comp_card secondComponent = const comp_card(titulo: 'Mis favoritos', flexText: 9, newRoute: MusicList(title: 'hola'));
+    comp_card thirdComponent = const comp_card(titulo: 'Sube tu música', flexText: 9, newRoute: MusicList(title: 'hola')) ;
+    comp_card fourthComponent = const comp_card(titulo: 'Sobre TakiChai', flexText: 7, newRoute: MusicList(title: 'hola')) ;
+    return Container(
+
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+
+            const Text(
+              'Bienvenido Xocrona!!',
+              style: TextStyle(
+                //color: Colors.white,
+                fontSize: 24,
+                fontFamily: 'Montserrat',
               ),
-              /*
+            ),
+            /*
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),*/
-              new Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  FristComponent,
-                  Container(
-                      margin: const EdgeInsets.all(1.0),
-                      padding: const EdgeInsets.all(1.0),
-                      decoration: BoxDecoration(
-                          //border: Border.all(color: Colors.blueAccent)
-                      ),
-                      child:
-                      new Row(
-                        children: [
-                          Expanded(
-                            flex: 5,
-                            child:
-                            SecondComponent,
-                          ),
-                          Expanded(
-                            flex: 5,
-                            child:
-                            ThirdComponent,
-                          ),
-                        ],
-                      )
-                  ),
-                  FourthComponent,
-                ],
-              ),
-            ]
-        ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                firstComponent,
+                Container(
+                    margin: const EdgeInsets.all(1.0),
+                    padding: const EdgeInsets.all(1.0),
+                    decoration: const BoxDecoration(
+                    ),
+                    child:
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child:
+                          secondComponent,
+                        ),
+                        Expanded(
+                          flex: 5,
+                          child:
+                          thirdComponent,
+                        ),
+                      ],
+                    )
+                ),
+                fourthComponent,
+              ],
+            ),
+          ]
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-
 }

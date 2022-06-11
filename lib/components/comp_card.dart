@@ -4,19 +4,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../activities/act_Login.dart';
+import '../activities/act_musiclist.dart';
 
 class comp_card extends StatelessWidget {
   const comp_card({Key? key,
-        String img="",
+        this.img = "",
         required this.titulo,
-        required this.flexText}) : super(key: key);
+        required this.flexText,
+        required this.newRoute}) : super(key: key);
   final String titulo;
   final int flexText;
-  final String img="";
-
+  final String img;
+  final StatefulWidget newRoute;
   @override
   Widget build(BuildContext context) {
     int InvertflexText = 10 - flexText;
+
     return
       InkWell(
         child: Container(
@@ -100,8 +103,13 @@ class comp_card extends StatelessWidget {
           print("Click event on Container");
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => act_Login()),
+            MaterialPageRoute(builder: (context) => newRoute),
           );
+          /*
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MusicList(title: 'hola')),
+          );*/
         },
       );
     throw UnimplementedError();
