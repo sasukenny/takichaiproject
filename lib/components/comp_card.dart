@@ -19,11 +19,11 @@ class comp_card extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int InvertflexText = 10 - flexText;
-
+    double height = MediaQuery.of(context).size.height;
     return
       InkWell(
         child: Container(
-            height: 110.0,
+            height: height/7,
             width: double.infinity,
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(3.0),

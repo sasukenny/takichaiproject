@@ -18,6 +18,35 @@ class _ProfileState extends State<Profile> {
       Wrapper(title: widget.title, activitieChild: elements());
   }
   Container elements(){
-    return Container();
+    return Container(
+      child:
+        Column(
+          children: [
+            Column(
+              children: [
+                Container(
+                  child: Text('Imagen de perfil'),
+                ),
+                Container(
+                  child: Text('botones editar - modoArtista'),
+                )
+              ],
+
+            ),
+            Column(
+              children: [
+                Container(
+                  child: Text('Favoritos'),
+                )],
+            ),
+            Column(
+              children: [
+                Container(
+                  child: Text('Artistas seguidos'),
+                )],
+            ),
+          ],
+        ),
+    );
   }
 }

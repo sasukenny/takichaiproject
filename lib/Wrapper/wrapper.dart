@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../activities/act_Profile.dart';
 import '../components/comp_bottomNavBar.dart';
 
 class Wrapper extends StatefulWidget {
@@ -27,17 +28,25 @@ class _HomeState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      backgroundColor: Color(0xFFE5E5E5),
-      appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios , color: Colors.white,),
-        title: Text(widget.title),
-        actions: myActions(),
-        backgroundColor: Color.fromRGBO(55, 0, 0, 0.5),
+    return WillPopScope(
+        onWillPop: ()async{
+          print('s');
+          return false;
+        },
+        child: Scaffold(
+          backgroundColor: Color(0xFFE5E5E5),
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios , color: Colors.white),
+              onPressed:  () => Navigator.of(context).pop() ),
+            title: Text(widget.title, style: TextStyle(fontWeight: FontWeight.bold),),
+            actions: myActions(),
+            backgroundColor: Color.fromRGBO(225, 225, 255, 0.5),
 
-      ),
-      body: widget.activitieChild,
-      bottomNavigationBar: bottomNavBar(),
+          ),
+          body: widget.activitieChild,
+          bottomNavigationBar: bottomNavBar(),
+        )
     );
   }
   List<Widget> myActions(){
@@ -72,10 +81,11 @@ class _HomeState extends State<Wrapper> {
         },
       ),
       PopupMenuButton<int>(
+        onSelected: (item)=>onSelected(context,item),
         itemBuilder: (context) => [
           PopupMenuItem<int>(
-              value: 1,
-              child: Text('Mi cuenta')
+              value: 0,
+              child: Text('Mi perfil')
           ),
           PopupMenuItem<int>(
               value: 1,
@@ -84,5 +94,17 @@ class _HomeState extends State<Wrapper> {
         ],
       ),
     ];
+  }
+  void onSelected(BuildContext context, int item ){
+    switch (item){
+      case 0:
+        print('perfil');
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Profile(title: 'perfil',)));
+        break;
+      case 1:
+        print('cerrando sesion');
+        break;
+
+    }
   }
 }

@@ -87,10 +87,13 @@ class _HomeState extends State<Home> {
   }
 
   Column blankSpace(){
+    double height = MediaQuery.of(context).size.height;
+    print(height/35);
     return Column(
       children: [Container(
-          height: 25,
-          color: Colors.yellow
+          height: height/35,
+          //color: Colors.yellow
+          //color: Colors.white
       )],
     );
   }

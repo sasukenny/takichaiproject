@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:takichaiproject/components/comp_songcard.dart';
 
+import '../Wrapper/wrapper.dart';
 import '../components/comp_header.dart';
 import '../components/comp_songDisplay.dart';
 import '../components/comp_musicButtons.dart';
@@ -20,8 +21,11 @@ class _MusicListState extends State<MusicList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-          body: Column(children: [
+    return Wrapper(title: widget.title, activitieChild: elements());
+  }
+  Container elements(){
+    return Container(
+      child:  Column(children: [
         Container(
           margin: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 50),
           child: Flex(
@@ -36,20 +40,21 @@ class _MusicListState extends State<MusicList> {
         ),
         Image.asset('../../assets/images/music-player.png'),
         const Text(
-          "PINK FLOYD", 
-          textAlign: TextAlign.center, 
+          "PINK FLOYD",
+          textAlign: TextAlign.center,
           style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
         ),
         Container(
           margin: const EdgeInsets.only(top: 40),
           child: Column(
             children: const [
-            SongCard(time: "1:12", title: "Time",),
-            SongCard(time: "4:23", title: "Comfortably Numb",),
-            SongCard(time: "3:20", title: "Hey You"),
-          ],
+              SongCard(time: "1:12", title: "Time",),
+              SongCard(time: "4:23", title: "Comfortably Numb",),
+              SongCard(time: "3:20", title: "Hey You"),
+            ],
           ),
         )
-      ]));
+      ]),
+    );
   }
 }
