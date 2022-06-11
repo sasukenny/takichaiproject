@@ -51,6 +51,7 @@ class _HomeState extends State<Wrapper> {
   }
   List<Widget> myActions(){
     return <Widget>[
+      /*
       IconButton(
         icon: const Icon(Icons.add_alert),
         tooltip: 'Show Snackbar',
@@ -80,6 +81,7 @@ class _HomeState extends State<Wrapper> {
           ));
         },
       ),
+      */
       PopupMenuButton<int>(
         onSelected: (item)=>onSelected(context,item),
         itemBuilder: (context) => [
@@ -98,8 +100,8 @@ class _HomeState extends State<Wrapper> {
   void onSelected(BuildContext context, int item ){
     switch (item){
       case 0:
-        print('perfil');
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Profile(title: 'perfil',)));
+        print('Mi perfil');
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Profile(title: 'Mi perfil',)));
         break;
       case 1:
         print('cerrando sesion');

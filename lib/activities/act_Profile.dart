@@ -22,31 +22,144 @@ class _ProfileState extends State<Profile> {
       child:
         Column(
           children: [
+            blankSpace(100),
             Column(
-              children: [
-                Container(
-                  child: Text('Imagen de perfil'),
-                ),
-                Container(
-                  child: Text('botones editar - modoArtista'),
-                )
-              ],
-
+              children:
+                perfil(context),
             ),
+            blankSpace(37),
             Column(
-              children: [
-                Container(
-                  child: Text('Favoritos'),
-                )],
+              children: [Container(
+                child: Text('Lista de Favoritos - componente -proximamente'),
+              )],
             ),
+            blankSpace(20),
             Column(
               children: [
                 Container(
-                  child: Text('Artistas seguidos'),
+                  child: Text('Lista de Artistas seguidos - componente -proximamente'),
                 )],
             ),
           ],
         ),
     );
   }
+  List<Container> perfil(BuildContext context){
+    Container my_options = opcionesUser();
+    return [
+      Container(
+        padding: const EdgeInsets.all(20.0),
+        height: 150.0,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+         ),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/discover.jpg"),
+                fit: BoxFit.cover,
+              ),
+              shape: BoxShape.circle
+          ),
+        ),
+      ),
+      Container(
+        child: Text('Kenny Suarez'),
+      ),
+      Container(
+        child: Text('Me gusta la música :D'),
+      ),
+      Container(
+        margin: const EdgeInsets.all(2.0),
+        padding: const EdgeInsets.all(2.0),
+        child:
+        Row(
+          children: [
+            Expanded(
+                flex: 5,
+                child:
+                Container(
+                  margin: const EdgeInsets.all(0.0),
+                  padding: const EdgeInsets.fromLTRB(80, 10, 10, 10),
+                  child: Column(
+                    children: [
+                      Text('Seguidores'),
+                      Text('87')
+                    ],
+                  ),
+                )
+            ),
+            Expanded(
+                flex: 5,
+                child:
+                Container(
+                  margin: const EdgeInsets.all(0.0),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 80, 10),
+                  child: Column(
+                    children: [
+                      Text('Seguidos'),
+                      Text('87')
+                    ],
+                  ),
+                )
+            ),
+          ],
+        ),
+      ),
+      my_options,
+    ];
+
+  }
+
+  Container opcionesUser(){
+    return
+      Container(
+        margin: const EdgeInsets.all(0),
+        padding: const EdgeInsets.all(2.0),
+        child:
+        Row(
+          children: [
+            Expanded(
+                flex: 5,
+                child:
+                Container(
+                  margin: const EdgeInsets.all(0.0),
+                  padding: const EdgeInsets.fromLTRB(40, 10, 10, 20),
+                  child: ElevatedButton(
+                    onPressed: () { print("object");},
+                    child: Text('Editar Perfil'),
+                  ),
+                )
+            ),
+            Expanded(
+                flex: 5,
+                child:
+                Container(
+                  margin: const EdgeInsets.all(0.0),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 40, 20),
+                  child: ElevatedButton(
+                    onPressed: () { print("object");},
+                    child: Text('Modo Artista'),
+                  ),
+                )
+            ),
+          ],
+        ),
+      );
+  }
+  Column blankSpace(int number){
+    double height = MediaQuery.of(context).size.height;
+    print(height/number);
+    return Column(
+      children: [Container(
+        height: height/number,
+        //color: Colors.yellow
+        //color: Colors.white
+      )],
+    );
+  }
+
 }

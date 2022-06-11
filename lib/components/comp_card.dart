@@ -22,13 +22,19 @@ class comp_card extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return
       InkWell(
+
         child: Container(
             height: height/7,
             width: double.infinity,
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(3.0),
             decoration: BoxDecoration(
-              color: Color.fromRGBO(24, 24, 24, 1),
+              gradient: LinearGradient(
+                colors: [Color.fromRGBO(24, 24, 24, 1),Color.fromRGBO(7, 7, 7, 1)],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              //color: Color.fromRGBO(24, 24, 24, 1),
               //border: Border.all(color: Colors.blueAccent),
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
