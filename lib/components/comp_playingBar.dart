@@ -16,6 +16,8 @@ class playingBar extends StatefulWidget {
 
 class _playingBarState extends State<playingBar> {
 
+  double actualTime = 0;
+
   @override
   Widget build(BuildContext context) {
 
@@ -24,14 +26,53 @@ class _playingBarState extends State<playingBar> {
 
     var format = new NumberFormat();
     format.minimumIntegerDigits = 2;
+    format.minimumFractionDigits = 0;
 
     return
-      Row(
-        children: [
-          Text('${timePlayed.minutes}:${format.format(timePlayed.seconds)} - ${songDuration.minutes}:${format.format(songDuration.seconds)} \n'
-              '${(timePlayed.numEquiv/songDuration.numEquiv * 100).toInt()}%')
-        ],
-      )
-    ;
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 50),
+        child: Column(
+          children: [
+            Slider(
+              value: actualTime,
+              max: songDuration.numEquiv,
+              min: 0,
+              label: actualTime.toString(),
+              activeColor: Color(0xFF000000),
+              inactiveColor: Color(0xFF000000),
+              onChanged: (double value) {
+                setState(() {
+                  actualTime = value;
+                });
+              }
+            ),
+            Row(
+              children: [
+                Text('${actualTime~/60}'':''${format.format(actualTime%60)}'),
+                const Spacer(),
+                Text(' ${songDuration.minutes}:${format.format(songDuration.seconds)}')
+              ],
+            )
+          ],
+
+        ),
+      );
+
   }
+  // double _currentSliderValue = 20;
+  //
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Slider(
+  //     value: _currentSliderValue,
+  //     max: 100,
+  //     divisions: 5,
+  //     label: _currentSliderValue.round().toString(),
+  //     onChanged: (double value) {
+  //       setState(() {
+  //         _currentSliderValue = value;
+  //       });
+  //     },
+  //   );
+  // }
 }
