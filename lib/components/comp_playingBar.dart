@@ -24,9 +24,9 @@ class _playingBarState extends State<playingBar> {
     var timePlayed = PlayingTime.copy(widget.timePlayed);
     var songDuration = PlayingTime.copy(widget.songDuration);
 
-    var format = new NumberFormat();
+    var format = new NumberFormat("00");
     format.minimumIntegerDigits = 2;
-    format.minimumFractionDigits = 0;
+    // format.significantDigits = 2;
 
     return
       Container(
