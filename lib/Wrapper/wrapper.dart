@@ -28,6 +28,7 @@ class _HomeState extends State<Wrapper> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: Color(0xFFE5E5E5),
       appBar: AppBar(
         leading: Icon(Icons.arrow_back_ios , color: Colors.white,),
         title: Text(widget.title),

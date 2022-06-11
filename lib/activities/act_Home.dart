@@ -25,15 +25,16 @@ class _HomeState extends State<Home> {
 
   Container elements(){
     comp_card firstComponent = const comp_card(titulo: 'Descubre', flexText: 7, img: "assets/images/heart.png", newRoute: MusicList(title: 'Descubre') ,);
-    comp_card secondComponent = const comp_card(titulo: 'Mis favoritos', flexText: 9, newRoute: MusicList(title: 'Mis favoritos'));
+    comp_card secondComponent = const comp_card(titulo: 'Mis favoritos', flexText: 9, newRoute: NowPlayingPage(title: 'Mis favoritos'));
     comp_card thirdComponent = const comp_card(titulo: 'Sube tu música', flexText: 9, newRoute: MusicList(title: 'Sube tu música')) ;
-    comp_card fourthComponent = const comp_card(titulo: 'Sobre TakiChai', flexText: 7, newRoute: MusicList(title: 'Sobre TakiChai')) ;
+    comp_card fourthComponent = const comp_card(titulo: 'Nuestros Artistas', flexText: 7, newRoute: MusicList(title: 'Sobre TakiChai')) ;
+    comp_card fifthComponent = const comp_card(titulo: 'Sobre TakiChai', flexText: 7, newRoute: MusicList(title: 'Sobre TakiChai')) ;
     return Container(
 
       child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-
+            blankSpace(),
             const Text(
               'Bienvenido Xocrona!!',
               style: TextStyle(
@@ -42,6 +43,7 @@ class _HomeState extends State<Home> {
                 fontFamily: 'Montserrat',
               ),
             ),
+            blankSpace(),
             /*
             Text(
               '$_counter',
@@ -75,10 +77,21 @@ class _HomeState extends State<Home> {
                     )
                 ),
                 fourthComponent,
+                fifthComponent,
+                blankSpace(),
               ],
             ),
           ]
       ),
+    );
+  }
+
+  Column blankSpace(){
+    return Column(
+      children: [Container(
+          height: 25,
+          color: Colors.yellow
+      )],
     );
   }
 }

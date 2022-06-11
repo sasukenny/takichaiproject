@@ -23,7 +23,7 @@ class comp_card extends StatelessWidget {
     return
       InkWell(
         child: Container(
-            height: 100.0,
+            height: 110.0,
             width: double.infinity,
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(3.0),

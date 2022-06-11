@@ -23,12 +23,12 @@ class _HeaderState extends State<Header> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Icon(CupertinoIcons.back,size: 32),
+                    //const Icon(CupertinoIcons.back,size: 32),
                     Text(widget.title,
                       style:
                         Theme.of(context).textTheme.headline4
                     ),
-                    const Icon(CupertinoIcons.ellipsis_vertical ,size: 32)
+                    //const Icon(CupertinoIcons.ellipsis_vertical ,size: 32)
                   ],
                 )
           )
