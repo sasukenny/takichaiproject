@@ -44,9 +44,9 @@ class _MusicListState extends State<MusicList> {
           margin: const EdgeInsets.only(top: 40),
           child: Column(
             children: const [
-            SongCard(time: "1:12"),
-            SongCard(time: "4:23"),
-            SongCard(time: "3:20"),
+            SongCard(time: "1:12", title: "Time",),
+            SongCard(time: "4:23", title: "Comfortably Numb",),
+            SongCard(time: "3:20", title: "Hey You"),
           ],
           ),
         )

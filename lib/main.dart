@@ -4,7 +4,7 @@ import 'Wrapper/wrapper.dart';
 import 'activities/act_Home.dart';
 import 'activities/act_nowPlaying.dart';
 import 'activities/act_musiclist.dart';
-import 'createMaterialColor.dart';
+import 'util/createMaterialColor.dart';
 
 import 'components/comp_card.dart';
 
