@@ -27,8 +27,8 @@ class bottomNavBar extends StatelessWidget{
           label: 'Favoritos',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Buscar',
+          icon: Icon(Icons.account_box_outlined),
+          label: 'Mis artistas',
         ),
       ],
       //currentIndex: _selectedIndex,
