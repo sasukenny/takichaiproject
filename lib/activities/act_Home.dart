@@ -24,13 +24,16 @@ class _HomeState extends State<Home> {
 
 
   Container elements(){
-    comp_card firstComponent = const comp_card(titulo: 'Descubre', flexText: 7, img: "assets/images/heart.png", newRoute: MusicList(title: 'Descubre') ,);
-    comp_card secondComponent = const comp_card(titulo: 'Mis favoritos', flexText: 9, newRoute: NowPlayingPage(title: 'Mis favoritos'));
-    comp_card thirdComponent = const comp_card(titulo: 'Sube tu música', flexText: 9, newRoute: MusicList(title: 'Sube tu música')) ;
-    comp_card fourthComponent = const comp_card(titulo: 'Nuestros Artistas', flexText: 7, newRoute: MusicList(title: 'Sobre TakiChai')) ;
-    comp_card fifthComponent = const comp_card(titulo: 'Sobre TakiChai', flexText: 7, newRoute: MusicList(title: 'Sobre TakiChai')) ;
+    comp_card firstComponent = const comp_card(titulo: 'Descubre nueva música', flexText: 7, img: "assets/images/heart.png", newRoute: MusicList(title: 'Descubre') ,);
+    comp_card secondComponent = const comp_card(titulo: 'Escucha nuevos artistas', flexText: 9, newRoute: NowPlayingPage(title: 'Mis favoritos'));
+    comp_card thirdComponent = const comp_card(titulo: 'Sube tu música', flexText: 9, newRoute: NowPlayingPage(title: 'Mis favoritos'),divide: 4,);
+    comp_card fourthComponent = const comp_card(titulo: 'Mi música favorita', flexText: 7, newRoute: MusicList(title: 'Sube tu música')) ;
+    comp_card fifthComponent = const comp_card(titulo: 'Mis Artistas favoritos', flexText: 7, newRoute: MusicList(title: 'Sobre TakiChai')) ;
+    comp_card sixthComponent = const comp_card(titulo: 'Sobre TakiChai', flexText: 7, newRoute: MusicList(title: 'Sobre TakiChai')) ;
+    double dobleheight = MediaQuery.of(context).size.height/4;
+    print('object');
+    print(dobleheight);
     return Container(
-
       child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -54,7 +57,37 @@ class _HomeState extends State<Home> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                firstComponent,
+
+                Container(
+                    margin: const EdgeInsets.all(1.0),
+                    padding: const EdgeInsets.all(1.0),
+
+                    decoration: const BoxDecoration(
+                      //color: Colors.amber,
+                    ),
+                    child:
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 7,
+                          child:
+                          //firstComponent,
+                          Column(
+                            children: [
+
+                              firstComponent,
+                              secondComponent,
+                            ],
+                          )
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child:
+                          thirdComponent
+                        ),
+                      ],
+                    )
+                ),
                 Container(
                     margin: const EdgeInsets.all(1.0),
                     padding: const EdgeInsets.all(1.0),
@@ -66,18 +99,18 @@ class _HomeState extends State<Home> {
                         Expanded(
                           flex: 5,
                           child:
-                          secondComponent,
+                          fourthComponent,
                         ),
                         Expanded(
                           flex: 5,
                           child:
-                          thirdComponent,
+                          fifthComponent,
                         ),
                       ],
                     )
                 ),
-                fourthComponent,
-                fifthComponent,
+                sixthComponent,
+                sixthComponent,
                 blankSpace(),
               ],
             ),
@@ -88,7 +121,7 @@ class _HomeState extends State<Home> {
 
   Column blankSpace(){
     double height = MediaQuery.of(context).size.height;
-    print(height/35);
+    //print(height/35);
     return Column(
       children: [Container(
           height: height/35,

@@ -121,31 +121,30 @@ class _ProfileState extends State<Profile> {
         padding: const EdgeInsets.all(2.0),
         child:
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-                flex: 5,
-                child:
-                Container(
-                  margin: const EdgeInsets.all(0.0),
-                  padding: const EdgeInsets.fromLTRB(40, 10, 10, 20),
-                  child: ElevatedButton(
-                    onPressed: () { print("object");},
-                    child: Text('Editar Perfil'),
-                  ),
-                )
+
+            Container(
+              //margin: const EdgeInsets.fromLTRB(30, 10, 5, 20),
+              padding: const EdgeInsets.fromLTRB(10, 10, 5, 20),
+              //padding: const EdgeInsets.fromLTRB(30, 10, 5, 20),
+              child: ElevatedButton(
+                onPressed: () { print("object");},
+                child: Text('Editar Perfil',
+                    style: TextStyle(fontSize: 11)),
+              ),
             ),
-            Expanded(
-                flex: 5,
-                child:
-                Container(
-                  margin: const EdgeInsets.all(0.0),
-                  padding: const EdgeInsets.fromLTRB(10, 10, 40, 20),
-                  child: ElevatedButton(
-                    onPressed: () { print("object");},
-                    child: Text('Modo Artista'),
-                  ),
-                )
-            ),
+            Container(
+              //margin: const EdgeInsets.fromLTRB(30, 10, 5, 20),
+              //padding: const EdgeInsets.all(0),
+              padding: const EdgeInsets.fromLTRB(5, 10, 10, 20),
+              child: ElevatedButton(
+                onPressed: () { print("object");},
+                child: Text('Modo Público: ON',
+                    style: TextStyle(fontSize: 11)),
+              ),
+            )
+
           ],
         ),
       );
