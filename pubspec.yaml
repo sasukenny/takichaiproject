@@ -69,6 +69,7 @@ flutter:
       - assets/images/discover.jpg
       - assets/images/unmsm-logo.png
       - README.md
+      - LICENSE.md
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
