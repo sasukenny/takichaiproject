@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../Wrapper/wrapper.dart';
+import '../components/comp_card.dart';
+import 'act_musiclist.dart';
+import 'act_nowPlaying.dart';
 
 class Profile extends StatefulWidget {
 const Profile({Key? key, required this.title}) : super(key: key);
@@ -18,30 +21,50 @@ class _ProfileState extends State<Profile> {
       Wrapper(title: widget.title, activitieChild: elements());
   }
   Container elements(){
+    comp_card firstComponent = const comp_card(titulo: 'Mis videos subidos', flexText: 9, newRoute: MusicList(title: 'Descubre'),divide: 7);
+    comp_card secondComponent = const comp_card(titulo: 'Mis artistas favoritos', flexText: 9, newRoute: MusicList(title: 'Descubre'),divide: 7);
+    comp_card thirdComponent = const comp_card(titulo: 'Mis artistas favoritos', flexText: 9, newRoute: NowPlayingPage(title: 'Mis favoritos'),divide: 7);
     return Container(
       child:
-        Column(
-          children: [
-            blankSpace(100),
-            Column(
-              children:
-                perfil(context),
-            ),
-            blankSpace(37),
-            Column(
-              children: [Container(
-                child: Text('Lista de Favoritos - componente -proximamente'),
-              )],
-            ),
-            blankSpace(20),
-            Column(
+        Scaffold(
+          body: SingleChildScrollView(
+            child: Column(
               children: [
-                Container(
-                  child: Text('Lista de Artistas seguidos - componente -proximamente'),
-                )],
+                blankSpace(100),
+                Column(
+                  children:
+                  perfil(context),
+                ),
+                blankSpace(100),
+                Column(
+                  children: [Container(
+                      child:
+                      //Text('Lista de Favoritos - componente -proximamente'),
+                      firstComponent
+                  )],
+                ),
+                blankSpace(100),
+                Column(
+                  children: [
+                    Container(
+                        child:
+                        //Text('Lista de Artistas seguidos - componente -proximamente'),
+                        secondComponent
+                    )],
+                ),
+                blankSpace(100),
+                Column(
+                  children: [
+                    Container(
+                        child:
+                        //Text('Lista de Artistas seguidos - componente -proximamente'),
+                        thirdComponent
+                    )],
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        )
     );
   }
   List<Container> perfil(BuildContext context){

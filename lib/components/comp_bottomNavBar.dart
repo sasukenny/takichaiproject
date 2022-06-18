@@ -21,6 +21,7 @@ class bottomNavBar extends StatelessWidget{
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Inicio',
+
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.star),
@@ -33,8 +34,10 @@ class bottomNavBar extends StatelessWidget{
       ],
       //currentIndex: _selectedIndex,
       selectedItemColor: Colors.amber[800],
-      //onTap: _onItemTapped,
+      onTap: _onItemTapped,
     );
   }
-
+  void _onItemTapped(int index) {
+    print("object");
+  }
 }

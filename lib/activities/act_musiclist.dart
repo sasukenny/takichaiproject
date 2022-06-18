@@ -27,26 +27,28 @@ class _MusicListState extends State<MusicList> {
         body: SingleChildScrollView(
             child: Column(children: [
               Container(
-                margin:
-                const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 50),
-                child: Flex(
-                  direction: Axis.horizontal,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Icon(Icons.arrow_back),
-                    Text(
-                      "Music List",
-                      style: TextStyle(fontSize: 32),
-                    ),
-                    Icon(Icons.more_vert),
-                  ],
-                ),
+                child: Text(widget.title),
               ),
-              Image.asset('../../assets/images/music-player.png'),
+              Container(
+                padding: const EdgeInsets.all(20.0),
+                height: 150.0,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/discover.jpg"),
+                    fit: BoxFit.cover,
+                  ),
+                  color: Colors.amber,
+                )
+              ),
+              //Image.asset('../../assets/images/music-player.png'),
               const Text(
                 "PINK FLOYD",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                ),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 40),
