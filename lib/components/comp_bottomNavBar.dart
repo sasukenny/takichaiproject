@@ -1,5 +1,10 @@
+import 'dart:js';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../activities/act_Home.dart';
+import '../activities/act_myFavoriteSongs.dart';
 class bottomNavBar extends StatelessWidget{
   //attributes
   //final String titulo;
@@ -20,7 +25,6 @@ class bottomNavBar extends StatelessWidget{
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Inicio',
-
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.star),
@@ -33,10 +37,27 @@ class bottomNavBar extends StatelessWidget{
       ],
       //currentIndex: _selectedIndex,
       selectedItemColor: Colors.amber[800],
-      onTap: _onItemTapped,
+      onTap: (item)=>_onItemTapped(context,item),
     );
   }
-  void _onItemTapped(int index) {
+  void _onItemTapped(BuildContext context, int index) {
     print("object");
+    switch (index){
+      case 0:
+        print('Mi perfil');
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Home(title: 'Takichai',)));
+        break;
+      case 1:
+        print('MyFavoriteSongs ');
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyFavoriteSongs(title: 'Takichai',)));
+        break;
+      case 2:
+        print('cerrando sesion 2');
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Home(title: 'Takichai',)));
+        break;
+      case 3:
+        print('cerrando sesion 3');
+        break;
+    }
   }
 }

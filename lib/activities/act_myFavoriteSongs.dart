@@ -91,7 +91,7 @@ class _MyFavoriteSongsState extends State<MyFavoriteSongs> {
                     ),
                     SongCard(
                       time: "4:23",
-                      title: "Comfortably Numb",
+                      title: "Comfortably",
                     ),
                     SongCard(time: "3:20", title: "Hey You"),
                     SongCard(time: "3:20", title: "Hey You"),

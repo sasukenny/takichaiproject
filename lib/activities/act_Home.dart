@@ -34,8 +34,8 @@ class _HomeState extends State<Home> {
     comp_card sixthComponent = const comp_card(titulo: 'Mis creaciones', flexText: 7, newRoute: AboutUs(title: "About Us")) ;
     comp_card seventhComponent = const comp_card(titulo: 'Sobre TakiChai', flexText: 7, newRoute: AboutUs(title: "About Us")) ;
     double dobleheight = MediaQuery.of(context).size.height/4;
-    print('object');
-    print(dobleheight);
+    //print('object');
+    //print(dobleheight);
     return Container(
       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
       child: Column(
@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
             const Text(
               'Bienvenido Xocrona!!',
               style: TextStyle(
-                //color: Colors.white,
+                color: Colors.white,
                 fontSize: 24,
                 fontFamily: 'Montserrat',
               ),

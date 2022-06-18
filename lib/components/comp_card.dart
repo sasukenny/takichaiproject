@@ -18,9 +18,9 @@ class comp_card extends StatelessWidget {
   Widget build(BuildContext context) {
     int InvertflexText = 10 - flexText;
     double height = MediaQuery.of(context).size.height;
-    print("height/7");
-    print(height/6);
-    print(this.divide);
+    //print("height/7");
+    //print(height/6);
+    //print(this.divide);
     return
       InkWell(
 
