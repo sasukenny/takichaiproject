@@ -14,9 +14,10 @@ class SongCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Container(
       margin: const EdgeInsets.all(10),
-      width: 380,
+      width: width,
       height: 50,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(15)),

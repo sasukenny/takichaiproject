@@ -1,16 +1,15 @@
-# takichaiproject
+# Takichai App 🎶 
+(**en desarrollo**)
 
-A new Flutter project.
+Takichai es una App que permite la difusión musical, buscando brindar a los artistas independientes la mejor opción respecto al promocionarse y hacer llegar sus obras a más público. 
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Integrantes
+* Kenny, Suarez
+* Juan Diego, Perez
+* Cifuentes Michuy, Daniel Ernesto
+* Ramos Paredes, Roger Anthony
+* Torres Briones, Diego Leonardo	
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Plataformas disponibles 📱
+* Android

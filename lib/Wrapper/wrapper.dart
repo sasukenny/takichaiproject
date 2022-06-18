@@ -35,7 +35,14 @@ class _HomeState extends State<Wrapper> {
               actions: myActions(),
               backgroundColor: Color(0xFFE5E5E5)
           ),
-          body: widget.activitieChild,
+          body: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color.fromRGBO(41, 44, 45, 1.0),Color.fromRGBO(18, 23, 26, 1.0)],
+              ),
+            ),
+            child: widget.activitieChild,
+          ),
           bottomNavigationBar: bottomNavBar(),
         )
     );
@@ -43,6 +50,7 @@ class _HomeState extends State<Wrapper> {
 
   List<Widget> myActions(){
     return <Widget>[
+<<<<<<< HEAD
       Container(
           margin: const EdgeInsets.only(right: 15),
           child:PopupMenuButton<int>(
@@ -58,6 +66,61 @@ class _HomeState extends State<Wrapper> {
               ),
             ],
           )
+=======
+      Row(
+        children: [
+          /*
+          Text(
+            'Subir una canción',
+          ),*/
+          IconButton(
+            padding: EdgeInsets.all(0),
+            icon: const Icon(Icons.download_sharp),
+            tooltip: 'Show Snackbar',
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('This is a snackbar')));
+            },
+          ),
+        ],
+      ),
+
+      /*
+      IconButton(
+        icon: const Icon(Icons.more_vert),
+        tooltip: 'Go to the next page',
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return Scaffold(
+                appBar: AppBar(
+                  title: const Text('Next page'),
+                ),
+                body: const Center(
+                  child: Text(
+                    'This is the next page',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ),
+              );
+            },
+          ));
+        },
+      ),
+    */
+      PopupMenuButton<int>(
+        onSelected: (item)=>onSelected(context,item),
+        itemBuilder: (context) => [
+          PopupMenuItem<int>(
+              value: 0,
+              child: Text('Mi perfil')
+          ),
+          PopupMenuItem<int>(
+              value: 1,
+              child: Text('cerrar sesión')
+          ),
+        ],
+>>>>>>> 9ff27a9a3a37d2bd672076c41addb2c7049fe1fc
       ),
     ];
   }

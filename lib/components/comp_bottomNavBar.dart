@@ -21,20 +21,23 @@ class bottomNavBar extends StatelessWidget{
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Inicio',
+
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.star),
           label: 'Favoritos',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Buscar',
+          icon: Icon(Icons.account_box_outlined),
+          label: 'Mis artistas',
         ),
       ],
       //currentIndex: _selectedIndex,
       selectedItemColor: Colors.amber[800],
-      //onTap: _onItemTapped,
+      onTap: _onItemTapped,
     );
   }
-
+  void _onItemTapped(int index) {
+    print("object");
+  }
 }

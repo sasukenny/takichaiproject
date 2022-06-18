@@ -11,22 +11,28 @@ class comp_card extends StatelessWidget {
         this.img = "",
         required this.titulo,
         required this.flexText,
-        required this.newRoute}) : super(key: key);
+        required this.newRoute,
+        this.divide = 5
+  }) : super(key: key);
   final String titulo;
   final int flexText;
   final String img;
   final StatefulWidget newRoute;
+  final double divide;
   @override
   Widget build(BuildContext context) {
     int InvertflexText = 10 - flexText;
     double height = MediaQuery.of(context).size.height;
+    print("height/7");
+    print(height/6);
+    print(this.divide);
     return
       InkWell(
 
         child: Container(
-            height: height/7,
+            height: height/this.divide,
             width: double.infinity,
-            margin: const EdgeInsets.all(5.0),
+            margin: const EdgeInsets.all(4.0),
             padding: const EdgeInsets.all(3.0),
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -59,7 +65,7 @@ class comp_card extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Container(
-                            margin: const EdgeInsets.all(3.0),
+                            margin: const EdgeInsets.all(0.0),
                             padding: const EdgeInsets.all(3.0),
                             alignment: Alignment(-1.0, 1.0),
                             child: Text(
@@ -72,7 +78,7 @@ class comp_card extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            margin: const EdgeInsets.all(3.0),
+                            margin: const EdgeInsets.all(0.0),
                             padding: const EdgeInsets.all(3.0),
                             alignment: Alignment(-1.0, 1.0),
                             child: Text(
