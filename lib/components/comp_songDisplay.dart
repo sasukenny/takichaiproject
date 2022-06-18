@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 
 class songDisplay extends StatefulWidget {
   const songDisplay({Key? key, required this.songTitle, required this.songArtist, this.songImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Simple_Music.svg/600px-Simple_Music.svg.png'}) : super(key: key);

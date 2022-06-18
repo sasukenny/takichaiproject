@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:takichaiproject/components/comp_songcard.dart';
 
 import '../Wrapper/wrapper.dart';
-import '../components/comp_header.dart';
-import '../components/comp_songDisplay.dart';
-import '../components/comp_musicButtons.dart';
 
 class MyFavoriteSongs extends StatefulWidget {
   const MyFavoriteSongs({Key? key, required this.title}) : super(key: key);

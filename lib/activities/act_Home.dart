@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+
 import '../Wrapper/wrapper.dart';
-import '../components/comp_bottomNavBar.dart';
 import '../components/comp_card.dart';
 import 'act_AboutUs.dart';
 import 'act_musiclist.dart';

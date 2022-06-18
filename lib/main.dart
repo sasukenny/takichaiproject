@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:takichaiproject/activities/act_AboutUs.dart';
-import 'package:takichaiproject/activities/act_musiclist.dart';
-import 'Wrapper/wrapper.dart';
-import 'activities/act_Home.dart';
-import 'activities/act_nowPlaying.dart';
-import 'activities/act_musiclist.dart';
-import 'util/createMaterialColor.dart';
 
-import 'components/comp_card.dart';
+import 'activities/act_Login.dart';
+import 'activities/act_Register.dart';
+import 'components/comp_header.dart';
+import 'util/createMaterialColor.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,11 +26,13 @@ class MyApp extends StatelessWidget {
         )
       ),
       // home: const NowPlayingPage(title: 'Takichai'),
-      home: const Home(title: 'Takichai'),
+      //home: const Home(title: 'Takichai'),
       //home: const Wrapper(title: 'Now Playing'),
       //home: const NowPlayingPage(title: 'Now Playing'),
       // home: const MusicList(title: 'Music List'),
       //home: const AboutUs(title: "About Us"),
+      home: const register(),
+
     );
   }
 }
