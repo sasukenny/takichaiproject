@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../Wrapper/wrapper.dart';
 import '../components/comp_header.dart';
-import '../components/comp_songDisplay.dart';
 import '../components/comp_musicButtons.dart';
-
 import '../components/comp_playingBar.dart';
+import '../components/comp_songDisplay.dart';
 import '../util/playingTime.dart';
 
 class NowPlayingPage extends StatefulWidget {

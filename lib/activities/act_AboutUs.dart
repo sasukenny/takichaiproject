@@ -1,8 +1,6 @@
+import 'package:about/about.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:takichaiproject/components/comp_songcard.dart';
-import 'package:about/about.dart';
-import 'package:pubspec/pubspec.dart';
 
 class AboutUs extends StatefulWidget {
   const AboutUs({Key? key, required this.title}) : super(key: key);

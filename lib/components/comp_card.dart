@@ -1,10 +1,5 @@
-import 'dart:js';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../activities/act_Login.dart';
-import '../activities/act_musiclist.dart';
 
 class comp_card extends StatelessWidget {
   const comp_card({Key? key,
