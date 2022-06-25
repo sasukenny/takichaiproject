@@ -25,36 +25,28 @@ class _MusicListState extends State<MusicList> {
   }
   Container elements(){
     return Container(
-      child:  Column(children: [
-        Container(
-          margin: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 50),
-          child: Flex(
-            direction: Axis.horizontal,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Icon(Icons.arrow_back),
-              Text("Music List", style: TextStyle(fontSize: 32),),
-              Icon(Icons.more_vert),
-            ],
-          ),
-        ),
-        Image.asset('../../assets/images/music-player.png'),
-        const Text(
-          "PINK FLOYD",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 40),
-          child: Column(
-            children: const [
-              SongCard(time: "1:12", title: "Time",),
-              SongCard(time: "4:23", title: "Comfortably Numb",),
-              SongCard(time: "3:20", title: "Hey You"),
-            ],
-          ),
-        )
-      ]),
+      child:Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('../../assets/images/music-player.png'),
+              const Text(
+                "PINK FLOYD",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 40),
+                child: Column(
+                  children: const [
+                    SongCard(time: "1:12", title: "Time",),
+                    SongCard(time: "4:23", title: "Comfortably Numb",),
+                    SongCard(time: "3:20", title: "Hey You"),
+                  ],
+                ),
+              )
+            ]),
+      ),
     );
   }
 }

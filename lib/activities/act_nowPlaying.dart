@@ -27,7 +27,7 @@ class _NowPlayingPageState extends State<NowPlayingPage> {
   Container elements(){
     return Container(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
               margin: const EdgeInsets.symmetric(vertical: 30),
