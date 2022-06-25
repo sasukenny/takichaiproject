@@ -36,11 +36,7 @@ class _HomeState extends State<Wrapper> {
               backgroundColor: Color(0xFFE5E5E5)
           ),
           body: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color.fromRGBO(41, 44, 45, 1.0),Color.fromRGBO(18, 23, 26, 1.0)],
-              ),
-            ),
+
             child: widget.activitieChild,
           ),
           bottomNavigationBar: bottomNavBar(),
@@ -50,23 +46,6 @@ class _HomeState extends State<Wrapper> {
 
   List<Widget> myActions(){
     return <Widget>[
-<<<<<<< HEAD
-      Container(
-          margin: const EdgeInsets.only(right: 15),
-          child:PopupMenuButton<int>(
-            onSelected: (item)=>onSelected(context,item),
-            itemBuilder: (context) => [
-              const PopupMenuItem<int>(
-                  value: 0,
-                  child: Text('Mi perfil')
-              ),
-              const PopupMenuItem<int>(
-                  value: 1,
-                  child: Text('cerrar sesión')
-              ),
-            ],
-          )
-=======
       Row(
         children: [
           /*
@@ -120,7 +99,6 @@ class _HomeState extends State<Wrapper> {
               child: Text('cerrar sesión')
           ),
         ],
->>>>>>> 9ff27a9a3a37d2bd672076c41addb2c7049fe1fc
       ),
     ];
   }

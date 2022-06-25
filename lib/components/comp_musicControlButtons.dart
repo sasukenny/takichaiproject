@@ -12,6 +12,18 @@ class musicControlButtons extends StatefulWidget {
 
 class _musicControlButtonsState extends State<musicControlButtons> {
 
+  backward(){
+
+  }
+
+  playPause(){
+
+  }
+
+  forward(){
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return
@@ -21,14 +33,33 @@ class _musicControlButtonsState extends State<musicControlButtons> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Icon(CupertinoIcons.backward_end_alt_fill ,size: 32),
-              const Icon(CupertinoIcons.play_fill ,size: 32),
-              const Icon(CupertinoIcons.forward_end_alt_fill ,size: 32)
+              TextButton.icon(
+                  onPressed: backward,
+                  label: const Text(''),
+                  style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.resolveWith((states) => Colors.black)
+                  ),
+                  icon: Icon(CupertinoIcons.backward_end_alt_fill,size: 32)
+              ),
+              TextButton.icon(
+                  onPressed: playPause,
+                  label: const Text(''),
+                  style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.resolveWith((states) => Colors.black)
+                  ),
+                  icon: Icon(CupertinoIcons.play_fill,size: 32)
+              ),
+              TextButton.icon(
+                  onPressed: forward,
+                  label: const Text(''),
+                  style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.resolveWith((states) => Colors.black)
+                  ),
+                  icon: Icon(CupertinoIcons.forward_end_alt_fill,size: 32)
+              )
             ],
           ),
-      )
-    // This trailing comma makes auto-formatting nicer for build methods.
-        ;
+      );
   }
 }
 
