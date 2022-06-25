@@ -68,6 +68,7 @@ flutter:
       - assets/images/logoTakiChai.jpeg
       - assets/images/discover.jpg
       - assets/images/unmsm-logo.png
+      - assets/images/oor.jpg
       - README.md
       - LICENSE.md
   #   - images/a_dot_ham.jpeg

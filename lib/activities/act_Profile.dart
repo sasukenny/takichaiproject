@@ -19,7 +19,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return
-      Wrapper(title: widget.title, activitieChild: elements());
+      Wrapper(activitieChild: elements());
   }
   Container elements(){
     comp_card firstComponent = const comp_card(titulo: 'Mis videos subidos', flexText: 9, newRoute: MusicList(title: 'Descubre'),divide: 7);

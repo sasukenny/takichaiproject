@@ -21,7 +21,7 @@ class _NowPlayingPageState extends State<NowPlayingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Wrapper(title: widget.title, activitieChild: elements());
+    return Wrapper(activitieChild: elements());
   }
   Container elements(){
     return Container(

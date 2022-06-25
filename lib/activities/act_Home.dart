@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return
-      Wrapper(title: widget.title, activitieChild: elements());
+      Wrapper(activitieChild: elements());
   }
 
 
