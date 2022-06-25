@@ -34,12 +34,15 @@ class _loginState extends State<login> {
                               inputText(
                                   controller: email,
                                   placeholder: "Correo",
-                                  voidMessage: "Ingrese el email"
+                                  voidMessage: "Ingrese un email correcto",
+                                  regexp: new RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               ),
                               inputText(
                                   controller: password,
                                   placeholder: "Contraseña",
-                                  voidMessage: "Ingrese la contraseña"
+                                  voidMessage: "Ingrese contraseña correcta",
+                                  regexp: new RegExp(".*"),
+                                  obscureText: true
                               ),
                               buttonLogin(
                                   formkey: _formkey,
