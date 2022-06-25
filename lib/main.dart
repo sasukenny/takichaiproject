@@ -25,12 +25,12 @@ class MyApp extends StatelessWidget {
         )
       ),
       // home: const NowPlayingPage(title: 'Takichai'),
-      home: const Home(title: 'Takichai'),
-      //home: const Wrapper(title: 'Now Playing'),
+      // home: const Home(title: 'Takichai'),
+      // home: const Wrapper(title: 'Now Playing'),
       //home: const NowPlayingPage(title: 'Now Playing'),
       // home: const MusicList(title: 'Music List'),
       //home: const AboutUs(title: "About Us"),
-      //home: const register(),
+      home: const register(),
 
     );
   }
