@@ -36,22 +36,27 @@ class _registerState extends State<register> {
                             inputText(
                                 controller: name,
                                 placeholder: "Nombre",
-                                voidMessage: "Ingrese su nombre"
+                                voidMessage: "Ingrese nombre solo con letras",
+                                regexp: new RegExp(r'^[a-z A-Z]+$'),
                             ),
                             inputText(
                                 controller: phone,
                                 placeholder: "Celular",
-                                voidMessage: "Ingrese su número de celular"
+                                voidMessage: "Ingrese número de celular correcto",
+                                regexp: new RegExp(r'^[0-9]{9}$')
                             ),
                             inputText(
                                 controller: email,
                                 placeholder: "Correo",
-                                voidMessage: "Ingrese su email"
+                                voidMessage: "Ingrese un email correcto",
+                                regexp: new RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                             ),
                             inputText(
                                 controller: password,
                                 placeholder: "Contraseña",
-                                voidMessage: "Ingrese su contraseña"
+                                voidMessage: "Ingrese contraseña (mínimo 8 caracteres)",
+                                regexp: new RegExp(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$"),
+                                obscureText: true
                             ),
                             buttonLogin(
                                 formkey: _formkey,

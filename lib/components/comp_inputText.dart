@@ -5,12 +5,16 @@ class inputText extends StatelessWidget {
   final String placeholder;
   final String voidMessage;
   final TextEditingController controller;
+  final RegExp regexp;
+  final bool obscureText;
 
   const inputText({
     Key? key,
     required this.controller,
     required this.placeholder,
-    required this.voidMessage
+    required this.voidMessage,
+    required this.regexp,
+    this.obscureText = false
   }) : super(key: key);
 
   @override
@@ -25,12 +29,12 @@ class inputText extends StatelessWidget {
       ),
       child: TextFormField(
           controller: controller,
+          obscureText: obscureText,
           decoration: InputDecoration(
             hintText: placeholder,
           ),
           validator:(value) {
-            if(value!.isEmpty)
-            {
+            if(value!.isEmpty || !regexp.hasMatch(value)){
               return voidMessage;
             }
           }
