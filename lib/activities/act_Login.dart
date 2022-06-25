@@ -30,7 +30,7 @@ class _loginState extends State<login> {
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset('../assets/images/logoTakiChai.jpeg', height: 200),
+                              Image.asset('../assets/images/logoTakiChai.png', height: 200),
                               inputText(
                                   controller: email,
                                   placeholder: "Correo",

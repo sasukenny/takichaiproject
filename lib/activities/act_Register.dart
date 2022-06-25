@@ -32,7 +32,7 @@ class _registerState extends State<register> {
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset('../assets/music.jpg', height: 200),
+                            Image.asset('../assets/images/logoTakiChai.png', height: 200),
                             inputText(
                                 controller: name,
                                 placeholder: "Nombre",
