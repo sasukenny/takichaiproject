@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../activities/act_Profile.dart';
 import '../components/comp_bottomNavBar.dart';
+import '../components/comp_TakichayAppbar.dart';
+import '../activities/act_Profile.dart';
 
 class Wrapper extends StatefulWidget {
   const Wrapper({Key? key, required this.title, required this.activitieChild}) : super(key: key);
@@ -13,19 +15,6 @@ class Wrapper extends StatefulWidget {
 }
 
 class _HomeState extends State<Wrapper> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
 
@@ -36,29 +25,27 @@ class _HomeState extends State<Wrapper> {
         },
         child: Scaffold(
           backgroundColor: Color(0xFFE5E5E5),
-          //backgroundColor: Color(0xFF0B0C0E),
-          appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios , color: Colors.white),
-              onPressed:  () => Navigator.of(context).pop() ),
-            //title: Text(widget.title, style: TextStyle(fontWeight: FontWeight.bold),),
-            title: Text( 'TakiChai', style: TextStyle(fontWeight: FontWeight.bold),),
-            actions: myActions(),
-            backgroundColor: Color.fromRGBO(225, 225, 255, 0.5),
-
+          appBar:       AppBar(
+              leading: Container(
+                  margin: const EdgeInsets.only(left: 15),
+                  child:IconButton(
+                      icon: Icon(Icons.arrow_back_ios , color: Colors.black),
+                      onPressed:  () => Navigator.of(context).pop()
+                  )
+              ),
+              title: Center(child:Text(widget.title, style: TextStyle(fontWeight: FontWeight.bold))),
+              actions: myActions(),
+              backgroundColor: Color(0xFFE5E5E5)
           ),
           body: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color.fromRGBO(41, 44, 45, 1.0),Color.fromRGBO(18, 23, 26, 1.0)],
-              ),
-            ),
+
             child: widget.activitieChild,
           ),
           bottomNavigationBar: bottomNavBar(),
         )
     );
   }
+
   List<Widget> myActions(){
     return <Widget>[
       Row(
@@ -129,4 +116,6 @@ class _HomeState extends State<Wrapper> {
 
     }
   }
+
+
 }

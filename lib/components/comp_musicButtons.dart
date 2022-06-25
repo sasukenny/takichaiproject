@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'comp_musicControlButtons.dart';
+<<<<<<< HEAD
+=======
+import '../UTIL/createMaterialColor.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
+>>>>>>> DanielBranch
 
 enum repeatEnum {
   none,
@@ -22,6 +27,13 @@ class musicButtons extends StatefulWidget {
 
 class _musicButtonsState extends State<musicButtons> {
 
+  toggleShuffle(){
+    //Shuffle songs: aleatorias
+  }
+  toggleRepeat(){
+    //Shuffle songs: aleatorias
+  }
+
   @override
   Widget build(BuildContext context) {
     return
@@ -31,14 +43,25 @@ class _musicButtonsState extends State<musicButtons> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Icon(CupertinoIcons.shuffle,size: 32),
+              TextButton.icon(
+                  onPressed: toggleShuffle,
+                  label: const Text(''),
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.resolveWith((states) => Colors.black)
+                  ),
+                  icon: Icon(CupertinoIcons.shuffle,size: 32)
+              ),
               const musicControlButtons(),
-              const Icon(CupertinoIcons.repeat ,size: 32)
+              TextButton.icon(
+                  onPressed: toggleRepeat,
+                  label: const Text(''),
+                  style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.resolveWith((states) => Colors.black)
+                  ),
+                  icon: Icon(CupertinoIcons.repeat,size: 32)
+              )
             ],
           )
-        ,
-      )
-    // This trailing comma makes auto-formatting nicer for build methods.
-        ;
+      );
   }
 }
