@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SongCard extends StatelessWidget {
+class ArtistCard extends StatelessWidget {
 
-  const SongCard({
+  const ArtistCard({
     Key? key,
     this.time="0:00" ,
     this.title="0:00" ,
   }) : super(key: key);
-  
+
   final String time;
   final String title;
 
@@ -17,15 +17,15 @@ class SongCard extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      margin: const EdgeInsets.all(10),
-      width: width,
-      height: 85,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(15)),
-        color: Colors.black,
-      ),
-      padding: const EdgeInsets.only(left: 15, bottom: 5, top: 5, right: 15),
-      alignment: Alignment.center,
+        margin: const EdgeInsets.all(10),
+        width: width,
+        height: 85,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          color: Colors.black,
+        ),
+        padding: const EdgeInsets.only(left: 15, bottom: 5, top: 5, right: 15),
+        alignment: Alignment.center,
         child:
         Row(
           children: [
@@ -39,7 +39,7 @@ class SongCard extends StatelessWidget {
                       width: 50,
                       height: 50,
                       decoration: BoxDecoration(
-                        color: Colors.amber
+                          color: Colors.amber
                       ),
                     ),
                     Container(
@@ -49,22 +49,22 @@ class SongCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                                textAlign: TextAlign.left,
-                                title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.white))
-                          ),
-                          Container(
-                              alignment: Alignment(-1, 0),
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                   textAlign: TextAlign.left,
-                                  'autor: Artista Name', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white)),
+                                  title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.white))
                           ),
                           Container(
-                              alignment: Alignment(-1, 0),
-                              child:  Text(
-                                  textAlign: TextAlign.left,
-                                  'duración: ' + time, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white)),
+                            alignment: Alignment(-1, 0),
+                            child: Text(
+                                textAlign: TextAlign.left,
+                                'autor: Artista Name', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white)),
+                          ),
+                          Container(
+                            alignment: Alignment(-1, 0),
+                            child:  Text(
+                                textAlign: TextAlign.left,
+                                'duración: ' + time, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white)),
                           ),
                           Container(
                               alignment: Alignment(-1, 0),
@@ -86,11 +86,15 @@ class SongCard extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.all(7),
-                      child: Icon(Icons.favorite, color: Colors.white),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(7),
-                      child: Icon(Icons.play_arrow, color: Colors.white,),
+                      child: ElevatedButton(
+                        style: raisedButtonStyle,
+                        onPressed: () { },
+                        child:
+                          Flexible(
+                            child: new Text("Ver Artista"))
+                          //Text('Looks like a RaisedButton'),
+                        ,
+                      ),
                     ),
                   ],
                 )
@@ -100,3 +104,15 @@ class SongCard extends StatelessWidget {
     );
   }
 }
+final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+  //onPrimary: Colors.black87,
+  //primary: Colors.grey[300],
+  primary: Colors.black87,
+  onPrimary: Colors.grey[300],
+  //minimumSize: Size(88, 36),
+  padding: EdgeInsets.symmetric(horizontal: 16),
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(5)),
+  ),
+  side: BorderSide(width: 1.5, color: Colors.grey),
+);

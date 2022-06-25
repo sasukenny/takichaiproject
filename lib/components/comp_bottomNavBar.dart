@@ -1,6 +1,11 @@
 import 'dart:js';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../activities/act_Home.dart';
+import '../activities/act_myFavoriteArtists.dart';
+import '../activities/act_myFavoriteSongs.dart';
 class bottomNavBar extends StatelessWidget{
   //attributes
   //final String titulo;
@@ -27,14 +32,33 @@ class bottomNavBar extends StatelessWidget{
           label: 'Favoritos',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Buscar',
+          icon: Icon(Icons.account_box_outlined),
+          label: 'Mis artistas',
         ),
       ],
       //currentIndex: _selectedIndex,
       selectedItemColor: Colors.amber[800],
-      //onTap: _onItemTapped,
+      onTap: (item)=>_onItemTapped(context,item),
     );
   }
-
+  void _onItemTapped(BuildContext context, int index) {
+    print("object");
+    switch (index){
+      case 0:
+        print('Mi perfil');
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Home(title: 'Takichai',)));
+        break;
+      case 1:
+        print('MyFavoriteSongs ');
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyFavoriteSongs(title: 'Mis Canciones Favoritas',)));
+        break;
+      case 2:
+        print('MyFavoriteArtist ');
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyFavoriteArtist(title: 'Mis Artistas Favoritos',)));
+        break;
+      case 3:
+        print('cerrando sesion 3');
+        break;
+    }
+  }
 }

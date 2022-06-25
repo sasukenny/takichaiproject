@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../activities/act_Profile.dart';
 import '../components/comp_bottomNavBar.dart';
 
@@ -35,31 +36,50 @@ class _HomeState extends State<Wrapper> {
         },
         child: Scaffold(
           backgroundColor: Color(0xFFE5E5E5),
+          //backgroundColor: Color(0xFF0B0C0E),
           appBar: AppBar(
             leading: IconButton(
               icon: Icon(Icons.arrow_back_ios , color: Colors.white),
               onPressed:  () => Navigator.of(context).pop() ),
-            title: Text(widget.title, style: TextStyle(fontWeight: FontWeight.bold),),
+            //title: Text(widget.title, style: TextStyle(fontWeight: FontWeight.bold),),
+            title: Text( 'TakiChai', style: TextStyle(fontWeight: FontWeight.bold),),
             actions: myActions(),
             backgroundColor: Color.fromRGBO(225, 225, 255, 0.5),
 
           ),
-          body: widget.activitieChild,
+          body: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color.fromRGBO(41, 44, 45, 1.0),Color.fromRGBO(18, 23, 26, 1.0)],
+              ),
+            ),
+            child: widget.activitieChild,
+          ),
           bottomNavigationBar: bottomNavBar(),
         )
     );
   }
   List<Widget> myActions(){
     return <Widget>[
-      /*
-      IconButton(
-        icon: const Icon(Icons.add_alert),
-        tooltip: 'Show Snackbar',
-        onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('This is a snackbar')));
-        },
+      Row(
+        children: [
+          /*
+          Text(
+            'Subir una canción',
+          ),*/
+          IconButton(
+            padding: EdgeInsets.all(0),
+            icon: const Icon(Icons.download_sharp),
+            tooltip: 'Show Snackbar',
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('This is a snackbar')));
+            },
+          ),
+        ],
       ),
+
+      /*
       IconButton(
         icon: const Icon(Icons.more_vert),
         tooltip: 'Go to the next page',
@@ -81,7 +101,7 @@ class _HomeState extends State<Wrapper> {
           ));
         },
       ),
-      */
+    */
       PopupMenuButton<int>(
         onSelected: (item)=>onSelected(context,item),
         itemBuilder: (context) => [
