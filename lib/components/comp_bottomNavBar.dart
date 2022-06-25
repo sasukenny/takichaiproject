@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../activities/act_Home.dart';
+import '../activities/act_myFavoriteArtists.dart';
 import '../activities/act_myFavoriteSongs.dart';
 class bottomNavBar extends StatelessWidget{
   //attributes
@@ -49,11 +50,11 @@ class bottomNavBar extends StatelessWidget{
         break;
       case 1:
         print('MyFavoriteSongs ');
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyFavoriteSongs(title: 'Takichai',)));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyFavoriteSongs(title: 'Mis Canciones Favoritas',)));
         break;
       case 2:
-        print('cerrando sesion 2');
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Home(title: 'Takichai',)));
+        print('MyFavoriteArtist ');
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyFavoriteArtist(title: 'Mis Artistas Favoritos',)));
         break;
       case 3:
         print('cerrando sesion 3');
