@@ -25,7 +25,7 @@ class _HomeState extends State<Wrapper> {
           return false;
         },
         child: Scaffold(
-          backgroundColor: Color(0xFFE5E5E5),
+          backgroundColor: Color.fromRGBO(24, 24, 24, 1),
           appBar:       AppBar(
               leading: Container(
                   margin: const EdgeInsets.only(left: 15),

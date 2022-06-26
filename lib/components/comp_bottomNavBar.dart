@@ -5,21 +5,13 @@ import '../activities/act_Home.dart';
 import '../activities/act_myFavoriteArtists.dart';
 import '../activities/act_myFavoriteSongs.dart';
 class bottomNavBar extends StatelessWidget{
-  //attributes
-  //final String titulo;
-  //final int flexText;
-  //final String img;
-  //final StatefulWidget newRoute;
-  //constructor
   const bottomNavBar({Key? key,
-    //this.img = "",
-    //required this.titulo,
-    //required this.flexText,
-    //required this.newRoute}) : super(key: key);
     }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+
+      backgroundColor: Color.fromRGBO(24, 24, 24, 1),
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
@@ -31,10 +23,11 @@ class bottomNavBar extends StatelessWidget{
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.account_box_outlined),
-          label: 'Mis artistas',
+          label: 'Suscripciones',
         ),
       ],
       //currentIndex: _selectedIndex,
+      unselectedItemColor:  Colors.white,
       selectedItemColor: Colors.amber[800],
       onTap: (item)=>_onItemTapped(context,item),
     );
