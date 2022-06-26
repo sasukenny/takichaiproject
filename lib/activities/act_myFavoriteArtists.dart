@@ -6,10 +6,7 @@ import '../components/comp_artistCard.dart';
 import '../components/comp_sectionTitle.dart';
 
 class MyFavoriteArtist extends StatefulWidget {
-  const MyFavoriteArtist({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
+  const MyFavoriteArtist({Key? key}) : super(key: key);
   @override
   State<MyFavoriteArtist> createState() => _MyFavoriteArtistState();
 }

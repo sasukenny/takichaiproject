@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'activities/act_ArtistProfile.dart';
 import 'activities/act_Home.dart';
 import 'activities/act_Register.dart';
+import 'activities/act_musiclist.dart';
 import 'util/createMaterialColor.dart';
 
 void main() {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         )
       ),
       // home: const NowPlayingPage(title: 'Takichai'),
-      home: const ArtistProfile(title: 'Takichai'),
+      home: const MusicList(title: 'Takichai'),
       // home: const Wrapper(title: 'Now Playing'),
       //home: const NowPlayingPage(title: 'Now Playing'),
       // home: const MusicList(title: 'Music List'),

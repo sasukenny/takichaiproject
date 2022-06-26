@@ -45,7 +45,7 @@ class bottomNavBar extends StatelessWidget{
         break;
       case 2:
         print('MyFavoriteArtist ');
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyFavoriteArtist(title: 'Mis Artistas Favoritos',)));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyFavoriteArtist()));
         break;
       case 3:
         print('cerrando sesion 3');
