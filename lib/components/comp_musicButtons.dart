@@ -2,15 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'comp_musicControlButtons.dart';
-<<<<<<< HEAD
-import '../UTIL/createMaterialColor.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
-=======
 
 import '../UTIL/createMaterialColor.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 
->>>>>>> bd8da63ca4ec16170e29d18db1f3b2ff691e0474
 
 enum repeatEnum {
   none,
