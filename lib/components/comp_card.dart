@@ -38,7 +38,7 @@ class comp_card extends StatelessWidget {
               //color: Color.fromRGBO(24, 24, 24, 1),
               //border: Border.all(color: Colors.blueAccent),
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(7),
               ),
             ),
             child:
@@ -112,11 +112,6 @@ class comp_card extends StatelessWidget {
             context,
             MaterialPageRoute(builder: (context) => newRoute),
           );
-          /*
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MusicList(title: 'hola')),
-          );*/
         },
       );
     throw UnimplementedError();

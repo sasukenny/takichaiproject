@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../Wrapper/wrapper.dart';
 import '../components/comp_card.dart';
 import 'act_musiclist.dart';
+import 'act_myFavoriteArtists.dart';
+import 'act_myFavoriteSongs.dart';
+import 'act_mySongs.dart';
 import 'act_nowPlaying.dart';
 
 class Profile extends StatefulWidget {
@@ -19,16 +22,21 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return
-      Wrapper(title: widget.title, activitieChild: elements());
+      Wrapper(activitieChild: elements());
   }
   Container elements(){
-    comp_card firstComponent = const comp_card(titulo: 'Mis videos subidos', flexText: 9, newRoute: MusicList(title: 'Descubre'),divide: 7);
-    comp_card secondComponent = const comp_card(titulo: 'Mis artistas favoritos', flexText: 9, newRoute: MusicList(title: 'Descubre'),divide: 7);
-    comp_card thirdComponent = const comp_card(titulo: 'Mis artistas favoritos', flexText: 9, newRoute: NowPlayingPage(title: 'Mis favoritos'),divide: 7);
+    comp_card firstComponent = const comp_card(titulo: 'Mis videos subidos', flexText: 9, newRoute: MySongs(),divide: 7);
+    comp_card secondComponent = const comp_card(titulo: 'Mis favoritos', flexText: 9, newRoute: MyFavoriteSongs(title: 'Descubre'),divide: 7);
+    comp_card thirdComponent = const comp_card(titulo: 'Mis suscripciones', flexText: 9, newRoute: MyFavoriteArtist(),divide: 7);
     return Container(
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color.fromRGBO(41, 44, 45, 1.0),Color.fromRGBO(18, 23, 26, 1.0)],
+        ),
+      ),
       child:
-        Scaffold(
-          body: SingleChildScrollView(
+         SingleChildScrollView(
             child: Column(
               children: [
                 blankSpace(100),
@@ -65,7 +73,6 @@ class _ProfileState extends State<Profile> {
               ],
             ),
           ),
-        )
     );
   }
   List<Container> perfil(BuildContext context){
@@ -75,16 +82,12 @@ class _ProfileState extends State<Profile> {
         padding: const EdgeInsets.all(20.0),
         height: 150.0,
         width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-         ),
-        ),
         child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/images/discover.jpg"),
-                fit: BoxFit.cover,
+
+                fit: BoxFit.fitHeight,
               ),
               shape: BoxShape.circle
           ),

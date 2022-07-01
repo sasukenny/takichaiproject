@@ -17,12 +17,14 @@ class SongCard extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.fromLTRB(3, 0.5, 3, 0.5),
       width: width,
       height: 85,
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(15)),
-        color: Colors.black,
+        borderRadius: BorderRadius.all(Radius.circular(2)),
+        gradient: LinearGradient(
+          colors: [Color.fromRGBO(24, 24, 24, 0.75),Color.fromRGBO(7, 7, 7, 0.75)],
+        ),
       ),
       padding: const EdgeInsets.only(left: 15, bottom: 5, top: 5, right: 15),
       alignment: Alignment.center,

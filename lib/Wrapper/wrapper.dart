@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import '../activities/act_Profile.dart';
@@ -6,8 +8,7 @@ import '../components/comp_TakichayAppbar.dart';
 import '../activities/act_Profile.dart';
 
 class Wrapper extends StatefulWidget {
-  const Wrapper({Key? key, required this.title, required this.activitieChild}) : super(key: key);
-  final String title;
+  const Wrapper({Key? key, required this.activitieChild}) : super(key: key);
   final Widget activitieChild;
 
   @override
@@ -24,21 +25,30 @@ class _HomeState extends State<Wrapper> {
           return false;
         },
         child: Scaffold(
-          backgroundColor: Color(0xFFE5E5E5),
+          backgroundColor: Color.fromRGBO(24, 24, 24, 1),
           appBar:       AppBar(
               leading: Container(
                   margin: const EdgeInsets.only(left: 15),
                   child:IconButton(
-                      icon: Icon(Icons.arrow_back_ios , color: Colors.black),
+                      icon: Icon(Icons.arrow_back_ios , color: Colors.white),
                       onPressed:  () => Navigator.of(context).pop()
                   )
               ),
-              title: Center(child:Text(widget.title, style: TextStyle(fontWeight: FontWeight.bold))),
+
+              title: Center(child:Text("Takichai", style:
+              TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white
+              ))),
               actions: myActions(),
-              backgroundColor: Color(0xFFE5E5E5)
+              backgroundColor: Color.fromRGBO(24, 24, 24, 1)
           ),
           body: Container(
-
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color.fromRGBO(41, 44, 45, 1.0),Color.fromRGBO(18, 23, 26, 1.0)],
+              ),
+            ),
             child: widget.activitieChild,
           ),
           bottomNavigationBar: bottomNavBar(),
