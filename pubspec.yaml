@@ -38,6 +38,8 @@ dependencies:
   intl: ^0.17.0
   about: ^2.1.1
   pubspec: ^2.2.0
+  html: ^0.13.0
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:

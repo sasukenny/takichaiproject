@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../components/comp_buttonLogin.dart';
 import '../components/comp_inputText.dart';
+import '../models/mod_Album.dart'; //modelo de la data de llegada
+
 
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
@@ -10,11 +12,22 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+
+  late Future<Album> futureAlbum;
+
   TextEditingController email = new TextEditingController();
   TextEditingController password = new TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
 
+  //Init state
+  @override
+  void initState() {
+    super.initState();
+    futureAlbum = fetchAlbum('https://jsonplaceholder.typicode.com/albums/1');
+  }
+
+  //build
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -30,6 +43,7 @@ class _loginState extends State<login> {
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              fBuilder(futureAlbum),
                               Image.asset('../assets/images/logoTakiChai.png', height: 200),
                               inputText(
                                   controller: email,
