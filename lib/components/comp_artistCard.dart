@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../activities/act_ArtistProfile.dart';
+
 class ArtistCard extends StatelessWidget {
 
   const ArtistCard({
@@ -87,7 +89,12 @@ class ArtistCard extends StatelessWidget {
                       padding: EdgeInsets.all(7),
                       child: ElevatedButton(
                         style: raisedButtonStyle,
-                        onPressed: () { },
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ArtistProfile(UserId: "62bf6513929a04ce7230db56")),
+                          );
+                        },
                         child:
                           Flexible(
                             child: new Text("Ver Artista"))

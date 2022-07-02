@@ -11,9 +11,9 @@ import 'act_musiclist.dart';
 import 'act_nowPlaying.dart';
 
 class ArtistProfile extends StatefulWidget {
-  const ArtistProfile({Key? key, required this.title}) : super(key: key);
+  const ArtistProfile({Key? key, required this.UserId}) : super(key: key);
 
-  final String title;
+  final String UserId;
 
   @override
   State<ArtistProfile> createState() => _ArtistProfileState();
