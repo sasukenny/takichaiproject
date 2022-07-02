@@ -1,51 +1,58 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http; //importar para hacer peticiones
-import 'dart:convert'; //importar para hacer peticiones
 
-//Clase modelo
-class Album {
-  final int userId;
-  final int id;
-  final String title;
 
-  const Album({
-    required this.userId,
-    required this.id,
-    required this.title,
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+User userFromJson(String str) => User.fromJson(json.decode(str));
+
+String userToJson(User data) => json.encode(data.toJson());
+
+class User {
+  User({
+    this.userId = 0,
+    required this.name,
+    this.description = "",
+    this.password = "",
+    required this.email,
   });
 
-  //Método constructor a partir de json
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      userId: json['userId'],
-      id: json['id'],
-      title: json['title'],
-    );
-  }
-}
+  int userId;
+  String name;
+  String description;
+  String password;
+  String email;
 
-//Definir la llamada asíncrona
-Future<Album> fetchAlbum(String url) async {
-  final response = await http
-      .get(Uri.parse(url));
-  if (response.statusCode == 200) {
-    return Album.fromJson(jsonDecode(response.body));
-  } else {
-    throw Exception('Failed to load album');
-  }
-}
-
-Widget fBuilder(futureAlbum){
-  return FutureBuilder<Album>(
-    future: futureAlbum,
-    builder: (context, snapshot) {
-      if (snapshot.hasData) {
-        return Text(snapshot.data!.title);
-      } else if (snapshot.hasError) {
-        return Text('${snapshot.error}');
-      }
-      // By default, show a loading spinner.
-      return const CircularProgressIndicator();
-    },
+  factory User.fromJson(Map<String, dynamic> json) => User(
+    userId: json["user"]["userId"],
+    name: json["user"]["name"],
+    description: json["user"]["description"],
+    email: json["user"]["email"],
   );
+
+  Map<String, dynamic> toJson() => {
+    "userId": userId,
+    "name": name,
+    "description": description,
+    "password": password,
+    "email": email,
+  };
+
+  Future <User> RegisterUser (String name, String email, String password) async {
+    final String apiUrl = "https://takichai-backend.herokuapp.com/api/user";
+
+    final response = await http.post(Uri.parse(apiUrl), body: {
+      "name": name,
+      "email": email,
+      "password": password
+    });
+
+    if(response.statusCode == 201){
+      final String responseString = response.body;
+
+      return userFromJson(responseString);
+    }else{
+      return User(email:"", name:"", password:"");
+    }
+
+  }
 }
