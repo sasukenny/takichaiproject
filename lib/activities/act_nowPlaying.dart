@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../Wrapper/wrapper.dart';
 import '../components/comp_header.dart';
-import '../components/comp_songDisplay.dart';
 import '../components/comp_musicButtons.dart';
-
 import '../components/comp_playingBar.dart';
+import '../components/comp_songDisplay.dart';
 import '../util/playingTime.dart';
 
 class NowPlayingPage extends StatefulWidget {
@@ -22,12 +21,12 @@ class _NowPlayingPageState extends State<NowPlayingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Wrapper(title: widget.title, activitieChild: elements());
+    return Wrapper(activitieChild: elements());
   }
   Container elements(){
     return Container(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
             margin: const EdgeInsets.only(top: 45),

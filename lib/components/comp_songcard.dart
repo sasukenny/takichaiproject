@@ -15,37 +15,90 @@ class SongCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+
     return Container(
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.fromLTRB(3, 0.5, 3, 0.5),
       width: width,
-      height: 50,
+      height: 85,
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(15)),
-        color: Colors.black,
+        borderRadius: BorderRadius.all(Radius.circular(2)),
+        gradient: LinearGradient(
+          colors: [Color.fromRGBO(24, 24, 24, 0.75),Color.fromRGBO(7, 7, 7, 0.75)],
+        ),
       ),
-      padding: const EdgeInsets.only(left: 15, bottom: 5, top: 5, right: 30),
+      padding: const EdgeInsets.only(left: 15, bottom: 5, top: 5, right: 15),
       alignment: Alignment.center,
-      child: Flex(
-        direction: Axis.horizontal,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Flex( // Columna 1
-            direction: Axis.vertical,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-              Text(time, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 10, color: Colors.white))
-            ],
-          ),
-          Flex( // Columna 2
-            direction: Axis.horizontal,
-            children: const [
-              Icon(Icons.play_arrow, color: Colors.white,),
-              Icon(Icons.favorite, color: Colors.white),
-            ],
-          )
-        ],
-      ),
+        child:
+        Row(
+          children: [
+            Expanded(
+                flex: 6,
+                child:
+                //firstComponent,
+                Row(
+                  children: [
+                    Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.amber
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                                textAlign: TextAlign.left,
+                                title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.white))
+                          ),
+                          Container(
+                              alignment: Alignment(-1, 0),
+                              child: Text(
+                                  textAlign: TextAlign.left,
+                                  'autor: Artista Name', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white)),
+                          ),
+                          Container(
+                              alignment: Alignment(-1, 0),
+                              child:  Text(
+                                  textAlign: TextAlign.left,
+                                  'duración: ' + time, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white)),
+                          ),
+                          Container(
+                              alignment: Alignment(-1, 0),
+                              child: Text(
+                                  textAlign: TextAlign.left,
+                                  'genero: Rock', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white))
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                )
+            ),
+            Expanded(
+                flex: 4,
+                child:
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(7),
+                      child: Icon(Icons.favorite, color: Colors.white),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(7),
+                      child: Icon(Icons.play_arrow, color: Colors.white,),
+                    ),
+                  ],
+                )
+            ),
+          ],
+        )
     );
   }
 }

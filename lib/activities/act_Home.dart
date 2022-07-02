@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import '../Wrapper/wrapper.dart';
-import '../components/comp_bottomNavBar.dart';
 import '../components/comp_card.dart';
 import 'act_AboutUs.dart';
 import 'act_musiclist.dart';
+import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
 import 'act_nowPlaying.dart';
 
@@ -21,7 +22,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return
-      Wrapper(title: widget.title, activitieChild: elements());
+      Wrapper(activitieChild: elements());
   }
 
 
@@ -30,12 +31,12 @@ class _HomeState extends State<Home> {
     comp_card secondComponent = const comp_card(titulo: 'Escucha nuevos artistas', flexText: 9, newRoute: NowPlayingPage(title: 'Mis favoritos'),divide: 4.75);
     comp_card thirdComponent = const comp_card(titulo: 'Mis creaciones', flexText: 9, newRoute: NowPlayingPage(title: 'Mis Creaciones'),divide: 2.25,);
     comp_card fourthComponent = const comp_card(titulo: 'Mi música favorita', flexText: 7, newRoute: MyFavoriteSongs(title: 'Mi música favorita')) ;
-    comp_card fifthComponent = const comp_card(titulo: 'Mis Artistas favoritos', flexText: 7, newRoute: MusicList(title: 'Sobre TakiChai')) ;
+    comp_card fifthComponent = const comp_card(titulo: 'Mis Artistas favoritos', flexText: 7, newRoute: MyFavoriteArtist()) ;
     comp_card sixthComponent = const comp_card(titulo: 'Mis creaciones', flexText: 7, newRoute: AboutUs(title: "About Us")) ;
     comp_card seventhComponent = const comp_card(titulo: 'Sobre TakiChai', flexText: 7, newRoute: AboutUs(title: "About Us")) ;
     double dobleheight = MediaQuery.of(context).size.height/4;
-    print('object');
-    print(dobleheight);
+    //print('object');
+    //print(dobleheight);
     return Container(
       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
       child: Column(
@@ -45,7 +46,7 @@ class _HomeState extends State<Home> {
             const Text(
               'Bienvenido Xocrona!!',
               style: TextStyle(
-                //color: Colors.white,
+                color: Colors.white,
                 fontSize: 24,
                 fontFamily: 'Montserrat',
               ),

@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'comp_musicControlButtons.dart';
+
 import '../UTIL/createMaterialColor.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
+
 
 enum repeatEnum {
   none,
@@ -27,7 +30,7 @@ class _musicButtonsState extends State<musicButtons> {
     //Shuffle songs: aleatorias
   }
   toggleRepeat(){
-    //Shuffle songs: aleatorias
+    //Repeat set of songs: repetir
   }
 
   @override

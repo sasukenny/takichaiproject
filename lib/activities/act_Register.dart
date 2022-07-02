@@ -4,6 +4,7 @@ import '../components/comp_buttonLogin.dart';
 import '../util/mod_User.dart';
 
 class register extends StatefulWidget {
+  const register({Key? key}) : super(key: key);
   @override
   _registerState createState() => _registerState();
 }

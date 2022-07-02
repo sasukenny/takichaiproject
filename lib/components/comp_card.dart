@@ -1,10 +1,5 @@
-import 'dart:js';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../activities/act_Login.dart';
-import '../activities/act_musiclist.dart';
 
 class comp_card extends StatelessWidget {
   const comp_card({Key? key,
@@ -23,9 +18,9 @@ class comp_card extends StatelessWidget {
   Widget build(BuildContext context) {
     int InvertflexText = 10 - flexText;
     double height = MediaQuery.of(context).size.height;
-    print("height/7");
-    print(height/6);
-    print(this.divide);
+    //print("height/7");
+    //print(height/6);
+    //print(this.divide);
     return
       InkWell(
 
@@ -43,7 +38,7 @@ class comp_card extends StatelessWidget {
               //color: Color.fromRGBO(24, 24, 24, 1),
               //border: Border.all(color: Colors.blueAccent),
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(7),
               ),
             ),
             child:
@@ -117,11 +112,6 @@ class comp_card extends StatelessWidget {
             context,
             MaterialPageRoute(builder: (context) => newRoute),
           );
-          /*
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MusicList(title: 'hola')),
-          );*/
         },
       );
     throw UnimplementedError();
