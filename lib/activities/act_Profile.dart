@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../Wrapper/wrapper.dart';
 import '../components/comp_card.dart';
-import '../models/mod_User.dart';
+import '../models/mod_Users.dart';
 import '../services/UserService.dart';
 import 'act_musiclist.dart';
 import 'act_myFavoriteArtists.dart';
@@ -26,7 +26,7 @@ class _ProfileState extends State<Profile> {
   @protected
   @mustCallSuper
   initState(){
-    userService.getUserData().then((response) => {
+    userService.getUserData('62c010e864cff995b542c222').then((response) => {
       setState(() {
         userdata = response;
       })

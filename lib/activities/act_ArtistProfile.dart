@@ -7,7 +7,7 @@ import '../components/comp_listFullSongs.dart';
 import '../components/comp_sectionSubtitle.dart';
 import '../components/comp_sectionTitle.dart';
 import '../components/comp_songcard.dart';
-import '../models/mod_User.dart';
+import '../models/mod_Users.dart';
 import '../services/UserService.dart';
 import 'act_musiclist.dart';
 import 'act_nowPlaying.dart';
@@ -23,6 +23,8 @@ class ArtistProfile extends StatefulWidget {
 
 class _ArtistProfileState extends State<ArtistProfile> {
   UserService userService = UserService();
+  bool following = false;
+  String followingmsg = '';
   User userdata = new User(
       name: 'ONE OK ROCK',
       email: '',
@@ -33,12 +35,21 @@ class _ArtistProfileState extends State<ArtistProfile> {
   @protected
   @mustCallSuper
   initState(){
-    userService.getUserData().then((response) => {
+    userService.getUserData('62bf6513929a04ce7230db56').then((response) => {
       setState(() {
         userdata = response;
       })
     });
   }
+  /*
+  callFollow(){
+    userService.followArtist().then((response) => {
+      setState(() {
+        userdata = response;
+      })
+    });
+  }
+  */
   @override
   Widget build(BuildContext context) {
     return
@@ -164,7 +175,12 @@ class _ArtistProfileState extends State<ArtistProfile> {
                                     padding: EdgeInsets.all(0),
                                     child: ElevatedButton(
                                       style: raisedButtonStyle,
-                                      onPressed: () { },
+                                      onPressed: () {
+
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          const SnackBar(content: Text('Ahora está siguiendo al artista'))
+                                        );
+                                        },
                                       child:
                                       Flexible(
                                           child: new Text(
