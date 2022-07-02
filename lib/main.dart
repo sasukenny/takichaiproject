@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         )
       ),
        //home: const NowPlayingPage(title: 'Takichai'),
-       home: const login(),
+       home: const Home(title: 'Takichai',),
       // home: const NowPlayingPage(title: 'Takichai'),
       //home: const MusicList(title: 'Takichai'),
       // home: const Wrapper(title: 'Now Playing'),
