@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/comp_inputText.dart';
 import '../components/comp_buttonLogin.dart';
+import '../util/mod_User.dart';
 
 class register extends StatefulWidget {
   @override
@@ -19,45 +20,62 @@ class _registerState extends State<register> {
   Widget build(BuildContext context) {
     return Form(
       key: _formkey,
-      child: Column(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 50),
-              child: Center(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset('../assets/music.jpg', height: 200),
-                        inputText(
-                            controller: name,
-                            placeholder: "Nombre",
-                            voidMessage: "Ingrese su nombre"
-                        ),
-                        inputText(
-                            controller: phone,
-                            placeholder: "Celular",
-                            voidMessage: "Ingrese su número de celular"
-                        ),
-                        inputText(
-                            controller: email,
-                            placeholder: "Correo",
-                            voidMessage: "Ingrese su email"
-                        ),
-                        inputText(
-                            controller: password,
-                            placeholder: "Contraseña",
-                            voidMessage: "Ingrese su contraseña"
-                        ),
-                        buttonLogin(
-                            formkey: _formkey,
-                            name: "Registrarse"
-                        ),
-                      ]
-                  )
-              ),
-            ),
-          ]
-      ),
+      child:
+       Container(
+        child: Scaffold(
+          body: Column(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 50),
+                  child: Center(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset('../assets/images/logoTakiChai.png', height: 200),
+                            inputText(
+                                controller: name,
+                                placeholder: "Nombre",
+                                voidMessage: "Ingrese nombre solo con letras",
+                                regexp: new RegExp(r'^[a-z A-Z]+$'),
+                            ),
+                            inputText(
+                                controller: phone,
+                                placeholder: "Celular",
+                                voidMessage: "Ingrese número de celular correcto",
+                                regexp: new RegExp(r'^[0-9]{9}$')
+                            ),
+                            inputText(
+                                controller: email,
+                                placeholder: "Correo",
+                                voidMessage: "Ingrese un email correcto",
+                                regexp: new RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            ),
+                            inputText(
+                                controller: password,
+                                placeholder: "Contraseña",
+                                voidMessage: "Ingrese contraseña (mínimo 8 caracteres)",
+                                regexp: new RegExp(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$"),
+                                obscureText: true
+                            ),
+                            buttonLogin(
+                                user: User(
+                                  name: name.text,
+                                  password: password.text,
+                                  email: email.text,
+                                  description: ""
+                                ),
+                                formkey: _formkey,
+                                name: "Registrarse"
+                            ),
+                          ]
+                      )
+                  ),
+                ),
+              ]
+          ),
+        )
+       )
+
     );
   }
 }

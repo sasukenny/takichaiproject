@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import '../util/mod_User.dart';
 
 class buttonLogin extends StatelessWidget {
 
+  final User user;
   final String name;
   final GlobalKey<FormState> formkey;
 
-  const buttonLogin({Key? key, required this.formkey, required this.name}) : super(key: key);
+  const buttonLogin({Key? key, required this.formkey, required this.name, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +29,15 @@ class buttonLogin extends StatelessWidget {
           ),
         ),
         onPressed: ()
-        {
+        async {
           if(formkey.currentState!.validate())
           {
             Scaffold.of(context).showSnackBar(
                 SnackBar(content:Text("Accesando al Sistema"))
             );
+
+            final User user = await RegisterUser(this.user.name, this.user.email, this.user.password, this.user.description);
+            print(user);
           }
         },
       ),
