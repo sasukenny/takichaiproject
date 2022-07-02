@@ -2,16 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../activities/act_ArtistProfile.dart';
+import '../models/mod_ArtistResumen.dart';
+import '../models/mod_User.dart';
 
 class ArtistCard extends StatelessWidget {
 
   const ArtistCard({
     Key? key,
+    this.artistData,
     this.numberOfSongs= 0,
-    this.artistName="artis name" ,
+    this.artistName="artist name" ,
   }) : super(key: key);
   final int numberOfSongs;
   final String artistName;
+  final Artist_resumen? artistData;
 
   @override
   Widget build(BuildContext context) {
