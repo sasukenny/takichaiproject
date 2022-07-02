@@ -7,20 +7,38 @@ import '../components/comp_listFullSongs.dart';
 import '../components/comp_sectionSubtitle.dart';
 import '../components/comp_sectionTitle.dart';
 import '../components/comp_songcard.dart';
+import '../models/mod_User.dart';
+import '../services/UserService.dart';
 import 'act_musiclist.dart';
 import 'act_nowPlaying.dart';
 
 class ArtistProfile extends StatefulWidget {
-  const ArtistProfile({Key? key, required this.title}) : super(key: key);
+  const ArtistProfile({Key? key, required this.UserId}) : super(key: key);
 
-  final String title;
+  final String UserId;
 
   @override
   State<ArtistProfile> createState() => _ArtistProfileState();
 }
 
 class _ArtistProfileState extends State<ArtistProfile> {
-
+  UserService userService = UserService();
+  User userdata = new User(
+      name: 'ONE OK ROCK',
+      email: '',
+      description: 'ONE OK ROCK es una banda japonesa de rock formada en el año 2005, actualmente compuesta por cuatro miembros, Takahiro Morita, Tōru Yamashita, Ryōta Kohama y Tomoya Kanki.',
+      subscribers: [],
+      subscriptions: []
+  ) ;
+  @protected
+  @mustCallSuper
+  initState(){
+    userService.getUserData().then((response) => {
+      setState(() {
+        userdata = response;
+      })
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return
@@ -51,7 +69,7 @@ class _ArtistProfileState extends State<ArtistProfile> {
   }
   List<Container> perfil(BuildContext context){
     return [
-      PerfilImage(),
+      PerfilImage(context),
       Container(
         alignment: Alignment(-1, 0),
         margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -61,7 +79,7 @@ class _ArtistProfileState extends State<ArtistProfile> {
         ),
         child: Text(
           textAlign: TextAlign.start,
-          "ONE OK ROCK es una banda japonesa de rock formada en el año 2005, actualmente compuesta por cuatro miembros, Takahiro Morita, Tōru Yamashita, Ryōta Kohama y Tomoya Kanki.",
+          userdata.description,
           style: TextStyle(
               fontSize: 11,
               color: Colors.white
@@ -71,7 +89,7 @@ class _ArtistProfileState extends State<ArtistProfile> {
       sectionSubtitle("Canciones"),
     ];
   }
-  Container PerfilImage(){
+  Container PerfilImage(BuildContext context){
     return
       Container(
         padding: const EdgeInsets.all(0),
@@ -110,7 +128,7 @@ class _ArtistProfileState extends State<ArtistProfile> {
                                 padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                 child: Text(
                                   textAlign: TextAlign.start,
-                                  "ONE OK ROCK",
+                                  userdata.name,
                                   style: TextStyle(
                                       fontSize: 20,
                                       //fontWeight: FontWeight.bold,

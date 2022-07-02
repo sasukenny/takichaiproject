@@ -5,13 +5,13 @@ import '../Wrapper/wrapper.dart';
 import '../components/comp_artistCard.dart';
 import '../components/comp_sectionTitle.dart';
 
-class MyFavoriteArtist extends StatefulWidget {
-  const MyFavoriteArtist({Key? key}) : super(key: key);
+class ArtistList extends StatefulWidget {
+  const ArtistList({Key? key}) : super(key: key);
   @override
-  State<MyFavoriteArtist> createState() => _MyFavoriteArtistState();
+  State<ArtistList> createState() => _ArtistListState();
 }
 
-class _MyFavoriteArtistState extends State<MyFavoriteArtist> {
+class _ArtistListState extends State<ArtistList> {
   @override
   Widget build(BuildContext context) {
     return Wrapper(activitieChild: elements());
@@ -26,7 +26,7 @@ class _MyFavoriteArtistState extends State<MyFavoriteArtist> {
         ),
         child:SingleChildScrollView(
             child: Column(children: [
-              sectionTitle("Mis Suscripciones"),
+              sectionTitle("Descubre nuevos artistas"),
               Container(
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -37,6 +37,13 @@ class _MyFavoriteArtistState extends State<MyFavoriteArtist> {
                     ArtistCard(numberOfSongs: 1, artistName: "Kennysuher"),
                     ArtistCard(numberOfSongs: 0, artistName: "Hey You"),
                     ArtistCard(numberOfSongs: 10, artistName: "ONEOKROCK"),
+                    ArtistCard(numberOfSongs: 5, artistName: "Demode"),
+                    ArtistCard(numberOfSongs: 1, artistName: "Kennysuher"),
+                    ArtistCard(numberOfSongs: 0, artistName: "Hey You"),
+                    ArtistCard(numberOfSongs: 10, artistName: "ONEOKROCK"),
+                    ArtistCard(numberOfSongs: 5, artistName: "Demode"),
+                    ArtistCard(numberOfSongs: 1, artistName: "Kennysuher"),
+                    ArtistCard(numberOfSongs: 0, artistName: "Hey You"),
                   ],
                 ),
               )
@@ -45,4 +52,3 @@ class _MyFavoriteArtistState extends State<MyFavoriteArtist> {
     );
   }
 }
-
