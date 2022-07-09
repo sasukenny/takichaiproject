@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../activities/act_ArtistProfile.dart';
 import '../models/mod_ArtistResumen.dart';
-import '../models/mod_Users.dart';
+
 
 class ArtistCard extends StatelessWidget {
 

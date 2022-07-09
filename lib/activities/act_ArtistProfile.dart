@@ -7,7 +7,7 @@ import '../components/comp_listFullSongs.dart';
 import '../components/comp_sectionSubtitle.dart';
 import '../components/comp_sectionTitle.dart';
 import '../components/comp_songcard.dart';
-import '../models/mod_Users.dart';
+import '../models/mod_User.dart';
 import '../services/UserService.dart';
 import 'act_musiclist.dart';
 import 'act_nowPlaying.dart';
@@ -30,7 +30,9 @@ class _ArtistProfileState extends State<ArtistProfile> {
       email: '',
       description: 'ONE OK ROCK es una banda japonesa de rock formada en el año 2005, actualmente compuesta por cuatro miembros, Takahiro Morita, Tōru Yamashita, Ryōta Kohama y Tomoya Kanki.',
       subscribers: [],
-      subscriptions: []
+      subscriptions: [],
+      userId: '',
+      publicProfile: true
   ) ;
   @protected
   @mustCallSuper
