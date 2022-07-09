@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../Wrapper/wrapper.dart';
 import '../components/comp_card.dart';
+import '../models/mod_User.dart';
+import '../services/UserService.dart';
 import 'act_musiclist.dart';
 import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
@@ -13,14 +15,31 @@ const Profile({Key? key, required this.title}) : super(key: key);
 
 final String title;
 
+
 @override
 State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-
+  UserService userService = UserService();
+  User userdata = new User(name: '', email: '', description: '', subscribers: [], subscriptions: [], userId: '', publicProfile: true) ;
+  @protected
+  @mustCallSuper
+  initState(){
+    userService.getUserData('62c010e864cff995b542c222').then((response) => {
+      setState(() {
+        userdata = response;
+      })
+    });
+  }
+  String CountItems( List<String> listParam){
+    return listParam.length.toString();
+  }
   @override
   Widget build(BuildContext context) {
+    print('userdata');
+
+    print(userdata.description);
     return
       Wrapper(activitieChild: elements());
   }
@@ -94,10 +113,19 @@ class _ProfileState extends State<Profile> {
         ),
       ),
       Container(
-        child: Text('Kenny Suarez'),
+        child: Text(userdata.name,
+          style: blancoColor()
+        ),
       ),
       Container(
-        child: Text('Me gusta la música :D'),
+        child: Text(userdata.email,
+          style: blancoColor()
+        ),
+      ),
+      Container(
+        child: Text(userdata.description,
+          style: blancoColor()
+        ),
       ),
       Container(
         margin: const EdgeInsets.all(2.0),
@@ -113,8 +141,10 @@ class _ProfileState extends State<Profile> {
                   padding: const EdgeInsets.fromLTRB(80, 10, 10, 10),
                   child: Column(
                     children: [
-                      Text('Seguidores'),
-                      Text('87')
+                      Text('Seguidores',
+                      style: blancoColor(),),
+                      Text(CountItems(userdata.subscribers),
+                      style: blancoColor(),)
                     ],
                   ),
                 )
@@ -127,8 +157,12 @@ class _ProfileState extends State<Profile> {
                   padding: const EdgeInsets.fromLTRB(10, 10, 80, 10),
                   child: Column(
                     children: [
-                      Text('Seguidos'),
-                      Text('87')
+                      Text('Seguidos',
+                      style: blancoColor()
+                      ),
+                      Text(CountItems(userdata.subscriptions),
+                      style: blancoColor()
+                        ,)
                     ],
                   ),
                 )
@@ -178,13 +212,19 @@ class _ProfileState extends State<Profile> {
   }
   Column blankSpace(int number){
     double height = MediaQuery.of(context).size.height;
-    print(height/number);
     return Column(
       children: [Container(
         height: height/number,
         //color: Colors.yellow
         //color: Colors.white
       )],
+    );
+  }
+  TextStyle blancoColor(){
+    return TextStyle(
+        color: Colors.white,
+        fontSize: 12,
+        fontFamily: 'Montserrat',
     );
   }
 

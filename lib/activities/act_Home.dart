@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../Wrapper/wrapper.dart';
 import '../components/comp_card.dart';
+import '../models/mod_User.dart';
+import '../services/UserService.dart';
 import 'act_AboutUs.dart';
+import 'act_ArtistList.dart';
 import 'act_musiclist.dart';
 import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
@@ -18,17 +21,27 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
+  UserService userService = UserService();
+  User userdata = new User(name: '', email: '', description: '', subscribers: [], subscriptions: [],userId: '', publicProfile: true) ;
+  @protected
+  @mustCallSuper
+  initState(){
+    userService.getUserData('62c010e864cff995b542c222').then((response) => {
+      setState(() {
+        userdata = response;
+      })
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return
-      Wrapper(activitieChild: elements());
+      Wrapper(activitieChild: elements(context));
   }
 
 
-  Container elements(){
+  Container elements(BuildContext context){
     comp_card firstComponent = const comp_card(titulo: 'Descubre nueva música', flexText: 7, img: "assets/images/heart.png", newRoute: MusicList(title: 'Descubre'),divide: 4.75);
-    comp_card secondComponent = const comp_card(titulo: 'Escucha nuevos artistas', flexText: 9, newRoute: NowPlayingPage(title: 'Mis favoritos'),divide: 4.75);
+    comp_card secondComponent = const comp_card(titulo: 'Escucha nuevos artistas', flexText: 9, newRoute: ArtistList());
     comp_card thirdComponent = const comp_card(titulo: 'Mis creaciones', flexText: 9, newRoute: NowPlayingPage(title: 'Mis Creaciones'),divide: 2.25,);
     comp_card fourthComponent = const comp_card(titulo: 'Mi música favorita', flexText: 7, newRoute: MyFavoriteSongs(title: 'Mi música favorita')) ;
     comp_card fifthComponent = const comp_card(titulo: 'Mis Artistas favoritos', flexText: 7, newRoute: MyFavoriteArtist()) ;
@@ -37,14 +50,16 @@ class _HomeState extends State<Home> {
     double dobleheight = MediaQuery.of(context).size.height/4;
     //print('object');
     //print(dobleheight);
+    String tituloBienvenida = 'Bienvenido '  + userdata.name + '!';
     return Container(
       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             blankSpace(),
-            const Text(
-              'Bienvenido Xocrona!!',
+
+            Text(
+              tituloBienvenida,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
