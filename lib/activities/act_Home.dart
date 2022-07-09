@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../Wrapper/wrapper.dart';
 import '../components/comp_card.dart';
-import '../models/mod_Users.dart';
+import '../models/mod_User.dart';
 import '../services/UserService.dart';
 import 'act_AboutUs.dart';
 import 'act_ArtistList.dart';
@@ -22,7 +22,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   UserService userService = UserService();
-  User userdata = new User(name: '', email: '', description: '', subscribers: [], subscriptions: []) ;
+  User userdata = new User(name: '', email: '', description: '', subscribers: [], subscriptions: [],userId: '', publicProfile: true) ;
   @protected
   @mustCallSuper
   initState(){

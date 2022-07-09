@@ -1,56 +1,66 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http; //importar para hacer peticiones
+import 'dart:convert'; //importar para hacer peticiones
 
-User userFromJson(String str) => User.fromJson(json.decode(str));
+User userFromJson(String str) => User.fromJson(json.decode(str)); //de Json a User
+String userToJson(User data) => json.encode(data.toJson()); //de User a Json
 
-String userToJson(User data) => json.encode(data.toJson());
-
+//Clase modelo
 class User {
-  User({
-    this.userId = 0,
+  final bool publicProfile;
+  final String name;
+  final String email;
+  final String description;
+  final List<String> subscribers;
+  final List<String> subscriptions;
+  final String userId;
+
+  //agregar en futuro las listas
+
+  const User({
     required this.name,
-    this.description = "",
-    this.password = "",
     required this.email,
+    required this.description,
+    required this.subscribers,
+    required this.subscriptions,
+    required this.publicProfile,
+    required this.userId
   });
 
-  int userId;
-  String name;
-  String description;
-  String password;
-  String email;
+  //Método constructor a partir de json
+  factory User.fromJson(Map<Object, dynamic> json) {
+    print('fromjson');
+    print(json['user']['subscribers']);
+    /*
+    json['user']['subscribers'].map((suscriber)=>{
+      subscribersList.add(suscriber)
+    });
+     */
+    List<String> subscribersList = [];
+    for(String sus in json['user']['subscribers']){
+      subscribersList.add(sus);
+    }
+    List<String>  subscriptionsList = [];
+    for(String sus in json['user']['subscriptions']){
+      subscriptionsList.add(sus);
+    }
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
-    userId: json["user"]["userId"],
-    name: json["user"]["name"],
-    description: json["user"]["description"],
-    email: json["user"]["email"],
-  );
+    return User(
+      name: json['user']['name'],
+      email: json['user']['email'],
+      description: json['user']['description'],
+      subscribers: subscribersList,
+      subscriptions: subscriptionsList,
+      publicProfile: json['user']['publicProfile'],
+      userId: json['user']['userId'],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     "userId": userId,
     "name": name,
     "description": description,
-    "password": password,
     "email": email,
   };
 
-  Future <User> RegisterUser (String name, String email, String password) async {
-    final String apiUrl = "https://takichai-backend.herokuapp.com/api/user";
 
-    final response = await http.post(Uri.parse(apiUrl), body: {
-      "name": name,
-      "email": email,
-      "password": password
-    });
-
-    if(response.statusCode == 201){
-      final String responseString = response.body;
-
-      return userFromJson(responseString);
-    }else{
-      return User(email:"", name:"", password:"");
-    }
-
-  }
 }
