@@ -36,7 +36,7 @@ class buttonLogin extends StatelessWidget {
                 SnackBar(content:Text("Accesando al Sistema"))
             );
 
-            final User user = await RegisterUser(this.user.name, this.user.email, this.user.password, this.user.description);
+            //final User user = await RegisterUser(this.user.name, this.user.email, this.user.password, this.user.description);
             print(user);
           }
         },
