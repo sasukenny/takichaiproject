@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../components/comp_inputText.dart';
-import '../components/comp_buttonLogin.dart';
 import '../util/mod_User.dart';
 
 class register extends StatefulWidget {
@@ -75,13 +74,11 @@ class _registerState extends State<register> {
                                       print(_formkey.currentState.toString());
                                       if(_formkey.currentState!.validate())
                                       {
-
                                         final User userRes = await RegisterUser(
                                             nameController.text,
                                             emailController.text,
                                             passwordController.text,
                                             "");
-
                                       }
                                     },
                                   ),

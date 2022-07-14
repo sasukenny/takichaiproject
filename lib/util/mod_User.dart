@@ -55,7 +55,29 @@ Future<User> RegisterUser(String name, String email, String pw, String desc) asy
   if(response.statusCode == 201){
     final String responseString = response.body;
     return userFromJson(responseString);
-  }else{
+  }else{ 
     return const User(name: "name", email: "email", password: "password", description: "");
+  }
+}
+
+
+//Login
+Future<User> LoginUser(String email, String pw) async{
+  const String url = 'https://takichai-backend.herokuapp.com/api/users/login';
+
+  final response = await http.post(Uri.parse(url),body: {
+    "email": email,
+    "password": pw,
+  });
+
+  if(response.statusCode == 200){
+    final String responseString = response.body;
+    print("Success, user logged");
+    User result = userFromJson(responseString);
+    print(result.email);
+    return result;
+  }else{
+    print("Error logging");
+    return const User(name: "", email: "email", password: "password", description: "");
   }
 }
