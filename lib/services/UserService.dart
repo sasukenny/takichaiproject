@@ -8,30 +8,31 @@ import '../models/mod_User.dart';
 import '../models/mod_UserMessage.dart';
 
 class UserService {
-  Future <User> RegisterUser (String name, String email, String password) async {
-    final String apiUrl = "https://takichai-backend.herokuapp.com/api/user";
-
-    final response = await http.post(Uri.parse(apiUrl), body: {
-      "name": name,
-      "email": email,
-      "password": password
-    });
-
-    if(response.statusCode == 201){
-      final String responseString = response.body;
-      User userdata = User.fromJson(jsonDecode(response.body));
-      return userdata;
-    }else{
-      return User(email:"", name:"",description: "", subscribers: [], subscriptions: [], userId: '', publicProfile: true);
+  //Registrer a new user
+  Future<User> RegisterUser(String name, String email, String pw, String desc) async{
+    try{
+      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users');
+      final response = await http.post(url, body:{
+        "name": name,
+        "email": email,
+        "password": pw,
+        "description": desc
+      });
+      //print(jsonDecode(response.body));
+      User newUser = User.fromRegister(jsonDecode(response.body));
+      return newUser;
+    }catch(error){
+      throw Exception('Failed to register new User');
     }
-
   }
+
+  //Get User Data
   Future<User> getUserData(String id) async {
     try{
       final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/${id}');
       final response = await http.get(url);
       print(jsonDecode(response.body));
-      User userdata = User.fromJson(jsonDecode(response.body));
+      User userdata = User.fromProfileData(jsonDecode(response.body));
       return userdata;
     }catch(error){
       throw Exception('Failed to load User');
@@ -42,7 +43,7 @@ class UserService {
       final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/62bf6513929a04ce7230db56');
       final response = await http.get(url);
       print(jsonDecode(response.body));
-      User userdata = User.fromJson(jsonDecode(response.body));
+      User userdata = User.fromProfileData(jsonDecode(response.body));
       return userdata;
     }catch(error){
       throw Exception('Failed to load User');

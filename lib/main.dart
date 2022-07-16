@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       //home: const NowPlayingPage(title: 'Now Playing'),
       // home: const MusicList(title: 'Music List'),
       //home: const AboutUs(title: "About Us"),
-      // home: const register(),
+      //home: const register(),
 
     );
   }

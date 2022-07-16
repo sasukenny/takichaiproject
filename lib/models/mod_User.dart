@@ -1,40 +1,43 @@
 import 'package:http/http.dart' as http; //importar para hacer peticiones
 import 'dart:convert'; //importar para hacer peticiones
 
-User userFromJson(String str) => User.fromJson(json.decode(str)); //de Json a User
+User userFromProfileData(String str) => User.fromProfileData(json.decode(str));
+User userFromRegister(String str) => User.fromRegister(json.decode(str));
+//de Json a User
 String userToJson(User data) => json.encode(data.toJson()); //de User a Json
 
 //Clase modelo
 class User {
-  final bool publicProfile;
-  final String name;
-  final String email;
-  final String description;
-  final List<String> subscribers;
-  final List<String> subscriptions;
-  final String userId;
+  String userId = "";
+  bool publicProfile = true;
+  String name = "";
+  String email = "";
+  String description = "";
+  List<String> subscribers = [];
+  List<String> subscriptions = [];
 
-  //agregar en futuro las listas
+  User(
+    this.name,
+    this.email,
+    this.description,
+    this.subscribers,
+    this.subscriptions,
+    this.publicProfile,
+    this.userId
+  );
 
-  const User({
-    required this.name,
-    required this.email,
-    required this.description,
-    required this.subscribers,
-    required this.subscriptions,
-    required this.publicProfile,
-    required this.userId
-  });
+  //Método constructor a partir de register
+  User.fromRegister(Map<Object, dynamic> json) {
+    description = "";
+    userId = json["user"]["userId"];
+    name = json["user"]["name"];
+    description = json["user"]["description"];
+    email = json["user"]["email"];
+  }
 
-  //Método constructor a partir de json
-  factory User.fromJson(Map<Object, dynamic> json) {
-    print('fromjson');
-    print(json['user']['subscribers']);
-    /*
-    json['user']['subscribers'].map((suscriber)=>{
-      subscribersList.add(suscriber)
-    });
-     */
+  //Método constructor a para la data de perfil
+  User.fromProfileData(Map<Object, dynamic> json) {
+
     List<String> subscribersList = [];
     for(String sus in json['user']['subscribers']){
       subscribersList.add(sus);
@@ -44,15 +47,14 @@ class User {
       subscriptionsList.add(sus);
     }
 
-    return User(
-      name: json['user']['name'],
-      email: json['user']['email'],
-      description: json['user']['description'],
-      subscribers: subscribersList,
-      subscriptions: subscriptionsList,
-      publicProfile: json['user']['publicProfile'],
-      userId: json['user']['userId'],
-    );
+    subscribers = subscribersList;
+    subscriptions = subscriptionsList;
+    description = json['user']['description'];
+    userId = json["user"]["userId"];
+    name = json["user"]["name"];
+    description = json["user"]["description"];
+    email = json["user"]["email"];
+    publicProfile = json['user']['publicProfile'];
   }
 
   Map<String, dynamic> toJson() => {
@@ -61,6 +63,5 @@ class User {
     "description": description,
     "email": email,
   };
-
 
 }

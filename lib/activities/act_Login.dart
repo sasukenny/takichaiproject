@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import '../components/comp_inputText.dart';
-import '../components/comp_buttonLogin.dart';
-import '../util/mod_User.dart'; //modelo de la data de llegada
 
 
 class login extends StatefulWidget {
@@ -12,7 +10,6 @@ class login extends StatefulWidget {
 
 class _loginState extends State<login> {
 
-  late Future<User> futureUser;
 
   TextEditingController email = new TextEditingController();
   TextEditingController password = new TextEditingController();
@@ -54,16 +51,6 @@ class _loginState extends State<login> {
                                   voidMessage: "Ingrese contraseña correcta",
                                   regexp: new RegExp(".*"),
                                   obscureText: true
-                              ),
-                              buttonLogin(
-                                  user: User(
-                                      name: "",
-                                      password: password.text,
-                                      email: email.text,
-                                      description: ""
-                                  ),
-                                  formkey: _formkey,
-                                  name: "Iniciar sesión"
                               ),
                             ]
                         )
