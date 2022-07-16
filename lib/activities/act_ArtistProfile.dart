@@ -32,6 +32,7 @@ class _ArtistProfileState extends State<ArtistProfile> {
       [],
       [],
       true,
+      '',
       ''
   ) ;
   @protected

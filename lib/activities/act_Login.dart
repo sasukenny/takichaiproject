@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../components/comp_inputText.dart';
+import '../models/mod_User.dart';
+import '../services/UserService.dart';
+import './act_Home.dart';
 
 
 class login extends StatefulWidget {
@@ -10,9 +13,12 @@ class login extends StatefulWidget {
 
 class _loginState extends State<login> {
 
+  UserService userService = UserService();
 
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+
+  late User userRes;
 
   final _formkey = GlobalKey<FormState>();
 
@@ -70,15 +76,14 @@ class _loginState extends State<login> {
                                   ),
                                   onPressed: ()
                                   async {
-                                    print(_formkey.currentState.toString());
-                                    if(_formkey.currentState!.validate())
-                                    {
-                                      final User userRes = await LoginUser(
-                                          emailController.text,
-                                          passwordController.text,
-                                      );
-                                      // print(userRes);
-                                    }
+                                    userRes = await userService.LoginUser(
+                                        emailController.text,
+                                        passwordController.text,
+                                        );
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Home(title: 'Takichai')),
+                                    );
                                   },
                                 ),
                               )

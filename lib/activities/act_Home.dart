@@ -10,6 +10,7 @@ import 'act_musiclist.dart';
 import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
 import 'act_nowPlaying.dart';
+import '../globals/globalValues.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key, required this.title}) : super(key: key);
@@ -22,11 +23,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   UserService userService = UserService();
-  User userdata = User('', '', '', [], [], true, '',) ;
+  User userdata = User('', '', '', [], [], true, '','') ;
   @protected
   @mustCallSuper
   initState(){
-    userService.getUserData('62c010e864cff995b542c222').then((response) => {
+    userService.getUserData(globalVariables[0].userId).then((response) => {
       setState(() {
         userdata = response;
       })

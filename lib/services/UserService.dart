@@ -7,6 +7,7 @@ import '../globals/globalValues.dart';
 import '../models/mod_User.dart';
 import '../models/mod_UserMessage.dart';
 
+
 class UserService {
   //Registrer a new user
   Future<User> RegisterUser(String name, String email, String pw, String desc) async{
@@ -23,6 +24,24 @@ class UserService {
       return newUser;
     }catch(error){
       throw Exception('Failed to register new User');
+    }
+  }
+
+  //Login user
+  Future<User> LoginUser(String email, String pw) async{
+    try{
+      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/login');
+      final response = await http.post(url, body:{
+        "email": email,
+        "password": pw,
+      });
+      //print(jsonDecode(response.body));
+      User newUser = User.fromLogin(jsonDecode(response.body));
+
+        globalVariables.add(newUser);
+      return newUser;
+    }catch(error){
+      throw Exception('Failed to login User');
     }
   }
 
@@ -54,7 +73,7 @@ class UserService {
     try{
       final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/subscribe?id=62bf6513929a04ce7230db56');
       final response = await http.patch(url,
-        headers: {"Authorization": "$authToken"},
+        headers: {"Authorization": "$globalVariables[0].token"},
       );
       print(jsonDecode(response.body));
       UserMessage userdata = UserMessage.fromJson(jsonDecode(response.body));
@@ -68,7 +87,7 @@ class UserService {
     try{
       final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/subscribe?id=62bf6513929a04ce7230db56');
       final response = await http.patch(url,
-        headers: {"Authorization": "$authToken"},
+        headers: {"Authorization": "$globalVariables[0].token"},
       );
       print(jsonDecode(response.body));
       UserMessage userdata = UserMessage.fromJson(jsonDecode(response.body));
