@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../components/comp_inputText.dart';
-import '../util/mod_User.dart';
+import '../models/mod_User.dart';
+import '../services/UserService.dart';
+import 'act_Login.dart';
 
 class register extends StatefulWidget {
   const register({Key? key}) : super(key: key);
@@ -9,9 +11,12 @@ class register extends StatefulWidget {
 }
 
 class _registerState extends State<register> {
-  TextEditingController nameController = new TextEditingController();
-  TextEditingController emailController = new TextEditingController();
-  TextEditingController passwordController = new TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  UserService userService = UserService();
+
+  late Future<User> userRes;
 
   final _formkey = GlobalKey<FormState>();
 
@@ -35,19 +40,19 @@ class _registerState extends State<register> {
                                   controller: nameController,
                                   placeholder: "Nombre",
                                   voidMessage: "Ingrese nombre solo con letras",
-                                  regexp: new RegExp(r'^[a-z A-Z]+$'),
+                                  regexp: RegExp(r'^[a-z A-Z]+$'),
                                 ),
                                 inputText(
                                     controller: emailController,
                                     placeholder: "Correo",
                                     voidMessage: "Ingrese un email correcto",
-                                    regexp: new RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    regexp: RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                 ),
                                 inputText(
                                     controller: passwordController,
                                     placeholder: "Contraseña",
                                     voidMessage: "Ingrese contraseña (mínimo 8 caracteres)",
-                                    regexp: new RegExp(r'.*'),
+                                    regexp: RegExp(r'.*'),
                                     obscureText: true
                                 ),
 
@@ -60,8 +65,8 @@ class _registerState extends State<register> {
                                     borderRadius: BorderRadius.circular(50),
                                   ),
                                   padding: EdgeInsets.fromLTRB(60,0,60,0),
-                                  child: FlatButton(
-                                    child: Text(
+                                  child: TextButton(
+                                    child: const Text(
                                       "Registrarse",
                                       style: TextStyle(
                                         color: Colors.white,
@@ -70,22 +75,20 @@ class _registerState extends State<register> {
                                       ),
                                     ),
                                     onPressed: ()
-                                    async {
-                                      print(_formkey.currentState.toString());
-                                      if(_formkey.currentState!.validate())
-                                      {
-                                        final User userRes = await RegisterUser(
-                                            nameController.text,
-                                            emailController.text,
-                                            passwordController.text,
-                                            "");
-                                      }
+                                    {
+                                      userRes = userService.RegisterUser(
+                                          nameController.text,
+                                          emailController.text,
+                                          passwordController.text,
+                                          "");
+
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => login()),
+                                      );
                                     },
-                                  ),
+                                  )
                                 )
-
-                                ////////
-
                               ]
                           )
                       ),

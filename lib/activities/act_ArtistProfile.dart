@@ -25,14 +25,14 @@ class _ArtistProfileState extends State<ArtistProfile> {
   UserService userService = UserService();
   bool following = false;
   String followingmsg = '';
-  User userdata = new User(
-      name: 'ONE OK ROCK',
-      email: '',
-      description: 'ONE OK ROCK es una banda japonesa de rock formada en el año 2005, actualmente compuesta por cuatro miembros, Takahiro Morita, Tōru Yamashita, Ryōta Kohama y Tomoya Kanki.',
-      subscribers: [],
-      subscriptions: [],
-      userId: '',
-      publicProfile: true
+  User userdata = User(
+      'ONE OK ROCK',
+      '',
+      'ONE OK ROCK es una banda japonesa de rock formada en el año 2005, actualmente compuesta por cuatro miembros, Takahiro Morita, Tōru Yamashita, Ryōta Kohama y Tomoya Kanki.',
+      [],
+      [],
+      true,
+      ''
   ) ;
   @protected
   @mustCallSuper

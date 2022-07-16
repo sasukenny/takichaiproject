@@ -22,7 +22,7 @@ State<Profile> createState() => _ProfileState();
 
 class _ProfileState extends State<Profile> {
   UserService userService = UserService();
-  User userdata = new User(name: '', email: '', description: '', subscribers: [], subscriptions: [], userId: '', publicProfile: true) ;
+  User userdata = User('', '', '', [], [], true, '',) ;
   @protected
   @mustCallSuper
   initState(){

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../components/comp_inputText.dart';
-import '../util/mod_User.dart'; //modelo de la data de llegada
 
 
 class login extends StatefulWidget {
@@ -11,7 +10,6 @@ class login extends StatefulWidget {
 
 class _loginState extends State<login> {
 
-  late Future<User> futureUser;
 
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();

@@ -22,7 +22,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   UserService userService = UserService();
-  User userdata = new User(name: '', email: '', description: '', subscribers: [], subscriptions: [],userId: '', publicProfile: true) ;
+  User userdata = User('', '', '', [], [], true, '',) ;
   @protected
   @mustCallSuper
   initState(){
