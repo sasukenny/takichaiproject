@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../components/comp_inputText.dart';
-import '../components/comp_buttonLogin.dart';
 import '../util/mod_User.dart'; //modelo de la data de llegada
 
 

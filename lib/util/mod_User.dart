@@ -9,26 +9,31 @@ String userToJson(User data) => json.encode(data.toJson()); //de User a Json
 
 //Clase modelo
 class User {
+  final String userId;
   final String name;
   final String email;
-  final String password;
+  final String? password;
   final String description;
 
   const User({
+    this.userId = "",
     required this.name,
     required this.email,
-    required this.password,
+    this.password,
     required this.description,
   });
 
   //Método constructor a partir de json
   factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      name: json['name'],
-      email: json['email'],
-      password: json['password'],
-      description: json['description']
+    User usuario = User(
+      userId: json["user"]["userId"],
+      name: json["user"]["name"],
+      description: json["user"]["description"],
+      password: json["user"]["password"],
+      email: json["user"]["email"],
     );
+    print(usuario.userId);
+    return usuario;
   }
 
   //Para retornar JSON
@@ -52,12 +57,8 @@ Future<User> RegisterUser(String name, String email, String pw, String desc) asy
     "description": desc
   });
 
-  if(response.statusCode == 201){
-    final String responseString = response.body;
-    return userFromJson(responseString);
-  }else{ 
-    return const User(name: "name", email: "email", password: "password", description: "");
-  }
+  final String responseString = response.body;
+  return userFromJson(responseString);
 }
 
 
@@ -70,14 +71,9 @@ Future<User> LoginUser(String email, String pw) async{
     "password": pw,
   });
 
-  if(response.statusCode == 200){
-    final String responseString = response.body;
-    print("Success, user logged");
-    User result = userFromJson(responseString);
-    print(result.email);
-    return result;
-  }else{
-    print("Error logging");
-    return const User(name: "", email: "email", password: "password", description: "");
-  }
+  final String responseString = response.body;
+  print("Success, user logged");
+  User result = userFromJson(responseString);
+  print(result.email);
+  return result;
 }
