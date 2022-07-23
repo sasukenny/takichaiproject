@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../Wrapper/wrapper.dart';
 import '../components/comp_card.dart';
 import '../models/mod_User.dart';
@@ -9,6 +8,7 @@ import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
 import 'act_mySongs.dart';
 import 'act_nowPlaying.dart';
+import '../globals/globalValues.dart';
 
 class Profile extends StatefulWidget {
 const Profile({Key? key, required this.title}) : super(key: key);
@@ -26,7 +26,7 @@ class _ProfileState extends State<Profile> {
   @protected
   @mustCallSuper
   initState(){
-    userService.getUserData('62c010e864cff995b542c222').then((response) => {
+    userService.getUserData(globalVariables[0].userId).then((response) => {
       setState(() {
         userdata = response;
       })

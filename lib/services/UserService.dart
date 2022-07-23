@@ -59,7 +59,8 @@ class UserService {
   }
   Future<User> getArtistData() async {
     try{
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/62bf6513929a04ce7230db56');
+      int id = globalVariables[0].userId;
+      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/${id}');
       final response = await http.get(url);
       print(jsonDecode(response.body));
       User userdata = User.fromProfileData(jsonDecode(response.body));

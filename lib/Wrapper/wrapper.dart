@@ -104,11 +104,11 @@ class _HomeState extends State<Wrapper> {
         itemBuilder: (context) => [
           PopupMenuItem<int>(
               value: 0,
-              child: Text('Mi perfil')
+              child: Text('Mi Perfil')
           ),
           PopupMenuItem<int>(
               value: 1,
-              child: Text('cerrar sesión')
+              child: Text('Cerrar Sesión')
           ),
         ],
       ),
