@@ -26,7 +26,6 @@ class UserService {
       throw Exception('Failed to register new User');
     }
   }
-
   //Login user
   Future<User> LoginUser(String email, String pw) async{
     try{
@@ -57,46 +56,7 @@ class UserService {
       throw Exception('Failed to load User');
     }
   }
-  Future<User> getArtistData() async {
-    try{
-      int id = globalVariables[0].userId;
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/${id}');
-      final response = await http.get(url);
-      print(jsonDecode(response.body));
-      User userdata = User.fromProfileData(jsonDecode(response.body));
-      return userdata;
-    }catch(error){
-      throw Exception('Failed to load User');
-    }
-  }
 
-  Future<UserMessage> followArtist() async {
-    try{
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/subscribe?id=62bf6513929a04ce7230db56');
-      final response = await http.patch(url,
-        headers: {"Authorization": "$globalVariables[0].token"},
-      );
-      print(jsonDecode(response.body));
-      UserMessage userdata = UserMessage.fromJson(jsonDecode(response.body));
-      return userdata;
-    }catch(error){
-      throw Exception('Failed to suscribe');
-    }
-  }
-
-  Future<UserMessage> unfollowArtist() async {
-    try{
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/subscribe?id=62bf6513929a04ce7230db56');
-      final response = await http.patch(url,
-        headers: {"Authorization": "$globalVariables[0].token"},
-      );
-      print(jsonDecode(response.body));
-      UserMessage userdata = UserMessage.fromJson(jsonDecode(response.body));
-      return userdata;
-    }catch(error){
-      throw Exception('Failed to unsuscribe');
-    }
-  }
 }
 
 
