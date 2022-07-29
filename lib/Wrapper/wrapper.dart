@@ -1,16 +1,18 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../activities/act_Login.dart';
 import '../activities/act_Profile.dart';
 import '../components/comp_bottomNavBar.dart';
 import '../components/comp_TakichayAppbar.dart';
 import '../activities/act_Profile.dart';
+import '../services/UserService.dart';
 
 class Wrapper extends StatefulWidget {
   const Wrapper({Key? key, required this.activitieChild}) : super(key: key);
   final Widget activitieChild;
-
   @override
   State<Wrapper> createState() => _HomeState();
 }
@@ -18,7 +20,7 @@ class Wrapper extends StatefulWidget {
 class _HomeState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
-
+  
     return WillPopScope(
         onWillPop: ()async{
           print('s');
@@ -109,12 +111,14 @@ class _HomeState extends State<Wrapper> {
           PopupMenuItem<int>(
               value: 1,
               child: Text('Cerrar Sesión')
+
           ),
         ],
       ),
     ];
   }
   void onSelected(BuildContext context, int item ){
+    UserService userService = UserService();
     switch (item){
       case 0:
         print('Mi perfil');
@@ -122,6 +126,8 @@ class _HomeState extends State<Wrapper> {
         break;
       case 1:
         print('cerrando sesion');
+        userService.LogoutUser();
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>login()));
         break;
 
     }

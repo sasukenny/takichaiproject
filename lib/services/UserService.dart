@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-import '../globals/globalValues.dart';
+
 import '../models/mod_User.dart';
-import '../models/mod_UserMessage.dart';
+
 
 
 class UserService {
@@ -48,11 +48,23 @@ class UserService {
       prefs.setStringList('subscribers', userRes.subscribers);
       prefs.setStringList('subscriptions', userRes.subscriptions);
       prefs.setString('token', userRes.token);
-      globalVariables.add(userRes);
       return userRes;
     }catch(error){
       throw Exception('Failed to login User');
     }
+  }
+
+  //logout user
+  Future<void> LogoutUser() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('userId');
+    prefs.remove('publicProfile');
+    prefs.remove('name');
+    prefs.remove('email');
+    prefs.remove('description');
+    prefs.remove('subscribers');
+    prefs.remove('subscriptions');
+    prefs.remove('token');
   }
 
   //Get and Update User Data

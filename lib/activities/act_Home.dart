@@ -45,6 +45,11 @@ class _HomeState extends State<Home> {
         setState(() {
           userdata = response;
         })
+      }).catchError(()=>{
+        Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => login()),
+        )
       });
     }
     else{
@@ -53,6 +58,9 @@ class _HomeState extends State<Home> {
         MaterialPageRoute(builder: (context) => login()),
       );
     }
+
+
+
 
   }
 
