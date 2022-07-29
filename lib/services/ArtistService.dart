@@ -8,7 +8,6 @@ import '../models/mod_User.dart';
 import '../models/mod_UserMessage.dart';
 
 class ArtistService {
-
   Future<User> getArtistData(String id) async {
     try{
       final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/${id}');

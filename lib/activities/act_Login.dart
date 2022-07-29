@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../components/comp_inputText.dart';
 import '../models/mod_User.dart';
 import '../services/UserService.dart';
@@ -19,7 +21,11 @@ class _loginState extends State<login> {
   TextEditingController passwordController = new TextEditingController();
 
   late User userRes;
-
+  var logger = Logger(
+    filter: null, // Use the default LogFilter (-> only log in debug mode)
+    printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
+    output: null, // Use the default LogOutput (-> send everything to console)
+  );
   final _formkey = GlobalKey<FormState>();
 
   //Init state
@@ -76,14 +82,24 @@ class _loginState extends State<login> {
                                   ),
                                   onPressed: ()
                                   async {
-                                    userRes = await userService.LoginUser(
+                                    try{
+                                      userRes = await userService.LoginUser(
                                         emailController.text,
                                         passwordController.text,
-                                        );
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => Home(title: 'Takichai')),
-                                    );
+                                      );
+                                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                                      logger.d("Debug log");
+                                      logger.d(prefs.getString('userID'));
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => Home()),
+                                      );
+                                    }
+                                    catch (e){
+                                      print(e);
+                                    }
+
+
                                   },
                                 ),
                               )

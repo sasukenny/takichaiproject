@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Wrapper/wrapper.dart';
 import '../components/comp_card.dart';
@@ -6,6 +8,7 @@ import '../models/mod_User.dart';
 import '../services/UserService.dart';
 import 'act_AboutUs.dart';
 import 'act_ArtistList.dart';
+import 'act_Login.dart';
 import 'act_musiclist.dart';
 import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
@@ -13,10 +16,7 @@ import 'act_nowPlaying.dart';
 import '../globals/globalValues.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
+  const Home({Key? key}) : super(key: key);
   @override
   State<Home> createState() => _HomeState();
 }
@@ -24,15 +24,38 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   UserService userService = UserService();
   User userdata = User('', '', '', [], [], true, '','') ;
+  String? userId;
+  var logger = Logger(
+    filter: null, // Use the default LogFilter (-> only log in debug mode)
+    printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
+    output: null, // Use the default LogOutput (-> send everything to console)
+  );
   @protected
   @mustCallSuper
-  initState(){
-    userService.getUserData(globalVariables[0].userId).then((response) => {
-      setState(() {
-        userdata = response;
-      })
-    });
+  initState() {
+    GetUserId();
   }
+
+  Future<void> GetUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    userId = prefs.getString('userId');
+    logger.d(userId);
+    if(userId!=null){
+      userService.getUserData(userId!).then((response) => {
+        setState(() {
+          userdata = response;
+        })
+      });
+    }
+    else{
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => login()),
+      );
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return

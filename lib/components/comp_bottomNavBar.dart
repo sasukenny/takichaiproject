@@ -37,7 +37,7 @@ class bottomNavBar extends StatelessWidget{
     switch (index){
       case 0:
         print('Mi perfil');
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Home(title: 'Takichai',)));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Home()));
         break;
       case 1:
         print('MyFavoriteSongs ');
