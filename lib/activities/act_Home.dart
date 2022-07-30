@@ -58,10 +58,6 @@ class _HomeState extends State<Home> {
         MaterialPageRoute(builder: (context) => login()),
       );
     }
-
-
-
-
   }
 
   @override

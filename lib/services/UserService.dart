@@ -2,15 +2,18 @@
 import 'dart:convert';
 import 'dart:core';
 import 'package:http/http.dart' as http;
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-
-
 import '../models/mod_User.dart';
 
 
 
 class UserService {
+  var logger = Logger(
+    filter: null, // Use the default LogFilter (-> only log in debug mode)
+    printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
+    output: null, // Use the default LogOutput (-> send everything to console)
+  );
   //Registrer a new user
   Future<User> RegisterUser(String name, String email, String pw, String desc) async{
     try{
@@ -90,6 +93,40 @@ class UserService {
     }
   }
 
+  //get all user - then this will become getAllArtist
+  Future<List<User>> getAllUsers() async {
+    try{
+      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/');
+      final response = await http.get(url);
+      List<User> users = [];
+      Map<Object, dynamic> json = jsonDecode(response.body);
+      //User a = json['users'][0];
+      for(Map<Object, dynamic> a in json['users']){
+        List<String> subscribersList = [];
+        for(String sus in a['subscribers']){
+          subscribersList.add(sus);
+        }
+        List<String>  subscriptionsList = [];
+        for(String sus in a['subscriptions']){
+          subscriptionsList.add(sus);
+        };
+        User useritem = User(
+            a['name'],
+            a['email'],
+            a['description'],
+            subscribersList,
+            subscriptionsList,
+            a['publicProfile'],
+            a['userId'],
+            "");
+        users.add(useritem);
+      }
+      return users;
+    }catch(error){
+      logger.e(error);
+      throw Exception('Failed to load User');
+    }
+  }
 }
 
 
