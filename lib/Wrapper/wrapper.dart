@@ -43,12 +43,12 @@ class _HomeState extends State<Wrapper> {
                   color: Colors.white
               ))),
               actions: myActions(),
-              backgroundColor: Color.fromRGBO(24, 24, 24, 1)
+              backgroundColor: Color.fromRGBO(7, 7, 7, 1.0)
           ),
           body: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color.fromRGBO(41, 44, 45, 1.0),Color.fromRGBO(18, 23, 26, 1.0)],
+                colors: [Color.fromRGBO(24, 24, 36, 1.0),Color.fromRGBO(8, 13, 25, 1.0)],
               ),
             ),
             child: widget.activitieChild,
@@ -62,11 +62,8 @@ class _HomeState extends State<Wrapper> {
     return <Widget>[
       Row(
         children: [
-          /*
-          Text(
-            'Subir una canción',
-          ),*/
           IconButton(
+            color: Color.fromRGBO(255, 255, 255, 1),
             padding: EdgeInsets.all(0),
             icon: const Icon(Icons.download_sharp),
             tooltip: 'Show Snackbar',
@@ -77,31 +74,9 @@ class _HomeState extends State<Wrapper> {
           ),
         ],
       ),
-
-      /*
-      IconButton(
-        icon: const Icon(Icons.more_vert),
-        tooltip: 'Go to the next page',
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute<void>(
-            builder: (BuildContext context) {
-              return Scaffold(
-                appBar: AppBar(
-                  title: const Text('Next page'),
-                ),
-                body: const Center(
-                  child: Text(
-                    'This is the next page',
-                    style: TextStyle(fontSize: 24),
-                  ),
-                ),
-              );
-            },
-          ));
-        },
-      ),
-    */
       PopupMenuButton<int>(
+        color: Color.fromRGBO(255, 255, 255, 1),
+        icon: const Icon( Icons.more_vert , color: Colors.white),
         onSelected: (item)=>onSelected(context,item),
         itemBuilder: (context) => [
           PopupMenuItem<int>(

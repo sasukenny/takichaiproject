@@ -68,13 +68,11 @@ class _HomeState extends State<Home> {
 
 
   Container elements(BuildContext context){
-    comp_card firstComponent = const comp_card(titulo: 'Descubre nueva música', flexText: 7, img: "assets/images/heart.png", newRoute: MusicList(title: 'Descubre'),divide: 4.75);
-    comp_card secondComponent = const comp_card(titulo: 'Escucha nuevos artistas', flexText: 9, newRoute: ArtistList());
-    comp_card thirdComponent = const comp_card(titulo: 'Mis creaciones', flexText: 9, newRoute: NowPlayingPage(title: 'Mis Creaciones'),divide: 2.25,);
-    comp_card fourthComponent = const comp_card(titulo: 'Mi música favorita', flexText: 7, newRoute: MyFavoriteSongs(title: 'Mi música favorita')) ;
-    comp_card fifthComponent = const comp_card(titulo: 'Mis Artistas favoritos', flexText: 7, newRoute: MyFavoriteArtist()) ;
-    comp_card sixthComponent = const comp_card(titulo: 'Mis creaciones', flexText: 7, newRoute: AboutUs(title: "About Us")) ;
-    comp_card seventhComponent = const comp_card(titulo: 'Sobre TakiChai', flexText: 7, newRoute: AboutUs(title: "About Us")) ;
+    comp_card firstComponent = const comp_card(titulo: 'Descubre nueva música', flexText: 7, img: "assets/images/heart.png", newRoute: MusicList(title: 'Descubre'),divide: 4.5,imgbg: "assets/images/listentoMusic.jpg", );
+    comp_card secondComponent = const comp_card(titulo: 'Escucha nuevos artistas', flexText: 9, newRoute: ArtistList(),divide: 4.5,imgbg: "assets/images/playMusic.jpg", );
+    comp_card thirdComponent = const comp_card(titulo: 'Mis creaciones', flexText: 9, newRoute: NowPlayingPage(title: 'Mis Creaciones'),divide: 2.19,imgbg: "assets/images/create.jpeg",);
+    comp_card fourthComponent = const comp_card(titulo: 'Mi música favorita', flexText: 7, newRoute: MyFavoriteSongs(title: 'Mi música favorita'),divide: 4.5, imgbg: "assets/images/favoriteMusic.jpg",) ;
+    comp_card fifthComponent = const comp_card(titulo: 'Mis Artistas favoritos', flexText: 7, newRoute: MyFavoriteArtist(),divide: 4.5, imgbg: "assets/images/myartists.jpeg") ;
     double dobleheight = MediaQuery.of(context).size.height/4;
     //print('object');
     //print(dobleheight);
@@ -108,7 +106,7 @@ class _HomeState extends State<Home> {
 
                 Container(
                     margin: const EdgeInsets.all(0),
-                    padding: const EdgeInsets.all(1.0),
+                    padding: const EdgeInsets.all(0),
 
                     decoration: const BoxDecoration(
                       //color: Colors.amber,
@@ -138,7 +136,7 @@ class _HomeState extends State<Home> {
                 ),
                 Container(
                     margin: const EdgeInsets.all(0),
-                    padding: const EdgeInsets.all(1.0),
+                    padding: const EdgeInsets.all(0),
                     decoration: const BoxDecoration(
                     ),
                     child:

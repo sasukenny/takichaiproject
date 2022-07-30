@@ -73,6 +73,12 @@ flutter:
       - assets/images/discover.jpg
       - assets/images/unmsm-logo.png
       - assets/images/oor.jpg
+      - assets/images/favoriteMusic.jpg
+      - assets/images/crea.png
+      - assets/images/playMusic.jpg
+      - assets/images/listentoMusic.jpg
+      - assets/images/create.jpeg
+      - assets/images/myartists.jpeg
       - README.md
       - LICENSE.md
   #   - images/a_dot_ham.jpeg
