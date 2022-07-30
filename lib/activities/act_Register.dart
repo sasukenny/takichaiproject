@@ -88,6 +88,16 @@ class _registerState extends State<register> {
                                       );
                                     },
                                   )
+                                ),
+                                Container(
+                                    margin: EdgeInsets.only(top: 20),
+                                    padding: EdgeInsets.fromLTRB(60,0,60,0),
+                                    child: InkWell(
+                                      child: const Text('¿Ya tienes una cuenta?'),
+                                      onTap: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => const login()),);
+                                      },
+                                    )
                                 )
                               ]
                           )
