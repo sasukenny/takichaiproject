@@ -8,9 +8,11 @@ class comp_card extends StatelessWidget {
         required this.titulo,
         required this.flexText,
         required this.newRoute,
+        this.content = "",
         this.divide = 5
   }) : super(key: key);
   final String titulo;
+  final String content;
   final int flexText;
   final String img;
   final String imgbg;
@@ -62,7 +64,7 @@ class comp_card extends StatelessWidget {
               padding: const EdgeInsets.all(0),
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color.fromRGBO(0, 0, 0, 0.02), Color.fromRGBO(0, 0, 0, 0.8), Color.fromRGBO(0, 0, 0, 1)],
+                    colors: [Color.fromRGBO(0, 0, 0, 0), Color.fromRGBO(0, 0, 0, 0.7), Color.fromRGBO(0, 0, 0, 1)],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   )
@@ -102,7 +104,7 @@ class comp_card extends StatelessWidget {
                               padding: const EdgeInsets.all(3.0),
                               alignment: Alignment(-1.0, 1.0),
                               child: Text(
-                                'Encuentra nueva música que te puede gustar',
+                                content,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 5,

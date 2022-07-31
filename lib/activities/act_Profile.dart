@@ -58,9 +58,6 @@ class _ProfileState extends State<Profile> {
   }
   @override
   Widget build(BuildContext context) {
-    print('userdata');
-
-    print(userdata.description);
     return
       Wrapper(activitieChild: elements());
   }

@@ -68,100 +68,104 @@ class _HomeState extends State<Home> {
 
 
   Container elements(BuildContext context){
-    comp_card firstComponent = const comp_card(titulo: 'Descubre nueva música', flexText: 7, img: "assets/images/heart.png", newRoute: MusicList(title: 'Descubre'),divide: 4.5,imgbg: "assets/images/listentoMusic.jpg", );
-    comp_card secondComponent = const comp_card(titulo: 'Escucha nuevos artistas', flexText: 9, newRoute: ArtistList(),divide: 4.5,imgbg: "assets/images/playMusic.jpg", );
-    comp_card thirdComponent = const comp_card(titulo: 'Mis creaciones', flexText: 9, newRoute: NowPlayingPage(title: 'Mis Creaciones'),divide: 2.19,imgbg: "assets/images/create.jpeg",);
-    comp_card fourthComponent = const comp_card(titulo: 'Mi música favorita', flexText: 7, newRoute: MyFavoriteSongs(title: 'Mi música favorita'),divide: 4.5, imgbg: "assets/images/favoriteMusic.jpg",) ;
-    comp_card fifthComponent = const comp_card(titulo: 'Mis Artistas favoritos', flexText: 7, newRoute: MyFavoriteArtist(),divide: 4.5, imgbg: "assets/images/myartists.jpeg") ;
+    comp_card firstComponent = const comp_card(titulo: 'Descubre nueva música', flexText: 7, img: "assets/images/heart.png", newRoute: MusicList(title: 'Descubre'),divide: 4.5, content: 'Encuentra nueva música que te puede gustar',imgbg: "assets/images/listentoMusic.jpg", );
+    comp_card secondComponent = const comp_card(titulo: 'Escucha nuevos artistas', flexText: 9, newRoute: ArtistList(),divide: 4.5, content: 'Encuentra nueva artistas con estilos únicos',imgbg: "assets/images/playMusic.jpg", );
+    comp_card thirdComponent = const comp_card(titulo: 'Mis creaciones', flexText: 9, newRoute: NowPlayingPage(title: 'Mis Creaciones'),divide: 2.19,  content: 'Comparte tus obras con el mundo',imgbg: "assets/images/create.jpeg",);
+    comp_card fourthComponent = const comp_card(titulo: 'Mi música favorita', flexText: 7, newRoute: MyFavoriteSongs(title: 'Mi música favorita'),divide: 4.5,  content: 'Guarda las canciones que más te gusten y ¡escuchalas sin parar!' ,imgbg: "assets/images/favoriteMusic.jpg",) ;
+    comp_card fifthComponent = const comp_card(titulo: 'Mis Artistas favoritos', flexText: 7, newRoute: MyFavoriteArtist(),divide: 4.5,  content: 'Suscribete a tus artistas favoritos para estar enterado de sus últimas noticias' ,imgbg: "assets/images/myartists.jpeg") ;
     double dobleheight = MediaQuery.of(context).size.height/4;
     //print('object');
     //print(dobleheight);
     String tituloBienvenida = 'Bienvenido '  + userdata.name + '!';
     return Container(
+      height: MediaQuery.of(context).size.height,
       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            blankSpace(),
+      child: SingleChildScrollView(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              blankSpace(),
 
-            Text(
-              tituloBienvenida,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontFamily: 'Montserrat',
+              Text(
+                tituloBienvenida,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontFamily: 'Montserrat',
+                ),
               ),
-            ),
-            blankSpace(),
-            /*
+              blankSpace(),
+              /*
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),*/
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
 
-                Container(
-                    margin: const EdgeInsets.all(0),
-                    padding: const EdgeInsets.all(0),
+                  Container(
+                      margin: const EdgeInsets.all(0),
+                      padding: const EdgeInsets.all(0),
 
-                    decoration: const BoxDecoration(
-                      //color: Colors.amber,
-                    ),
-                    child:
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 6,
-                          child:
-                          //firstComponent,
-                          Column(
-                            children: [
+                      decoration: const BoxDecoration(
+                        //color: Colors.amber,
+                      ),
+                      child:
+                      Row(
+                        children: [
+                          Expanded(
+                              flex: 6,
+                              child:
+                              //firstComponent,
+                              Column(
+                                children: [
 
-                              firstComponent,
-                              secondComponent,
-                            ],
-                          )
-                        ),
-                        Expanded(
-                          flex: 4,
-                          child:
-                          thirdComponent
-                        ),
-                      ],
-                    )
-                ),
-                Container(
-                    margin: const EdgeInsets.all(0),
-                    padding: const EdgeInsets.all(0),
-                    decoration: const BoxDecoration(
-                    ),
-                    child:
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 5,
-                          child:
-                          fourthComponent,
-                        ),
-                        Expanded(
-                          flex: 5,
-                          child:
-                          fifthComponent,
-                        ),
-                      ],
-                    )
-                ),
-                //sixthComponent,
-                //seventhComponent,
-                blankSpace(),
-              ],
-            ),
-          ]
-      ),
+                                  firstComponent,
+                                  secondComponent,
+                                ],
+                              )
+                          ),
+                          Expanded(
+                              flex: 4,
+                              child:
+                              thirdComponent
+                          ),
+                        ],
+                      )
+                  ),
+                  Container(
+                      margin: const EdgeInsets.all(0),
+                      padding: const EdgeInsets.all(0),
+                      decoration: const BoxDecoration(
+                      ),
+                      child:
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child:
+                            fourthComponent,
+                          ),
+                          Expanded(
+                            flex: 5,
+                            child:
+                            fifthComponent,
+                          ),
+                        ],
+                      )
+                  ),
+                  //sixthComponent,
+                  //seventhComponent,
+                  blankSpace(),
+                ],
+              ),
+            ]
+        ),
+      )
+
     );
   }
 

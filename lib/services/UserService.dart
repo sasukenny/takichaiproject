@@ -53,6 +53,7 @@ class UserService {
       prefs.setString('token', userRes.token);
       return userRes;
     }catch(error){
+      logger.e(error);
       throw Exception('Failed to login User');
     }
   }

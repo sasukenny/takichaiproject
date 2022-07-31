@@ -67,18 +67,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-      - assets/images/heart.png
-      - assets/images/music-player.png
-      - assets/images/logoTakiChai.jpeg
-      - assets/images/discover.jpg
-      - assets/images/unmsm-logo.png
-      - assets/images/oor.jpg
-      - assets/images/favoriteMusic.jpg
-      - assets/images/crea.png
-      - assets/images/playMusic.jpg
-      - assets/images/listentoMusic.jpg
-      - assets/images/create.jpeg
-      - assets/images/myartists.jpeg
+      - assets/images/
       - README.md
       - LICENSE.md
   #   - images/a_dot_ham.jpeg
