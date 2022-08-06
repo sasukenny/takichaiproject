@@ -128,6 +128,34 @@ class UserService {
       throw Exception('Failed to load User');
     }
   }
+
+  //Edit Profile user
+  Future<User> EditProfile(String name, String pw, String description) async{
+    try{
+      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/login');
+      final response = await http.post(url, body:{
+        "email": name,
+        "password": pw,
+        "description": description,
+      });
+      //print(jsonDecode(response.body));
+      User userRes = User.fromLogin(jsonDecode(response.body));
+      /*storing on localstorage*/
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('userId', userRes.userId);
+      prefs.setBool('publicProfile', userRes.publicProfile);
+      prefs.setString('name', userRes.name);
+      prefs.setString('email', userRes.email);
+      prefs.setString('description', userRes.description);
+      prefs.setStringList('subscribers', userRes.subscribers);
+      prefs.setStringList('subscriptions', userRes.subscriptions);
+      prefs.setString('token', userRes.token);
+      return userRes;
+    }catch(error){
+      logger.e(error);
+      throw Exception('Failed to login User');
+    }
+  }
 }
 
 
