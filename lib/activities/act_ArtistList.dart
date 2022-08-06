@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 import '../Wrapper/wrapper.dart';
 import '../components/comp_artistCard.dart';
 import '../components/comp_sectionTitle.dart';
+import '../models/mod_User.dart';
+import '../services/UserService.dart';
 
 class ArtistList extends StatefulWidget {
   const ArtistList({Key? key}) : super(key: key);
@@ -12,6 +15,29 @@ class ArtistList extends StatefulWidget {
 }
 
 class _ArtistListState extends State<ArtistList> {
+  List<User> allusers = [];
+  List<Widget> usersCard = [];
+  List<String> products = [];
+  var logger = Logger(
+    filter: null, // Use the default LogFilter (-> only log in debug mode)
+    printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
+    output: null, // Use the default LogOutput (-> send everything to console)
+  );
+  @protected
+  @mustCallSuper
+  initState() {
+    GetAllUsers();
+  }
+  GetAllUsers() async {
+    UserService userService = UserService();
+    List<User> response = await userService.getAllUsers();
+    //logger.d("responseq ");
+    setState(()  {
+      allusers = response;
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Wrapper(activitieChild: elements());
@@ -19,36 +45,21 @@ class _ArtistListState extends State<ArtistList> {
   Container elements(){
     return Container(
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color.fromRGBO(41, 44, 45, 1.0),Color.fromRGBO(18, 23, 26, 1.0)],
-          ),
-        ),
         child:SingleChildScrollView(
             child: Column(children: [
               sectionTitle("Descubre nuevos artistas"),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+              ListView.builder(
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                child: Column(
-                  children: [
-                    ArtistCard(numberOfSongs: 10, artistName: "ONEOKROCK"),
-                    ArtistCard(numberOfSongs: 5, artistName: "Demode"),
-                    ArtistCard(numberOfSongs: 1, artistName: "Kennysuher"),
-                    ArtistCard(numberOfSongs: 0, artistName: "Hey You"),
-                    ArtistCard(numberOfSongs: 10, artistName: "ONEOKROCK"),
-                    ArtistCard(numberOfSongs: 5, artistName: "Demode"),
-                    ArtistCard(numberOfSongs: 1, artistName: "Kennysuher"),
-                    ArtistCard(numberOfSongs: 0, artistName: "Hey You"),
-                    ArtistCard(numberOfSongs: 10, artistName: "ONEOKROCK"),
-                    ArtistCard(numberOfSongs: 5, artistName: "Demode"),
-                    ArtistCard(numberOfSongs: 1, artistName: "Kennysuher"),
-                    ArtistCard(numberOfSongs: 0, artistName: "Hey You"),
-                  ],
-                ),
-              )
+                shrinkWrap: true,
+                itemCount: allusers.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ArtistCard(artistName: allusers[index].name);
+                },
+              ),
             ])
         )
     );
   }
+
+
 }

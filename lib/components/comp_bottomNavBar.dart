@@ -11,7 +11,7 @@ class bottomNavBar extends StatelessWidget{
   Widget build(BuildContext context) {
     return BottomNavigationBar(
 
-      backgroundColor: Color.fromRGBO(24, 24, 24, 1),
+      backgroundColor: Color.fromRGBO(7, 7, 7, 1.0),
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
@@ -28,7 +28,7 @@ class bottomNavBar extends StatelessWidget{
       ],
       //currentIndex: _selectedIndex,
       unselectedItemColor:  Colors.white,
-      selectedItemColor: Colors.amber[800],
+      selectedItemColor: Color.fromRGBO(26, 115, 232, 1),
       onTap: (item)=>_onItemTapped(context,item),
     );
   }
@@ -37,7 +37,7 @@ class bottomNavBar extends StatelessWidget{
     switch (index){
       case 0:
         print('Mi perfil');
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Home(title: 'Takichai',)));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Home()));
         break;
       case 1:
         print('MyFavoriteSongs ');

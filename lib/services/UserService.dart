@@ -1,14 +1,19 @@
 // Dart
 import 'dart:convert';
+import 'dart:core';
 import 'package:http/http.dart' as http;
-
-
-import '../globals/globalValues.dart';
+import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/mod_User.dart';
-import '../models/mod_UserMessage.dart';
+
 
 
 class UserService {
+  var logger = Logger(
+    filter: null, // Use the default LogFilter (-> only log in debug mode)
+    printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
+    output: null, // Use the default LogOutput (-> send everything to console)
+  );
   //Registrer a new user
   Future<User> RegisterUser(String name, String email, String pw, String desc) async{
     try{
@@ -26,7 +31,6 @@ class UserService {
       throw Exception('Failed to register new User');
     }
   }
-
   //Login user
   Future<User> LoginUser(String email, String pw) async{
     try{
@@ -36,64 +40,92 @@ class UserService {
         "password": pw,
       });
       //print(jsonDecode(response.body));
-      User newUser = User.fromLogin(jsonDecode(response.body));
-
-        globalVariables.add(newUser);
-      return newUser;
+      User userRes = User.fromLogin(jsonDecode(response.body));
+      /*storing on localstorage*/
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('userId', userRes.userId);
+      prefs.setBool('publicProfile', userRes.publicProfile);
+      prefs.setString('name', userRes.name);
+      prefs.setString('email', userRes.email);
+      prefs.setString('description', userRes.description);
+      prefs.setStringList('subscribers', userRes.subscribers);
+      prefs.setStringList('subscriptions', userRes.subscriptions);
+      prefs.setString('token', userRes.token);
+      return userRes;
     }catch(error){
+      logger.e(error);
       throw Exception('Failed to login User');
     }
   }
 
-  //Get User Data
+  //logout user
+  Future<void> LogoutUser() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('userId');
+    prefs.remove('publicProfile');
+    prefs.remove('name');
+    prefs.remove('email');
+    prefs.remove('description');
+    prefs.remove('subscribers');
+    prefs.remove('subscriptions');
+    prefs.remove('token');
+  }
+
+  //Get and Update User Data
   Future<User> getUserData(String id) async {
     try{
       final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/${id}');
       final response = await http.get(url);
       print(jsonDecode(response.body));
       User userdata = User.fromProfileData(jsonDecode(response.body));
+      /*updating data*/
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('userID', userdata.userId);
+      prefs.setBool('publicProfile', userdata.publicProfile);
+      prefs.setString('name', userdata.name);
+      prefs.setString('email', userdata.email);
+      prefs.setString('description', userdata.description);
+      prefs.setStringList('subscribers', userdata.subscribers);
+      prefs.setStringList('subscriptions', userdata.subscriptions);
+      prefs.setString('token', userdata.token);
       return userdata;
     }catch(error){
       throw Exception('Failed to load User');
     }
   }
-  Future<User> getArtistData() async {
+
+  //get all user - then this will become getAllArtist
+  Future<List<User>> getAllUsers() async {
     try{
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/62bf6513929a04ce7230db56');
+      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/');
       final response = await http.get(url);
-      print(jsonDecode(response.body));
-      User userdata = User.fromProfileData(jsonDecode(response.body));
-      return userdata;
+      List<User> users = [];
+      Map<Object, dynamic> json = jsonDecode(response.body);
+      //User a = json['users'][0];
+      for(Map<Object, dynamic> a in json['users']){
+        List<String> subscribersList = [];
+        for(String sus in a['subscribers']){
+          subscribersList.add(sus);
+        }
+        List<String>  subscriptionsList = [];
+        for(String sus in a['subscriptions']){
+          subscriptionsList.add(sus);
+        };
+        User useritem = User(
+            a['name'],
+            a['email'],
+            a['description'],
+            subscribersList,
+            subscriptionsList,
+            a['publicProfile'],
+            a['userId'],
+            "");
+        users.add(useritem);
+      }
+      return users;
     }catch(error){
+      logger.e(error);
       throw Exception('Failed to load User');
-    }
-  }
-
-  Future<UserMessage> followArtist() async {
-    try{
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/subscribe?id=62bf6513929a04ce7230db56');
-      final response = await http.patch(url,
-        headers: {"Authorization": "$globalVariables[0].token"},
-      );
-      print(jsonDecode(response.body));
-      UserMessage userdata = UserMessage.fromJson(jsonDecode(response.body));
-      return userdata;
-    }catch(error){
-      throw Exception('Failed to suscribe');
-    }
-  }
-
-  Future<UserMessage> unfollowArtist() async {
-    try{
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/subscribe?id=62bf6513929a04ce7230db56');
-      final response = await http.patch(url,
-        headers: {"Authorization": "$globalVariables[0].token"},
-      );
-      print(jsonDecode(response.body));
-      UserMessage userdata = UserMessage.fromJson(jsonDecode(response.body));
-      return userdata;
-    }catch(error){
-      throw Exception('Failed to unsuscribe');
     }
   }
 }

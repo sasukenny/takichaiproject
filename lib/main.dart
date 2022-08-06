@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Takichai',
       theme: ThemeData(
 
@@ -28,14 +29,8 @@ class MyApp extends StatelessWidget {
         )
       ),
        //home: const NowPlayingPage(title: 'Takichai'),
-       // home: const Home(title: 'Takichai'),
-      // home: const NowPlayingPage(title: 'Takichai'),
-      //home: const MusicList(title: 'Takichai'),
-      // home: const Wrapper(title: 'Now Playing'),
-      //home: const NowPlayingPage(title: 'Now Playing'),
-      // home: const MusicList(title: 'Music List'),
       //home: const AboutUs(title: "About Us"),
-      home: const login(),
+      home: const Home(),
       // home: const register(),
 
     );

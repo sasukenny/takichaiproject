@@ -23,11 +23,6 @@ class _MusicListState extends State<MusicList> {
   Container elements(){
     return Container(
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color.fromRGBO(41, 44, 45, 1.0),Color.fromRGBO(18, 23, 26, 1.0)],
-          ),
-        ),
         child:SingleChildScrollView(
             child: Column(children: [
               sectionTitle("Descubre"),

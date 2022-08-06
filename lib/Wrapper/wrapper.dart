@@ -1,16 +1,18 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../activities/act_Login.dart';
 import '../activities/act_Profile.dart';
 import '../components/comp_bottomNavBar.dart';
 import '../components/comp_TakichayAppbar.dart';
 import '../activities/act_Profile.dart';
+import '../services/UserService.dart';
 
 class Wrapper extends StatefulWidget {
   const Wrapper({Key? key, required this.activitieChild}) : super(key: key);
   final Widget activitieChild;
-
   @override
   State<Wrapper> createState() => _HomeState();
 }
@@ -18,7 +20,7 @@ class Wrapper extends StatefulWidget {
 class _HomeState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
-
+  
     return WillPopScope(
         onWillPop: ()async{
           print('s');
@@ -41,12 +43,12 @@ class _HomeState extends State<Wrapper> {
                   color: Colors.white
               ))),
               actions: myActions(),
-              backgroundColor: Color.fromRGBO(24, 24, 24, 1)
+              backgroundColor: Color.fromRGBO(7, 7, 7, 1.0)
           ),
           body: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color.fromRGBO(41, 44, 45, 1.0),Color.fromRGBO(18, 23, 26, 1.0)],
+                colors: [Color.fromRGBO(24, 24, 36, 1.0),Color.fromRGBO(8, 13, 25, 1.0)],
               ),
             ),
             child: widget.activitieChild,
@@ -60,11 +62,8 @@ class _HomeState extends State<Wrapper> {
     return <Widget>[
       Row(
         children: [
-          /*
-          Text(
-            'Subir una canción',
-          ),*/
           IconButton(
+            color: Color.fromRGBO(255, 255, 255, 1),
             padding: EdgeInsets.all(0),
             icon: const Icon(Icons.download_sharp),
             tooltip: 'Show Snackbar',
@@ -75,46 +74,26 @@ class _HomeState extends State<Wrapper> {
           ),
         ],
       ),
-
-      /*
-      IconButton(
-        icon: const Icon(Icons.more_vert),
-        tooltip: 'Go to the next page',
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute<void>(
-            builder: (BuildContext context) {
-              return Scaffold(
-                appBar: AppBar(
-                  title: const Text('Next page'),
-                ),
-                body: const Center(
-                  child: Text(
-                    'This is the next page',
-                    style: TextStyle(fontSize: 24),
-                  ),
-                ),
-              );
-            },
-          ));
-        },
-      ),
-    */
       PopupMenuButton<int>(
+        color: Color.fromRGBO(255, 255, 255, 1),
+        icon: const Icon( Icons.more_vert , color: Colors.white),
         onSelected: (item)=>onSelected(context,item),
         itemBuilder: (context) => [
           PopupMenuItem<int>(
               value: 0,
-              child: Text('Mi perfil')
+              child: Text('Mi Perfil')
           ),
           PopupMenuItem<int>(
               value: 1,
-              child: Text('cerrar sesión')
+              child: Text('Cerrar Sesión')
+
           ),
         ],
       ),
     ];
   }
   void onSelected(BuildContext context, int item ){
+    UserService userService = UserService();
     switch (item){
       case 0:
         print('Mi perfil');
@@ -122,6 +101,8 @@ class _HomeState extends State<Wrapper> {
         break;
       case 1:
         print('cerrando sesion');
+        userService.LogoutUser();
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>login()));
         break;
 
     }

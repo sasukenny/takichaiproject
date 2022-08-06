@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Wrapper/wrapper.dart';
 import '../components/comp_card.dart';
 import '../models/mod_User.dart';
 import '../services/UserService.dart';
+import 'act_Login.dart';
 import 'act_musiclist.dart';
 import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
 import 'act_mySongs.dart';
 import 'act_nowPlaying.dart';
+import '../globals/globalValues.dart';
 
 class Profile extends StatefulWidget {
 const Profile({Key? key, required this.title}) : super(key: key);
@@ -23,23 +25,39 @@ State<Profile> createState() => _ProfileState();
 class _ProfileState extends State<Profile> {
   UserService userService = UserService();
   User userdata = User('', '', '', [], [], true, '','') ;
+  String? userId;
   @protected
   @mustCallSuper
   initState(){
-    userService.getUserData('62c010e864cff995b542c222').then((response) => {
-      setState(() {
-        userdata = response;
-      })
-    });
+    GetUserId();
+  }
+  Future<void> GetUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    userId = prefs.getString('userId');
+    if(userId!=null){
+      userService.getUserData(userId!).then((response) => {
+        setState(() {
+          userdata = response;
+        })
+      }).catchError(()=>{
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => login()),
+        )
+      });
+    }
+    else{
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => login()),
+      );
+    }
   }
   String CountItems( List<String> listParam){
     return listParam.length.toString();
   }
   @override
   Widget build(BuildContext context) {
-    print('userdata');
-
-    print(userdata.description);
     return
       Wrapper(activitieChild: elements());
   }
@@ -49,11 +67,6 @@ class _ProfileState extends State<Profile> {
     comp_card thirdComponent = const comp_card(titulo: 'Mis suscripciones', flexText: 9, newRoute: MyFavoriteArtist(),divide: 7);
     return Container(
       height: MediaQuery.of(context).size.height,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color.fromRGBO(41, 44, 45, 1.0),Color.fromRGBO(18, 23, 26, 1.0)],
-        ),
-      ),
       child:
          SingleChildScrollView(
             child: Column(
@@ -195,6 +208,7 @@ class _ProfileState extends State<Profile> {
                     style: TextStyle(fontSize: 11)),
               ),
             ),
+
             Container(
               //margin: const EdgeInsets.fromLTRB(30, 10, 5, 20),
               //padding: const EdgeInsets.all(0),
