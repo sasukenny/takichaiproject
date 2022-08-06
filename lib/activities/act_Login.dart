@@ -60,7 +60,7 @@ class _loginState extends State<login> {
                     controller: emailController,
                     placeholder: "Correo",
                     voidMessage: "Ingrese un email correcto",
-                    regexp: new RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                    regexp: new RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"),
                 ),
                 inputText(
                     controller: passwordController,

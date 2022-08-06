@@ -63,7 +63,7 @@ class _ArtistProfileState extends State<ArtistProfile> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color.fromRGBO(41, 44, 45, 1.0),Color.fromRGBO(18, 23, 26, 1.0)],
+            colors: [Color.fromRGBO(24, 24, 36, 1.0),Color.fromRGBO(8, 13, 25, 1.0)],
           ),
         ),
         child:
@@ -122,7 +122,7 @@ class _ArtistProfileState extends State<ArtistProfile> {
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color.fromRGBO(0, 0, 0, 0.05), Color.fromRGBO(0, 0, 0, 1)],
+                  colors: [Color.fromRGBO(0, 0, 0, 0.05),Color.fromRGBO(0, 0, 0, 0.77), Color.fromRGBO(0, 0, 0, 1)],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 )

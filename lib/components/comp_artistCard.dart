@@ -29,6 +29,14 @@ class ArtistCard extends StatelessWidget {
           gradient: LinearGradient(
             colors: [Color.fromRGBO(24, 24, 24, 0.75),Color.fromRGBO(7, 7, 7, 0.75)],
           ),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromRGBO(26, 115, 232, 0.125),
+              spreadRadius: 1,
+              blurRadius: 17,
+              offset: Offset(0, 0), // changes position of shadow
+            ),
+          ],
         ),
         padding: const EdgeInsets.only(left: 15, bottom: 5, top: 5, right: 15),
         alignment: Alignment.center,
@@ -49,7 +57,7 @@ class ArtistCard extends StatelessWidget {
                             image: AssetImage("assets/images/discover.jpg"),
                             fit: BoxFit.cover,
                           ),
-                          shape: BoxShape.circle
+                          shape: BoxShape.circle,
                       ),
                     ),
                     Container(

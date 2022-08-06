@@ -51,10 +51,10 @@ class comp_card extends StatelessWidget {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: Offset(0, 3), // changes position of shadow
+                  color: Color.fromRGBO(26, 115, 232, 0.225),
+                  spreadRadius: 2,
+                  blurRadius: 27,
+                  offset: Offset(0, 1), // changes position of shadow
                 ),
               ],
             ),
