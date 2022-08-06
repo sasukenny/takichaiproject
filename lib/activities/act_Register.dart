@@ -16,10 +16,17 @@ class _registerState extends State<register> {
   TextEditingController passwordController = TextEditingController();
   UserService userService = UserService();
 
-  late Future<User> userRes;
+  late User userRes;
 
   final _formkey = GlobalKey<FormState>();
 
+  //Init state
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  // build
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -75,8 +82,8 @@ class _registerState extends State<register> {
                                       ),
                                     ),
                                     onPressed: ()
-                                    {
-                                      userRes = userService.RegisterUser(
+                                   async {
+                                      userRes = await userService.RegisterUser(
                                           nameController.text,
                                           emailController.text,
                                           passwordController.text,
