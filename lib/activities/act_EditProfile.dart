@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Wrapper/wrapper.dart';
 import '../components/comp_inputText.dart';
 import '../components/comp_textArea.dart';
 import '../models/mod_User.dart';
 import '../services/UserService.dart';
 import './act_Profile.dart';
 import './act_Home.dart';
+import 'act_Login.dart';
 
 class editProfile extends StatefulWidget {
   const editProfile({Key? key}) : super(key: key);
@@ -18,6 +20,37 @@ class editProfile extends StatefulWidget {
 class _editProfileState extends State<editProfile> {
 
   UserService userService = UserService();
+
+  //////////////////////////////////////////////////////////////////
+  User userdata = User('', '', '', [], [], true, '','') ;
+  String? userId;
+  @protected
+  @mustCallSuper
+
+  Future<void> GetUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    userId = prefs.getString('userId');
+    if(userId!=null){
+      userService.getUserData(userId!).then((response) => {
+        setState(() {
+          userdata = response;
+        })
+      }).catchError(()=>{
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => login()),
+        )
+      });
+    }
+    else{
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => login()),
+      );
+    }
+  }
+  ////////////////////////////////////////////////////////////
+
   TextEditingController nameController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
@@ -40,8 +73,12 @@ class _editProfileState extends State<editProfile> {
   //build
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return
+      Wrapper(activitieChild: elements());
+  }
+
+  Container elements() {
+    return Container(
         padding: const EdgeInsets.fromLTRB(10, 80, 10, 50),
         width: double.infinity,
         decoration: BoxDecoration(
@@ -123,8 +160,7 @@ class _editProfileState extends State<editProfile> {
             ],
           )
         )
-      ),
-    );
+      );
   }
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     primary: Colors.black87,

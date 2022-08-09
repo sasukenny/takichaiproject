@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
        //home: const NowPlayingPage(title: 'Takichai'),
       //home: const AboutUs(title: "About Us"),
       //home: const Home(),
-      // home: const editProfile(),
-        home: const register(),
+       home: const editProfile(),
+       // home: const register(),
 
     );
   }

@@ -10,6 +10,7 @@ import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
 import 'act_mySongs.dart';
 import 'act_nowPlaying.dart';
+import 'act_EditProfile.dart';
 import '../globals/globalValues.dart';
 
 class Profile extends StatefulWidget {
@@ -203,7 +204,8 @@ class _ProfileState extends State<Profile> {
               padding: const EdgeInsets.fromLTRB(10, 10, 5, 20),
               //padding: const EdgeInsets.fromLTRB(30, 10, 5, 20),
               child: ElevatedButton(
-                onPressed: () { print("Edit Profile pressed");},
+                onPressed: () { print("Edit Profile pressed");
+                },
                 child: Text('Editar Perfil',
                     style: TextStyle(fontSize: 11)),
               ),
