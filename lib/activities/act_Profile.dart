@@ -27,37 +27,28 @@ State<Profile> createState() => _ProfileState();
 class _ProfileState extends State<Profile> {
   UserService userService = UserService();
   User userdata = User('', '', '', [], [], true, '','') ;
-  String? userId;
   String? token;
+  var logger = Logger(
+    filter: null, // Use the default LogFilter (-> only log in debug mode)
+    printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
+    output: null, // Use the default LogOutput (-> send everything to console)
+  );
   @protected
   @mustCallSuper
   initState(){
     GetUserId();
   }
-  Future<void> GetUserId() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    userId = prefs.getString('userId');
-    if(userId!=null){
-      token = prefs.getString('token'); ////////////////////////////////////////
-      print("TokenHome: ");
-      print(token);
-      userService.getUserData(userId!).then((response) => {
-        setState(() {
-          userdata = response;
-        })
-      }).catchError(()=>{
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => login()),
-        )
-      });
-    }
-    else{
+  GetUserId() async {
+    userService.getMyData().then((response) => {
+      setState(() {
+        userdata = response;
+      })
+    }).catchError(()=>{
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => login()),
-      );
-    }
+      )
+    });
   }
   String CountItems( List<String> listParam){
     return listParam.length.toString();

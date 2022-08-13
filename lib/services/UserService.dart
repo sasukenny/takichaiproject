@@ -80,6 +80,30 @@ class UserService {
       User userdata = User.fromProfileData(jsonDecode(response.body));
       /*updating data*/
       SharedPreferences prefs = await SharedPreferences.getInstance();
+      return userdata;
+    }catch(error){
+      throw Exception('Failed to load User');
+    }
+  }
+
+  Future<User> getMyData() async {
+    String? token;
+    try{
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.getString('token');
+      final url = Uri.https('takichai-backend.herokuapp.com', '/api/user');
+
+      final response = await http.get(url,
+        headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      print(jsonDecode(response.body));
+      User userdata = User.fromProfileData(jsonDecode(response.body));
+      /*updating data*/
       prefs.setString('userID', userdata.userId);
       prefs.setBool('publicProfile', userdata.publicProfile);
       prefs.setString('name', userdata.name);
@@ -87,7 +111,6 @@ class UserService {
       prefs.setString('description', userdata.description);
       prefs.setStringList('subscribers', userdata.subscribers);
       prefs.setStringList('subscriptions', userdata.subscriptions);
-      prefs.setString('token', userdata.token);
       return userdata;
     }catch(error){
       throw Exception('Failed to load User');

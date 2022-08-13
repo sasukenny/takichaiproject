@@ -25,8 +25,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   UserService userService = UserService();
   User userdata = User('', '', '', [], [], true, '','') ;
-  String? userId;
-  String? token;
+  String? token = null;
+  String? userId = null;
   var logger = Logger(
     filter: null, // Use the default LogFilter (-> only log in debug mode)
     printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
@@ -38,22 +38,23 @@ class _HomeState extends State<Home> {
     GetUserId();
   }
 
-  Future<void> GetUserId() async {
+  Future<void> GetUserId() async  {
+    logger.d("userdata.name1");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     userId = prefs.getString('userId');
-    logger.d(userId);
+
     if(userId!=null){
-      token = prefs.getString('token'); ////////////////////////////////////////
-      print("TokenHome: ");
-      print(token);
-      userService.getUserData(userId!).then((response) => {
+      userService.getMyData().then((response) => {
+        logger.d("userdata.name2"),
         setState(() {
           userdata = response;
+          logger.d("userdata.name3");
+          logger.d(userdata.name);
         })
       }).catchError(()=>{
         Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => login()),
+          context,
+          MaterialPageRoute(builder: (context) => login()),
         )
       });
     }

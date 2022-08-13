@@ -8,37 +8,36 @@ import '../components/comp_sectionSubtitle.dart';
 import '../components/comp_sectionTitle.dart';
 import '../components/comp_songcard.dart';
 import '../models/mod_User.dart';
+import '../services/ArtistService.dart';
 import '../services/UserService.dart';
 import 'act_musiclist.dart';
 import 'act_nowPlaying.dart';
 
 class ArtistProfile extends StatefulWidget {
-  const ArtistProfile({Key? key, required this.UserId}) : super(key: key);
+  const ArtistProfile({Key? key, required this.userId, this.isFollowing = true}) : super(key: key);
 
-  final String UserId;
-
+  final String userId;
+  final bool isFollowing;
   @override
   State<ArtistProfile> createState() => _ArtistProfileState();
 }
 
 class _ArtistProfileState extends State<ArtistProfile> {
   UserService userService = UserService();
+  ArtistService artistService = ArtistService();
   bool following = false;
-  String followingmsg = '';
-  User userdata = User(
-      'ONE OK ROCK',
-      '',
-      'ONE OK ROCK es una banda japonesa de rock formada en el año 2005, actualmente compuesta por cuatro miembros, Takahiro Morita, Tōru Yamashita, Ryōta Kohama y Tomoya Kanki.',
-      [],
-      [],
-      true,
-      '',
-      ''
+  bool isFollowingState = true;
+  User userdata = User('', '', '', [], [],true, '', ''
   ) ;
   @protected
   @mustCallSuper
   initState(){
-    userService.getUserData('62bf6513929a04ce7230db56').then((response) => {
+    print("widget.UserId");
+    print(widget.userId);
+    setState(() {
+      isFollowingState = widget.isFollowing;
+    });
+    userService.getUserData(widget.userId).then((response) => {
       setState(() {
         userdata = response;
       })
@@ -176,24 +175,7 @@ class _ArtistProfileState extends State<ArtistProfile> {
                                   Container(
                                     margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
                                     padding: EdgeInsets.all(0),
-                                    child: ElevatedButton(
-                                      style: raisedButtonStyle,
-                                      onPressed: () {
-
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          const SnackBar(content: Text('Ahora está siguiendo al artista'))
-                                        );
-                                        },
-                                      child:
-                                      Flexible(
-                                          child: new Text(
-                                            "Seguir",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.white
-                                            ),)
-                                      ),
-                                    ),
+                                    child: widget.isFollowing?botonSeguir(context,widget.userId):botonDejarSeguir(context, widget.userId)
                                   )
                                 ],
                               ),
@@ -208,6 +190,65 @@ class _ArtistProfileState extends State<ArtistProfile> {
         ),
       );
   }
+
+  Widget botonSeguir(BuildContext context, String userId){
+    return
+      ElevatedButton(
+        style: raisedButtonStyle,
+        onPressed: () {
+          artistService.followArtist(widget.userId);
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Ahora está siguiendo al artista'))
+          );
+          setState(() {
+            isFollowingState = !widget.isFollowing;
+          });
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ArtistProfile(userId: userdata.userId, isFollowing: isFollowingState,)),
+          );
+        },
+        child:
+        Flexible(
+            child: new Text(
+              "Seguir",
+              style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.white
+              ),)
+        ),
+      );
+  }
+
+  Widget botonDejarSeguir(BuildContext context, String userId){
+    return
+      ElevatedButton(
+        style: raisedButtonStyle,
+        onPressed: () {
+          artistService.unfollowArtist(widget.userId);
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Dejó de seguir al artista'))
+          );
+          setState(() {
+            isFollowingState = !widget.isFollowing;
+          });
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ArtistProfile(userId: userdata.userId, isFollowing: isFollowingState,)),
+          );
+        },
+        child:
+        Flexible(
+            child: new Text(
+              "Dejar de seguir",
+              style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.white
+              ),)
+        ),
+      );
+  }
+
   Container PerfilDescription(){
     return
       Container(
