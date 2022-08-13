@@ -34,7 +34,6 @@ class _ArtistListState extends State<ArtistList> {
     //logger.d("responseq ");
     setState(()  {
       allusers = response;
-
     });
   }
 
@@ -53,7 +52,7 @@ class _ArtistListState extends State<ArtistList> {
                 shrinkWrap: true,
                 itemCount: allusers.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return ArtistCard(artistName: allusers[index].name);
+                  return ArtistCard(artistName: allusers[index].name, userId: allusers[index].userId,);
                 },
               ),
             ])

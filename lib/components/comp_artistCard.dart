@@ -9,13 +9,15 @@ class ArtistCard extends StatelessWidget {
 
   const ArtistCard({
     Key? key,
-    this.artistData,
+    this.userId = "",
     this.numberOfSongs= 0,
     this.artistName="artist name" ,
+    this.isFollowing = true,
   }) : super(key: key);
   final int numberOfSongs;
   final String artistName;
-  final Artist_resumen? artistData;
+  final String userId;
+  final bool isFollowing;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +106,7 @@ class ArtistCard extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => ArtistProfile(UserId: "62bf6513929a04ce7230db56")),
+                            MaterialPageRoute(builder: (context) => ArtistProfile(userId: userId, isFollowing: isFollowing,)),
                           );
                         },
                         child:
@@ -122,6 +124,7 @@ class ArtistCard extends StatelessWidget {
     );
   }
 }
+
 final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
   //onPrimary: Colors.black87,
   //primary: Colors.grey[300],

@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http; //importar para hacer peticiones
+import 'package:logger/logger.dart';
 import 'dart:convert'; //importar para hacer peticiones
 import '../globals/globalValues.dart';
 
@@ -18,7 +19,11 @@ class User {
   List<String> subscribers = [];
   List<String> subscriptions = [];
   String token = "";
-
+  var logger = Logger(
+    filter: null, // Use the default LogFilter (-> only log in debug mode)
+    printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
+    output: null, // Use the default LogOutput (-> send everything to console)
+  );
   User(
     this.name,
     this.email,
@@ -27,7 +32,7 @@ class User {
     this.subscriptions,
     this.publicProfile,
     this.userId,
-      this.token
+    this.token
   );
 
   //Método constructor a partir de register
@@ -53,14 +58,18 @@ class User {
   User.fromProfileData(Map<Object, dynamic> json) {
 
     List<String> subscribersList = [];
-    for(String sus in json['user']['subscribers']){
-      subscribersList.add(sus);
-    }
-    List<String>  subscriptionsList = [];
-    for(String sus in json['user']['subscriptions']){
-      subscriptionsList.add(sus);
+    print(json['user']['subscribers']);
+    for(Map<Object, dynamic>  sus in json['user']['subscribers']){
+      logger.d("mi suscriptor: " + sus['name']);
+      subscribersList.add(sus['name']);
     }
 
+    List<String>  subscriptionsList = [];
+    for(Map<Object, dynamic> sus in json['user']['subscriptions']){
+      logger.d("estoy suscripto a : " + sus['name']);
+      subscriptionsList.add(sus['name']);
+    }
+    logger.d("ccc");
     subscribers = subscribersList;
     subscriptions = subscriptionsList;
     description = json['user']['description'];
