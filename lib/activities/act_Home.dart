@@ -26,6 +26,7 @@ class _HomeState extends State<Home> {
   UserService userService = UserService();
   User userdata = User('', '', '', [], [], true, '','') ;
   String? userId;
+  String? token;
   var logger = Logger(
     filter: null, // Use the default LogFilter (-> only log in debug mode)
     printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
@@ -42,6 +43,9 @@ class _HomeState extends State<Home> {
     userId = prefs.getString('userId');
     logger.d(userId);
     if(userId!=null){
+      token = prefs.getString('token'); ////////////////////////////////////////
+      print("TokenHome: ");
+      print(token);
       userService.getUserData(userId!).then((response) => {
         setState(() {
           userdata = response;

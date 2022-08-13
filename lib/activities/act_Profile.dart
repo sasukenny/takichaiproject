@@ -27,6 +27,7 @@ class _ProfileState extends State<Profile> {
   UserService userService = UserService();
   User userdata = User('', '', '', [], [], true, '','') ;
   String? userId;
+  String? token;
   @protected
   @mustCallSuper
   initState(){
@@ -36,6 +37,9 @@ class _ProfileState extends State<Profile> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     userId = prefs.getString('userId');
     if(userId!=null){
+      token = prefs.getString('token'); ////////////////////////////////////////
+      print("TokenHome: ");
+      print(token);
       userService.getUserData(userId!).then((response) => {
         setState(() {
           userdata = response;
@@ -205,6 +209,10 @@ class _ProfileState extends State<Profile> {
               //padding: const EdgeInsets.fromLTRB(30, 10, 5, 20),
               child: ElevatedButton(
                 onPressed: () { print("Edit Profile pressed");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => editProfile()),
+                );
                 },
                 child: Text('Editar Perfil',
                     style: TextStyle(fontSize: 11)),

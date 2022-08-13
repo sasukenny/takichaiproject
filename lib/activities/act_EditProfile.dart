@@ -24,13 +24,20 @@ class _editProfileState extends State<editProfile> {
   //////////////////////////////////////////////////////////////////
   User userdata = User('', '', '', [], [], true, '','') ;
   String? userId;
+  String? token;
   @protected
   @mustCallSuper
+  void initState() {
+    GetUserId();
+  }
 
   Future<void> GetUserId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     userId = prefs.getString('userId');
     if(userId!=null){
+      token = prefs.getString('token');
+      print("TokenEditProfile: ");
+      print(token);
       userService.getUserData(userId!).then((response) => {
         setState(() {
           userdata = response;
@@ -51,9 +58,9 @@ class _editProfileState extends State<editProfile> {
   }
   ////////////////////////////////////////////////////////////
 
-  TextEditingController nameController = new TextEditingController();
-  TextEditingController descriptionController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  TextEditingController descriptionController = new TextEditingController();
+  TextEditingController publicProfileController = new TextEditingController();
   TextEditingController imageController = new TextEditingController();
 
   late User userRes;
@@ -63,12 +70,6 @@ class _editProfileState extends State<editProfile> {
     output: null, // Use the default LogOutput (-> send everything to console)
   );
   final _formkey = GlobalKey<FormState>();
-
-  //Init state
-  @override
-  void initState() {
-    super.initState();
-  }
 
   //build
   @override
@@ -86,16 +87,11 @@ class _editProfileState extends State<editProfile> {
             colors: [Color.fromRGBO(24, 24, 36, 1.0),Color.fromRGBO(8, 13, 25, 1.0)],
           ),
         ),
-        child: Form(
+        child:
+        Form(
           key: _formkey,
           child: Column(
             children:[
-              inputText(
-                controller: nameController,
-                placeholder: "Editar nombre",
-                voidMessage:"",
-                regexp: new RegExp(r'.*'),
-              ),
               inputText(
                 controller: passwordController,
                 placeholder: "Editar contraseña",
@@ -106,6 +102,12 @@ class _editProfileState extends State<editProfile> {
                 controller: descriptionController,
                 placeholder: "Editar descripción...",
                 voidMessage:"",
+              ),
+              inputText(
+                controller: publicProfileController,
+                placeholder: "Editar PublicProfile",
+                voidMessage:"",
+                regexp: new RegExp(r'.*'),
               ),
               inputText(
                 controller: imageController,
@@ -129,9 +131,10 @@ class _editProfileState extends State<editProfile> {
               async {
                 try{
                   userRes = await userService.EditProfile(
-                    nameController.text,
                     passwordController.text,
                     descriptionController.text,
+                    publicProfileController.text,
+                    token
                   );
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   logger.d("Debug log");
@@ -151,7 +154,7 @@ class _editProfileState extends State<editProfile> {
                   margin: EdgeInsets.only(top: 15),
                   padding: EdgeInsets.fromLTRB(0,10,0,10),
                   child: InkWell(
-                    child: const Text('Regresar',style: TextStyle(color: Colors.white)),
+                    child: const Text('Volver a Home',style: TextStyle(color: Colors.white)),
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()),);
                     },
