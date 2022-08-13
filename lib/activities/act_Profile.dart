@@ -5,12 +5,9 @@ import '../components/comp_card.dart';
 import '../models/mod_User.dart';
 import '../services/UserService.dart';
 import 'act_Login.dart';
-import 'act_musiclist.dart';
 import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
 import 'act_mySongs.dart';
-import 'act_nowPlaying.dart';
-import '../globals/globalValues.dart';
 
 class Profile extends StatefulWidget {
 const Profile({Key? key, required this.title}) : super(key: key);
@@ -31,6 +28,8 @@ class _ProfileState extends State<Profile> {
   initState(){
     GetUserId();
   }
+
+
   Future<void> GetUserId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     userId = prefs.getString('userId');
@@ -56,6 +55,8 @@ class _ProfileState extends State<Profile> {
   String CountItems( List<String> listParam){
     return listParam.length.toString();
   }
+
+
   @override
   Widget build(BuildContext context) {
     return
