@@ -50,7 +50,7 @@ class _registerState extends State<register> {
               child: Column(
                   children: [
                     Container(
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 40),
+                      padding: EdgeInsets.fromLTRB(7, 0, 7, 30),
                       child: Image.asset('../assets/images/logoTakiChai.png', height: 200),
                     ),
                     inputText(
