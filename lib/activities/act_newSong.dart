@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 import '../Wrapper/wrapper.dart';
@@ -5,6 +7,7 @@ import '../Wrapper/wrapper.dart';
 // import 'package:takichaiproject/services/UserService.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:open_file/open_file.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 
 
 // import '../components/comp_inputText.dart';
@@ -27,6 +30,7 @@ class _newSongState extends State<newSong> {
   String _genre = "Huayno";
   String _songURL = "";
   String _imageURL = "";
+  bool _instrumental = false;
   
   late Future<Song> songRes;
 
@@ -165,14 +169,29 @@ class _newSongState extends State<newSong> {
         final imageFile = response.files.first;
 
           OpenFile.open(imageFile.bytes.toString()); //Para simulador movil cambiar bytes.toString() por path
-          _songURL = imageFile.bytes.toString(); //Para simulador movil cambiar bytes.toString() por path
+          _imageURL = imageFile.bytes.toString(); //Para simulador movil cambiar bytes.toString() por path
 
       },
     );
   }
 
   Widget _buildInstrumental(){
-    return TextField();
+    return
+      FlutterSwitch(
+      width: 50.0,
+      height: 25.0,
+      valueFontSize: 25.0,
+      toggleSize: 25.0,
+      value: _instrumental,
+      borderRadius: 10.0,
+      padding: 8.0,
+      showOnOff: true,
+      onToggle: (val) {
+        setState(() {
+          _instrumental = val;
+        });
+      },
+    );
   }
 
   Widget _buildSubmit(){
@@ -186,8 +205,13 @@ class _newSongState extends State<newSong> {
           print(_genre + ": _genre");
           print(_songURL + ": _songUrl");
           print(_imageURL + ": _imageUrl");
+          print(_instrumental.toString() + ": _instrumental");
         });
   }
+
+  TextStyle labels = const TextStyle(
+    color: Colors.white,
+    fontSize: 16);
 
   @override
   Widget build(BuildContext context) {
@@ -205,18 +229,61 @@ class _newSongState extends State<newSong> {
             child:
             Column(
               children: [
-                //Input Texts
-                _buildName(),
-                _buildDescription(),
-                //Dropdowns
-                _buildLanguage(),
-                _buildMood(),
-                _buildGenre(),
-                //FilePickers
-                _buildSong(),
-                _buildImage(),
+
+                Text("Nombre", style: labels),
+                Container(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: _buildName()
+                ),
+
+                Text("Descripción", style: labels),
+                Container(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child:_buildDescription()
+                ),
+
+                Text("Idioma", style: labels),
+                Container(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child: _buildLanguage(),
+                ),
+
+                Text("Ánimo", style: labels),
+                Container(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child: _buildMood(),
+                ),
+
+                Text("Género", style: labels),
+                Container(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child:_buildGenre(),
+                ),
+
+                Text("Archivo de canción", style: labels),
+                Container(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child:_buildSong(),
+                ),
+
+                Text("Archivo de imagen", style: labels),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child:_buildImage(),
+                ),
+
+                Text("Instrumental", style: labels),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child:_buildInstrumental(),
+                ),
+
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                  child:_buildSubmit(),
+                ),
                 //Submit button
-                _buildSubmit()
+
               ],
             ),
           )
