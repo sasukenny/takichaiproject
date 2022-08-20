@@ -22,9 +22,9 @@ class _newSongState extends State<newSong> {
   //Variables
   String _name = "";
   String _description = "";
-  String _language = "";
-  String _mood = "";
-  String _genre = "";
+  String _language = "Español";
+  String _mood = "Alegre";
+  String _genre = "Huayno";
   String _songURL = "";
   String _imageURL = "";
   
@@ -74,9 +74,8 @@ class _newSongState extends State<newSong> {
 
 // DROPDOWNS
   Widget _buildLanguage(){
-    String dropdownValue = "Idioma";
     return DropdownButton(
-      value: dropdownValue,
+      value: _language,
       items: <String>['Español', 'English', 'Quechua/RunaSimi', 'Aymara']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
@@ -85,20 +84,19 @@ class _newSongState extends State<newSong> {
         );
       }).toList(),
       icon: const Icon(Icons.arrow_downward),
-      style: const TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.black),
       onChanged:(String? newValue){
+        value:newValue;
         setState(() {
-          dropdownValue = newValue!;
-          _language = newValue;
+          _language = newValue!;
         });
       },
     );
   }
 
   Widget _buildMood(){
-    String dropdownValue = "Ánimo";
     return DropdownButton(
-      value: dropdownValue,
+      value: _mood,
       items: <String>['Alegre', 'Triste', 'Melancólico', 'Reflexivo']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
@@ -107,20 +105,18 @@ class _newSongState extends State<newSong> {
         );
       }).toList(),
       icon: const Icon(Icons.arrow_downward),
-      style: const TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.black),
       onChanged:(String? newValue){
         setState(() {
-          dropdownValue = newValue!;
-          _mood = newValue;
+          _mood = newValue!;
         });
       },
     );
   }
 
   Widget _buildGenre(){
-    String dropdownValue = "Idioma";
     return DropdownButton(
-      value: dropdownValue,
+      value: _genre,
       items: <String>['Huayno', 'Sikuri', 'Selvática', 'Cumbia', 'Afroperuana', 'Rock', 'Otro']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
@@ -129,11 +125,10 @@ class _newSongState extends State<newSong> {
         );
       }).toList(),
       icon: const Icon(Icons.arrow_downward),
-      style: const TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.black),
       onChanged:(String? newValue){
         setState(() {
-          dropdownValue = newValue!;
-          _genre = newValue;
+          _genre = newValue!;
         });
       },
     );
@@ -186,6 +181,9 @@ class _newSongState extends State<newSong> {
         onPressed: (){
           print(_name + ": _name");
           print(_description + ": _description");
+          print(_language + ": _language");
+          print(_mood + ": _mood");
+          print(_genre + ": _genre");
           print(_songURL + ": _songUrl");
           print(_imageURL + ": _imageUrl");
         });
@@ -211,9 +209,9 @@ class _newSongState extends State<newSong> {
                 _buildName(),
                 _buildDescription(),
                 //Dropdowns
-                //_buildLanguage(),
-                //_buildMood(),
-                //_buildGenre(),
+                _buildLanguage(),
+                _buildMood(),
+                _buildGenre(),
                 //FilePickers
                 _buildSong(),
                 _buildImage(),
