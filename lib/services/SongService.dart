@@ -17,7 +17,36 @@ class SongService{
     output: null, // Use the default LogOutput (-> send everything to console)
   );
 
-  Future<Song> NewSong(String name, String genre, String description) async{
+  Future<void> CreateSong(String name, String genre, String description) async{
+    try{
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('token');
+      final url = Uri.https('takichai-backend.herokuapp.com','/api/songs');
+      logger.d("aaa: " + token!);
+      final response = await http.post(url,
+          headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+          },
+          body:{
+        'name': '$name',
+        'genre': '$genre',
+        'description': '$description',
+        'year': '2000',
+        'mood': 'Melancolía',
+        'instrumental': 'false'
+      });
+      logger.d("aaa");
+      //print(jsonDecode(response.body));
+      logger.d(jsonDecode(response.body));
+      //return newUser;
+    }catch(error){
+      throw Exception('Failed to register new User');
+    }
+  }
+  
+  Future<void> NewSong(String name, String genre, String description) async{
     String? token;
     try{
       //////////////////
@@ -36,45 +65,16 @@ class SongService{
       http.StreamedResponse response = await request.send();
 
       if (response.statusCode == 200) {
-        String str = await response.stream.bytesToString();
-        print(str);
-        Song newSong = Song.fromNewSong(jsonDecode(str));
-        return newSong;
+        //String str = await response.stream.bytesToString();
+        print("yeihhh");
+        //Song newSong = Song.fromNewSong(jsonDecode(str));
+        //return newSong;
       }
       else {
         print(response.reasonPhrase);
         throw Exception('Failed to register new Song');
       }
       ////////////////
-      /*
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      token = prefs.getString('token');
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/songs');
-
-      print("name: "+ name);
-      print("genre: "+ genre);
-      print("description: "+ description);
-
-      final response = await http.post(url, body:{
-        "name": '$name',
-        "genre": '$genre',
-        "description": '$description',
-        "songUrl": "",
-        "year": "2000",
-         "language": "Spansish",
-        "popularity":"high",
-        "imageUrl":"image",
-        "duration":"duration",
-        "instrumental":"false",
-        "mood":"good"
-      },headers: {
-        'Content-type': 'multipart/form-data',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-      });
-      print(response.body);
-      Song newSong = Song.fromNewSong(jsonDecode(response.body));
-      return newSong;*/
     }catch(error){
       print(error);
       throw Exception('Failed to register new Song');

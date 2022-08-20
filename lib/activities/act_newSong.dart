@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 import '../Wrapper/wrapper.dart';
 // import 'package:takichaiproject/activities/act_mySongs.dart';
@@ -27,9 +28,22 @@ class _newSongState extends State<newSong> {
   String _genre = "";
   String _songURL = "";
   String _imageURL = "";
-  
+  var logger = Logger(
+    filter: null, // Use the default LogFilter (-> only log in debug mode)
+    printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
+    output: null, // Use the default LogOutput (-> send everything to console)
+  );
   late Future<Song> songRes;
-
+  @protected
+  @mustCallSuper
+  initState() {
+    SubmitSong();
+  }
+  SubmitSong() async {
+    SongService songService = SongService();
+    await songService.CreateSong("Kennecio", "rock", "description");
+    logger.d("response: " );
+  }
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
 
