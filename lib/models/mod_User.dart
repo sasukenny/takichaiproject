@@ -81,7 +81,6 @@ class User {
       logger.d("estoy suscripto a : " + sus['name']);
       subscriptionsList.add(sus['name']);
     }
-    logger.d("ccc");
     subscribers = subscribersList;
     subscriptions = subscriptionsList;
     description = json['user']['description'];
