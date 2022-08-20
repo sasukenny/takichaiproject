@@ -7,10 +7,12 @@ class SongCard extends StatelessWidget {
     Key? key,
     this.time="0:00" ,
     this.title="0:00" ,
+    this.genre="rock"
   }) : super(key: key);
   
   final String time;
   final String title;
+  final String genre;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,7 @@ class SongCard extends StatelessWidget {
                               alignment: Alignment(-1, 0),
                               child: Text(
                                   textAlign: TextAlign.left,
-                                  'autor: Artista Name', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white)),
+                                  '', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white)),
                           ),
                           Container(
                               alignment: Alignment(-1, 0),
@@ -80,7 +82,7 @@ class SongCard extends StatelessWidget {
                               alignment: Alignment(-1, 0),
                               child: Text(
                                   textAlign: TextAlign.left,
-                                  'genero: Rock', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white))
+                                  'genero: ' + genre, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white))
                           ),
                         ],
                       ),

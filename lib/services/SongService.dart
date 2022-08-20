@@ -42,6 +42,45 @@ class SongService{
     }
   }
 
+  Future<List<Song>> getAllSongs() async{
+    String? token;
+    Map<String,Object>query = {
+      'userId': "62bf6513929a04ce7230db56"
+    };
+    List<Song> songs = [];
+    try{
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.getString('token');
+      final url = Uri.https('takichai-backend.herokuapp.com','/api/songs', query);
+      final response = await http.get(url, headers: {"Authorization": 'Bearer $token'});
+      Map<Object, dynamic> json = jsonDecode(response.body);
+
+      for(Map<Object, dynamic> a in json['songs']){
+        print(a);
+        Song item = Song(
+            a['name'],
+            a['songUrl'],
+            a['year'],
+            a['genre'],
+            a['description'],
+            a['author'],
+            a['popularity'],
+            a['imageUrl'],
+            a['duration'],
+            a['instrumental'],
+            a['mood'],
+            /**/
+        );
+        print('item: '+ item.name);
+        songs.add(item);
+      }
+    }
+    catch(error){
+    logger.e(error);
+    throw Exception('Failed to load User');
+    }
+    return songs;
+  }
 }
 
 
