@@ -1,35 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http; //importar para hacer peticiones
-import 'dart:convert'; //importar para hacer peticiones
+import 'dart:convert';
+
+import 'package:logger/logger.dart'; //importar para hacer peticiones
 
 //Clase modelo
 class Artist_resumen {
-  final String name;
-  final String description;
-  final List<String> songs;
-  //agregar en futuro las listas
-  const Artist_resumen({
-    required this.name,
-    required this.description,
-    required this.songs,
-  });
+  String name = "";
+  String userid = "";
+  var logger = Logger(
+    filter: null, // Use the default LogFilter (-> only log in debug mode)
+    printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
+    output: null, // Use the default LogOutput (-> send everything to console)
+  );
+
+  Artist_resumen(this.name, this.userid);
 
   //Método constructor a partir de json
-  factory Artist_resumen.fromJson(Map<Object, dynamic> json) {
-    print('fromjson');
+  Artist_resumen.fromProfileData(Map<Object, dynamic> json) {
 
-    List<String> songList = [];
-    for(String sus in json['user']['songs']){
-      songList.add(sus);
+    List<String> subscribersList = [];
+    print(json['user']['subscribers']);
+    for(Map<Object, dynamic>  sus in json['user']['subscribers']){
+      logger.d("mi suscriptor: " + sus['name']);
+      subscribersList.add(sus['name']);
     }
-    print('lista1');
-    print(songList);
-
-    return Artist_resumen(
-      name: json['user']['name'],
-      description: json['user']['description'],
-      songs: songList,
-
-    );
+    logger.d("ccc");
+    userid = json["user"]["userId"];
+    name = json["user"]["name"];
   }
+
 }

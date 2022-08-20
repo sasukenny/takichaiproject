@@ -80,6 +80,30 @@ class UserService {
       User userdata = User.fromProfileData(jsonDecode(response.body));
       /*updating data*/
       SharedPreferences prefs = await SharedPreferences.getInstance();
+      return userdata;
+    }catch(error){
+      throw Exception('Failed to load User');
+    }
+  }
+
+  Future<User> getMyData() async {
+    String? token;
+    try{
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.getString('token');
+      final url = Uri.https('takichai-backend.herokuapp.com', '/api/user');
+
+      final response = await http.get(url,
+        headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      print(jsonDecode(response.body));
+      User userdata = User.fromProfileData(jsonDecode(response.body));
+      /*updating data*/
       prefs.setString('userID', userdata.userId);
       prefs.setBool('publicProfile', userdata.publicProfile);
       prefs.setString('name', userdata.name);
@@ -87,7 +111,6 @@ class UserService {
       prefs.setString('description', userdata.description);
       prefs.setStringList('subscribers', userdata.subscribers);
       prefs.setStringList('subscriptions', userdata.subscriptions);
-      prefs.setString('token', userdata.token);
       return userdata;
     }catch(error){
       throw Exception('Failed to load User');
@@ -126,6 +149,42 @@ class UserService {
     }catch(error){
       logger.e(error);
       throw Exception('Failed to load User');
+    }
+  }
+
+
+  //Edit Profile user
+  Future<User> EditProfile(String pw, String description, String publicProfile, String? token) async{
+    print(token);
+    try{
+      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users');
+      final response = await http.put(
+          url,
+          body:{
+            "password": pw,
+            "description": description,
+            "publicProfile": publicProfile,
+
+      }, headers: {
+            'Accept': 'application/json',
+            'Authorization': token ?? "",
+      });
+      //print(jsonDecode(response.body));
+      User userRes = User.fromEditProfile(jsonDecode(response.body));
+      /*storing on localstorage*/
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('userId', userRes.userId);
+      prefs.setBool('publicProfile', userRes.publicProfile);
+      // prefs.setString('name', userRes.name);
+      // prefs.setString('email', userRes.email);
+      prefs.setString('description', userRes.description);
+      // prefs.setStringList('subscribers', userRes.subscribers);
+      // prefs.setStringList('subscriptions', userRes.subscriptions);
+      prefs.setString('token', userRes.token);
+      return userRes;
+    }catch(error){
+      logger.e(error);
+      throw Exception('Failed to Edit User Profile');
     }
   }
 }

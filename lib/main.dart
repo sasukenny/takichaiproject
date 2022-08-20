@@ -5,6 +5,7 @@ import 'activities/act_Home.dart';
 import 'activities/act_Register.dart';
 import 'activities/act_Login.dart';
 import 'activities/act_musiclist.dart';
+import 'activities/act_EditProfile.dart';
 import 'util/createMaterialColor.dart';
 
 void main() {
@@ -30,8 +31,9 @@ class MyApp extends StatelessWidget {
       ),
        //home: const NowPlayingPage(title: 'Takichai'),
       //home: const AboutUs(title: "About Us"),
-      home: const Home(),
-      // home: const register(),
+      //home: const Home(),
+       home: const editProfile(),
+       // home: const register(),
 
     );
   }

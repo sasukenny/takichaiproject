@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Wrapper/wrapper.dart';
 import '../components/comp_card.dart';
@@ -8,6 +9,10 @@ import 'act_Login.dart';
 import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
 import 'act_mySongs.dart';
+import 'act_nowPlaying.dart';
+import 'act_EditProfile.dart';
+import '../globals/globalValues.dart';
+
 
 class Profile extends StatefulWidget {
 const Profile({Key? key, required this.title}) : super(key: key);
@@ -22,35 +27,29 @@ State<Profile> createState() => _ProfileState();
 class _ProfileState extends State<Profile> {
   UserService userService = UserService();
   User userdata = User('', '', '', [], [], true, '','') ;
-  String? userId;
+  String? token;
+  var logger = Logger(
+    filter: null, // Use the default LogFilter (-> only log in debug mode)
+    printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
+    output: null, // Use the default LogOutput (-> send everything to console)
+  );
   @protected
   @mustCallSuper
   initState(){
     GetUserId();
   }
 
-
-  Future<void> GetUserId() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    userId = prefs.getString('userId');
-    if(userId!=null){
-      userService.getUserData(userId!).then((response) => {
-        setState(() {
-          userdata = response;
-        })
-      }).catchError(()=>{
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => login()),
-        )
-      });
-    }
-    else{
+  GetUserId() async {
+    userService.getMyData().then((response) => {
+      setState(() {
+        userdata = response;
+      })
+    }).catchError(()=>{
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => login()),
-      );
-    }
+      )
+    });
   }
   String CountItems( List<String> listParam){
     return listParam.length.toString();
@@ -204,7 +203,12 @@ class _ProfileState extends State<Profile> {
               padding: const EdgeInsets.fromLTRB(10, 10, 5, 20),
               //padding: const EdgeInsets.fromLTRB(30, 10, 5, 20),
               child: ElevatedButton(
-                onPressed: () { print("object");},
+                onPressed: () { print("Edit Profile pressed");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => editProfile()),
+                );
+                },
                 child: Text('Editar Perfil',
                     style: TextStyle(fontSize: 11)),
               ),
