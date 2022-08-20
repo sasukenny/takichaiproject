@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http; //importar para hacer peticiones
 import 'package:logger/logger.dart';
 import 'dart:convert'; //importar para hacer peticiones
-import '../globals/globalValues.dart';
+
 
 User userFromProfileData(String str) => User.fromProfileData(json.decode(str));
 User userFromRegister(String str) => User.fromRegister(json.decode(str));
@@ -35,6 +35,17 @@ class User {
     this.userId,
     this.token
   );
+
+  User.emptyUser(){
+    userId = '';
+    publicProfile = true;
+    name = "";
+    email = "";
+    description = "";
+    subscribers = [];
+    subscriptions = [];
+    token = "";
+  }
 
   //Método constructor a partir de register
   User.fromRegister(Map<Object, dynamic> json) {
