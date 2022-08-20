@@ -155,6 +155,7 @@ class UserService {
 
   //Edit Profile user
   Future<User> EditProfile(String pw, String description, String publicProfile, String? token) async{
+    print(token);
     try{
       final url = Uri.https('takichai-backend.herokuapp.com', '/api/users');
       final response = await http.put(
@@ -165,7 +166,8 @@ class UserService {
             "publicProfile": publicProfile,
 
       }, headers: {
-            "Authorization": token ?? "",
+            'Accept': 'application/json',
+            'Authorization': token ?? "",
       });
       //print(jsonDecode(response.body));
       User userRes = User.fromEditProfile(jsonDecode(response.body));
