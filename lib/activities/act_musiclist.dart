@@ -5,6 +5,8 @@ import 'package:takichaiproject/components/comp_songcard.dart';
 import '../Wrapper/wrapper.dart';
 import '../components/comp_descriptionCard.dart';
 import '../components/comp_sectionTitle.dart';
+import '../models/mod_Song.dart';
+import '../services/SongService.dart';
 
 class MusicList extends StatefulWidget {
   const MusicList({Key? key, required this.title}) : super(key: key);
@@ -16,6 +18,21 @@ class MusicList extends StatefulWidget {
 }
 
 class _MusicListState extends State<MusicList> {
+  List<Song> allsongs = [];
+
+  @protected
+  @mustCallSuper
+  initState() {
+    GetAllUsers();
+  }
+  GetAllUsers() async {
+    SongService userService = SongService();
+    List<Song> response = await userService.getAllSongs();
+    //logger.d("responseq ");
+    setState(()  {
+      allsongs = response;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Wrapper(activitieChild: elements());
@@ -27,20 +44,14 @@ class _MusicListState extends State<MusicList> {
             child: Column(children: [
               sectionTitle("Descubre"),
               descriptionCard("Encuentra nueva música que te puede gustar",),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+              ListView.builder(
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                child: Column(
-                  children: [
-                    SongCard(time: "1:12", title: "Time",),
-                    SongCard(time: "4:23", title: "Comfortably",),
-                    SongCard(time: "3:20", title: "Hey You"),
-                    SongCard(time: "3:20", title: "Hey You"),
-                    SongCard(time: "3:20", title: "Hey You"),
-                    SongCard(time: "3:20", title: "Hey You"),
-                  ],
-                ),
-              )
+                shrinkWrap: true,
+                itemCount: allsongs.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return SongCard(time: allsongs[index].duration, title: allsongs[index].name,genre: allsongs[index].genre,);
+                },
+              ),
             ])
         )
     );
