@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:takichaiproject/activities/act_mySongs.dart';
-import 'package:takichaiproject/services/UserService.dart';
-import '../components/comp_inputText.dart';
+
+import '../Wrapper/wrapper.dart';
+// import 'package:takichaiproject/activities/act_mySongs.dart';
+// import 'package:takichaiproject/services/UserService.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:open_file/open_file.dart';
+
+
+// import '../components/comp_inputText.dart';
 import '../models/mod_Song.dart';
 import '../services/SongService.dart';
 
@@ -12,108 +18,212 @@ class newSong extends StatefulWidget {
 }
 
 class _newSongState extends State<newSong> {
-  //Campos al registrar una canción
-  TextEditingController nameController = TextEditingController();
-  TextEditingController genreController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  TextEditingController languageController = TextEditingController();
-  TextEditingController imageUrlController = TextEditingController();
-  TextEditingController instrumentalController = TextEditingController();
-  TextEditingController moodController = TextEditingController();
-  SongService songService = SongService();
 
+  //Variables
+  String _name = "";
+  String _description = "";
+  String _language = "";
+  String _mood = "";
+  String _genre = "";
+  String _songURL = "";
+  String _imageURL = "";
+  
   late Future<Song> songRes;
 
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
-  final _formkey = GlobalKey<FormState>();
+
+  // TEXT FIELDS
+
+  Widget _buildName(){
+    return TextFormField(
+      style: const TextStyle(
+        color: Colors.white
+      ),
+      decoration: const InputDecoration(
+        labelText: "Título de la canción",
+        hintStyle: TextStyle(
+          color: Colors.white
+        ),
+        fillColor: Colors.blue
+      ),
+      validator: (String? value){
+        return (value == null) ? 'El título es obligatorio' : null;
+      },
+      onChanged: (String? value){
+        _name = value!;
+      },
+    );
+  }
+
+  Widget _buildDescription(){
+    return TextFormField(
+      style: const TextStyle(
+          color: Colors.white,
+
+      ),
+      decoration: const InputDecoration(
+        labelText: "Descripción de la canción",
+        fillColor: Colors.blue
+      ),
+      onChanged: (String? value){
+        _description = value!;
+      },
+    );
+  }
+
+// DROPDOWNS
+  Widget _buildLanguage(){
+    String dropdownValue = "Idioma";
+    return DropdownButton(
+      value: dropdownValue,
+      items: <String>['Español', 'English', 'Quechua/RunaSimi', 'Aymara']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      icon: const Icon(Icons.arrow_downward),
+      style: const TextStyle(color: Colors.white),
+      onChanged:(String? newValue){
+        setState(() {
+          dropdownValue = newValue!;
+          _language = newValue;
+        });
+      },
+    );
+  }
+
+  Widget _buildMood(){
+    String dropdownValue = "Ánimo";
+    return DropdownButton(
+      value: dropdownValue,
+      items: <String>['Alegre', 'Triste', 'Melancólico', 'Reflexivo']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      icon: const Icon(Icons.arrow_downward),
+      style: const TextStyle(color: Colors.white),
+      onChanged:(String? newValue){
+        setState(() {
+          dropdownValue = newValue!;
+          _mood = newValue;
+        });
+      },
+    );
+  }
+
+  Widget _buildGenre(){
+    String dropdownValue = "Idioma";
+    return DropdownButton(
+      value: dropdownValue,
+      items: <String>['Huayno', 'Sikuri', 'Selvática', 'Cumbia', 'Afroperuana', 'Rock', 'Otro']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      icon: const Icon(Icons.arrow_downward),
+      style: const TextStyle(color: Colors.white),
+      onChanged:(String? newValue){
+        setState(() {
+          dropdownValue = newValue!;
+          _genre = newValue;
+        });
+      },
+    );
+  }
+
+
+  Widget _buildSong(){
+    return ElevatedButton(
+      child: const Text("Agregue la canción"),
+      onPressed: () async {
+        final response = await FilePicker.platform.pickFiles();
+        if(response == null){
+          return;
+          print("result null");
+        }
+        final songFile = response.files.first;
+
+          OpenFile.open(songFile.bytes.toString()); //Para simulador movil cambiar bytes.toString() por path
+          _songURL = songFile.bytes.toString(); //Para simulador movil cambiar bytes.toString() por path
+
+
+      },
+    );
+  }
+
+    Widget _buildImage(){
+    return ElevatedButton(
+      child: const Text("Agregue la portada"),
+      onPressed: () async {
+        final response = await FilePicker.platform.pickFiles();
+        if(response == null){
+          return;
+        }
+        final imageFile = response.files.first;
+
+          OpenFile.open(imageFile.bytes.toString()); //Para simulador movil cambiar bytes.toString() por path
+          _songURL = imageFile.bytes.toString(); //Para simulador movil cambiar bytes.toString() por path
+
+      },
+    );
+  }
+
+  Widget _buildInstrumental(){
+    return TextField();
+  }
+
+  Widget _buildSubmit(){
+    return ElevatedButton(
+        child: Text("Listo"),
+        onPressed: (){
+          print(_name + ": _name");
+          print(_description + ": _description");
+          print(_songURL + ": _songUrl");
+          print(_imageURL + ": _imageUrl");
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-        key: _formkey,
-        child:
-        Container(
-            child: Scaffold(
-              body: Column(
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 50),
-                      child: Center(
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset('../assets/images/logoTakiChai.png', height: 200),
-                                inputText(
-                                  controller: nameController,
-                                  placeholder: "Nombre",
-                                  voidMessage: "Ingrese nombre",
-                                  regexp: RegExp(r'.*'),
-                                ),
-                                inputText(
-                                    controller: genreController,
-                                    placeholder: "Género",
-                                    voidMessage: "Ingrese un email correcto",
-                                    regexp: RegExp(r'.*')
-                                ),
-                                inputText(
-                                    controller: descriptionController,
-                                    placeholder: "Description",
-                                    voidMessage: "Ingrese contraseña (mínimo 8 caracteres)",
-                                    regexp: RegExp(r'.*'),
-                                    obscureText: true
-                                ),
+    return Wrapper(activitieChild: elements(context));
+  }
 
-                                ////////
+  Container elements(BuildContext context){
+    return Container(
+        padding: const EdgeInsets.fromLTRB(10, 80, 10, 10),
+        height: MediaQuery.of(context).size.height,
+        child:SingleChildScrollView(
+          child:
+          Form(
+            key: _formkey,
+            child:
+            Column(
+              children: [
+                //Input Texts
+                _buildName(),
+                _buildDescription(),
+                //Dropdowns
+                //_buildLanguage(),
+                //_buildMood(),
+                //_buildGenre(),
+                //FilePickers
+                _buildSong(),
+                _buildImage(),
+                //Submit button
+                _buildSubmit()
+              ],
+            ),
+          )
 
-                                Container(
-                                    margin: EdgeInsets.only(top: 10),
-                                    decoration: BoxDecoration(
-                                      color: Colors.black54,
-                                      borderRadius: BorderRadius.circular(50),
-                                    ),
-                                    padding: EdgeInsets.fromLTRB(60,0,60,0),
-                                    child: TextButton(
-                                      child: const Text(
-                                        "Registrarse",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontFamily: 'Montserrat',
-                                        ),
-                                      ),
-                                      onPressed: ()
-                                      {
-                                        songService.NewSong(
-                                          nameController.text,
-                                          genreController.text,
-                                          descriptionController.text);
-
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(builder: (context) => MySongs()),
-                                        );
-                                      },
-                                    )
-                                ),
-                                Container(
-                                    margin: EdgeInsets.only(top: 20),
-                                    padding: EdgeInsets.fromLTRB(60,0,60,0),
-                                    child: InkWell(
-                                      child: const Text('¿Ya tienes una cuenta?'),
-                                      onTap: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => const MySongs()),);
-                                      },
-                                    )
-                                )
-                              ]
-                          )
-                      ),
-                    ),
-                  ]
-              ),
-            )
-        )
-
+      )
     );
   }
 }

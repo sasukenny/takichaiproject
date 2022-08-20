@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'activities/act_ArtistProfile.dart';
 import 'activities/act_Home.dart';
-import 'activities/act_Register.dart';
-import 'activities/act_Login.dart';
-import 'activities/act_musiclist.dart';
+
 import 'util/createMaterialColor.dart';
 
 void main() {
