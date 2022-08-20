@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../Wrapper/wrapper.dart';
 import '../components/comp_card.dart';
 import '../models/mod_User.dart';
@@ -9,6 +8,8 @@ import 'act_Login.dart';
 import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
 import 'act_mySongs.dart';
+import 'act_EditProfile.dart';
+
 
 class Profile extends StatefulWidget {
 const Profile({Key? key, required this.title}) : super(key: key);
@@ -34,6 +35,7 @@ class _ProfileState extends State<Profile> {
   initState(){
     GetUserId();
   }
+
   GetUserId() async {
     userService.getMyData().then((response) => {
       setState(() {
@@ -196,7 +198,12 @@ class _ProfileState extends State<Profile> {
               padding: const EdgeInsets.fromLTRB(10, 10, 5, 20),
               //padding: const EdgeInsets.fromLTRB(30, 10, 5, 20),
               child: ElevatedButton(
-                onPressed: () { print("object");},
+                onPressed: () { print("Edit Profile pressed");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => editProfile()),
+                );
+                },
                 child: Text('Editar Perfil',
                     style: TextStyle(fontSize: 11)),
               ),

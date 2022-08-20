@@ -6,6 +6,7 @@ import 'dart:convert'; //importar para hacer peticiones
 User userFromProfileData(String str) => User.fromProfileData(json.decode(str));
 User userFromRegister(String str) => User.fromRegister(json.decode(str));
 User userFromLogin(String str) => User.fromLogin(json.decode(str));
+User userFromEditProfile(String str) => User.fromEditProfile(json.decode(str));
 //de Json a User
 String userToJson(User data) => json.encode(data.toJson()); //de User a Json
 
@@ -91,11 +92,20 @@ class User {
     publicProfile = json['user']['publicProfile'];
   }
 
+  User.fromEditProfile(Map<Object, dynamic> json) {
+
+    description = json['user']['description'];
+    userId = json["user"]["userId"];
+    publicProfile = json['user']['publicProfile'];
+    // name = json["user"]["name"];
+    // description = json["user"]["description"];
+    // email = json["user"]["email"];
+  }
+
   Map<String, dynamic> toJson() => {
     "userId": userId,
-    "name": name,
     "description": description,
-    "email": email,
+    "publicProfile": publicProfile,
   };
 
 }
