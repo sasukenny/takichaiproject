@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../Wrapper/wrapper.dart';
 import '../components/comp_card.dart';
 import '../models/mod_User.dart';
@@ -9,9 +8,7 @@ import 'act_Login.dart';
 import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
 import 'act_mySongs.dart';
-import 'act_nowPlaying.dart';
 import 'act_EditProfile.dart';
-import '../globals/globalValues.dart';
 
 
 class Profile extends StatefulWidget {
@@ -54,8 +51,6 @@ class _ProfileState extends State<Profile> {
   String CountItems( List<String> listParam){
     return listParam.length.toString();
   }
-
-
   @override
   Widget build(BuildContext context) {
     return
