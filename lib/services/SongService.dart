@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,7 +18,8 @@ class SongService{
     output: null, // Use the default LogOutput (-> send everything to console)
   );
 
-  Future<void> CreateSong(String name, String genre, String description) async{
+
+  Future<void> CreateSong(String name, String genre, String description, String? song, String? image ) async{
     try{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('token');
@@ -25,59 +27,70 @@ class SongService{
       logger.d("aaa: " + token!);
       final response = await http.post(url,
           headers: {
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
+        'Content-type': 'multipart/form-data',
+        'Accept': '*/*',
         'Authorization': 'Bearer $token',
           },
           body:{
-        'name': '$name',
-        'genre': '$genre',
-        'description': '$description',
-        'year': '2000',
-        'mood': 'Melancolía',
-        'instrumental': 'false'
+            'name': '$name',
+            'year': '2000',
+            'description': '$description',
+            'genre': '$genre',
+            'mood': 'Melancolía',
+            'instrumental': 'false',
+            'img': image,
+            'song': song
       });
       logger.d("aaa");
       //print(jsonDecode(response.body));
       logger.d(jsonDecode(response.body));
       //return newUser;
     }catch(error){
-      throw Exception('Failed to register new User');
+      throw Exception(error);
     }
   }
   
-  Future<void> NewSong(String name, String genre, String description) async{
-    String? token;
+  Future<void> NewSong(String name, String genre, String description,File song, String image) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
     try{
       //////////////////
       var request = http.MultipartRequest('POST', Uri.https('takichai-backend.herokuapp.com','/api/songs'));
+
       request.fields.addAll({
-        'name': '$name',
-        'genre': '$genre',
-        'description': '$description',
+        'name': name,
         'year': '2000',
+        'description': description,
+        'genre': genre,
         'mood': 'Melancolía',
-        'instrumental': 'false'
+        'instrumental': 'false',
       });
-      request.files.add(await http.MultipartFile.fromPath('img', '../assets/images/logoTakiChai.png'));
-      request.files.add(await http.MultipartFile.fromPath('song', '../assets/songs/Via Crisis.mpeg'));
-
+      logger.d("a1");
+      var stream  = new http.ByteStream(song.openRead());
+      stream.cast();
+      var length = await song.length();
+      print(length);
+      request.files.add(await http.MultipartFile('song', stream, length, filename: song.path));
+      logger.d(song.path);
+      logger.d("a2");
+      request.files.add(await http.MultipartFile.fromPath('img', image));
+      logger.d("a3");
       http.StreamedResponse response = await request.send();
-
+      logger.d(request.files.toString());
+      logger.d(response.toString());
       if (response.statusCode == 200) {
-        //String str = await response.stream.bytesToString();
+        String str = await response.stream.bytesToString();
         print("yeihhh");
         //Song newSong = Song.fromNewSong(jsonDecode(str));
         //return newSong;
       }
       else {
-        print(response.reasonPhrase);
-        throw Exception('Failed to register new Song');
+        logger.d(response.reasonPhrase);
       }
       ////////////////
     }catch(error){
-      print(error);
-      throw Exception('Failed to register new Song');
+      logger.d(error);
+      throw Exception(error);
     }
   }
 

@@ -1,4 +1,4 @@
-import 'dart:html';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -32,20 +32,23 @@ class _newSongState extends State<newSong> {
   String _songURL = "";
   String _imageURL = "";
   bool _instrumental = false;
+  late File _song;
+  PlatformFile? _img;
   var logger = Logger(
     filter: null, // Use the default LogFilter (-> only log in debug mode)
     printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
     output: null, // Use the default LogOutput (-> send everything to console)
   );
   late Future<Song> songRes;
+
   @protected
   @mustCallSuper
   initState() {
-    SubmitSong();
+    logger.d("Inicando registro");
   }
   SubmitSong() async {
     SongService songService = SongService();
-    await songService.CreateSong("Kennecio", "rock", "description");
+    await songService.NewSong("Kennecio", "rock", "description",_song,_imageURL);
     logger.d("response: " );
   }
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
@@ -159,13 +162,18 @@ class _newSongState extends State<newSong> {
       onPressed: () async {
         final response = await FilePicker.platform.pickFiles();
         if(response == null){
-          return;
           print("result null");
+          return;
         }
-        final songFile = response.files.first;
+        print("result" );
+        PlatformFile songFile = response.files.first;
+        final File fileForFirebase = File(songFile.path!);
+        _song = fileForFirebase;
+        OpenFile.open(songFile.path); //Para simulador movil cambiar bytes.toString() por path
+        //OpenFile.open(songFile.bytes.toString());
 
-          OpenFile.open(songFile.bytes.toString()); //Para simulador movil cambiar bytes.toString() por path
-          _songURL = songFile.bytes.toString(); //Para simulador movil cambiar bytes.toString() por path
+        _songURL = songFile.path!; //Para simulador movil cambiar bytes.toString() por path
+        //_songURL = songFile.bytes.toString()!; //Para simulador movil cambiar bytes.toString() por path
 
 
       },
@@ -180,10 +188,14 @@ class _newSongState extends State<newSong> {
         if(response == null){
           return;
         }
+        print("result" );
         final imageFile = response.files.first;
+        _img = imageFile;
+        OpenFile.open(imageFile.path); //Para simulador movil cambiar bytes.toString() por path
+        //OpenFile.open(imageFile.bytes.toString());
 
-          OpenFile.open(imageFile.bytes.toString()); //Para simulador movil cambiar bytes.toString() por path
-          _imageURL = imageFile.bytes.toString(); //Para simulador movil cambiar bytes.toString() por path
+        _imageURL = imageFile.path!; //Para simulador movil cambiar bytes.toString() por path
+        //_songURL = imageFile.bytes.toString()!; //Para simulador movil cambiar bytes.toString() por path
 
       },
     );
@@ -212,14 +224,15 @@ class _newSongState extends State<newSong> {
     return ElevatedButton(
         child: Text("Listo"),
         onPressed: (){
-          print(_name + ": _name");
-          print(_description + ": _description");
-          print(_language + ": _language");
-          print(_mood + ": _mood");
-          print(_genre + ": _genre");
-          print(_songURL + ": _songUrl");
-          print(_imageURL + ": _imageUrl");
-          print(_instrumental.toString() + ": _instrumental");
+          print( "_name:" + _name );
+          print("_description:" + _description);
+          print("_language: " + _language);
+          print("_mood: " +  _mood);
+          print("_genre: " +  _genre);
+          print("_songURL: " +  _songURL );
+          print("_imageURL: " +  _imageURL);
+          print("_instrumental: " + _instrumental.toString());
+          SubmitSong();
         });
   }
 

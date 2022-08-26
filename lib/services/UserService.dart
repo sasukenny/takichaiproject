@@ -28,7 +28,7 @@ class UserService {
       User newUser = User.fromRegister(jsonDecode(response.body));
       return newUser;
     }catch(error){
-      throw Exception('Failed to register new User');
+      throw Exception(error);
     }
   }
   //Login user
@@ -39,7 +39,7 @@ class UserService {
         "email": email,
         "password": pw,
       });
-      //print(jsonDecode(response.body));
+      print(jsonDecode(response.body));
       User userRes = User.fromLogin(jsonDecode(response.body));
       /*storing on localstorage*/
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -54,7 +54,7 @@ class UserService {
       return userRes;
     }catch(error){
       logger.e(error);
-      throw Exception('Failed to login User');
+      throw Exception(error);
     }
   }
 
@@ -82,7 +82,7 @@ class UserService {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       return userdata;
     }catch(error){
-      throw Exception('Failed to load User');
+      throw Exception(error);
     }
   }
 
@@ -113,7 +113,7 @@ class UserService {
       prefs.setStringList('subscriptions', userdata.subscriptions);
       return userdata;
     }catch(error){
-      throw Exception('Failed to load User');
+      throw Exception(error);
     }
   }
 
@@ -148,7 +148,7 @@ class UserService {
       return users;
     }catch(error){
       logger.e(error);
-      throw Exception('Failed to load User');
+      throw Exception(error);
     }
   }
 
@@ -184,7 +184,7 @@ class UserService {
       return userRes;
     }catch(error){
       logger.e(error);
-      throw Exception('Failed to Edit User Profile');
+      throw Exception(error);
     }
   }
 }
