@@ -1,15 +1,25 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:file_picker/file_picker.dart';
+import 'package:open_file/open_file.dart';
 
 import '../Wrapper/wrapper.dart';
 import '../components/comp_inputText.dart';
 import '../components/comp_textArea.dart';
 import '../models/mod_User.dart';
 import '../services/UserService.dart';
-import './act_Profile.dart';
 import './act_Home.dart';
 import 'act_Login.dart';
+
+TextStyle labels = const TextStyle(
+    color: Colors.white,
+    fontSize: 16);
 
 class editProfile extends StatefulWidget {
   const editProfile({Key? key}) : super(key: key);
@@ -21,7 +31,6 @@ class _editProfileState extends State<editProfile> {
 
   UserService userService = UserService();
 
-  //////////////////////////////////////////////////////////////////
   User userdata = User('', '', '', [], [], true, '','') ;
   String? userId;
   String? token;
@@ -56,12 +65,65 @@ class _editProfileState extends State<editProfile> {
       );
     }
   }
+
+  //////////////////////////////////////////////////////////////////////////
+
+  bool _publicProfile = false;
+  String _imageURL = "";
+  late File _img;
+  String _imgBase64 = "";
+
+  Widget _buildPublicProfile(){
+    return
+      FlutterSwitch(
+        width: 50.0,
+        height: 25.0,
+        valueFontSize: 25.0,
+        toggleSize: 25.0,
+        value: _publicProfile,
+        borderRadius: 10.0,
+        padding: 8.0,
+        showOnOff: true,
+        onToggle: (val) {
+          setState(() {
+            _publicProfile = val;
+          });
+        },
+      );
+  }
+
+  Widget _buildImage(){
+    return ElevatedButton(
+      child: const Text("Editar imagen de Perfil"),
+      onPressed: () async {
+        final response = await FilePicker.platform.pickFiles();
+        if(response == null){
+          return;
+        }
+        print("result img" );
+        final imageFile = response.files.first;
+        final File fileForFirebase = File(imageFile.path!);
+        _img = fileForFirebase;
+        OpenFile.open(imageFile.path!); //Para simulador movil cambiar bytes.toString() por path
+        //OpenFile.open(imageFile.bytes.toString());
+
+        _imageURL = imageFile.path!; //Para simulador movil cambiar bytes.toString() por path
+        //_songURL = imageFile.bytes.toString()!; //Para simulador movil cambiar bytes.toString() por path
+        logger.d("werty");
+        List<int> fileBytes = await fileForFirebase.readAsBytes();
+        _imgBase64 = base64Encode(fileBytes);
+        logger.d(_imgBase64);
+      },
+    );
+  }
   ////////////////////////////////////////////////////////////
 
   TextEditingController passwordController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
   TextEditingController publicProfileController = new TextEditingController();
   TextEditingController imageController = new TextEditingController();
+
+
 
   late User userRes;
   var logger = Logger(
@@ -103,20 +165,19 @@ class _editProfileState extends State<editProfile> {
                 placeholder: "Editar descripción...",
                 voidMessage:"",
               ),
-              inputText(
-                controller: publicProfileController,
-                placeholder: "Editar PublicProfile",
-                voidMessage:"",
-                regexp: new RegExp(r'.*'),
+
+              Text("Perfil público", style: labels),
+              Container(
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child:_buildPublicProfile(),
               ),
-              inputText(
-                controller: imageController,
-                placeholder: "Editar imagen",
-                voidMessage:"",
-                regexp: new RegExp(r'.*'),
+              Text(" ", style: labels),
+              Container(
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child:_buildImage(),
               ),
               Container(
-              padding: EdgeInsets.all(7),
+              padding: EdgeInsets.all(35),
               child: ElevatedButton(
                 style: raisedButtonStyle,
                 child: Text(
@@ -134,6 +195,7 @@ class _editProfileState extends State<editProfile> {
                     passwordController.text,
                     descriptionController.text,
                     publicProfileController.text,
+                      _imgBase64,
                     token,
                     userId
                   );

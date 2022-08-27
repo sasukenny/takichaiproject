@@ -153,7 +153,7 @@ class UserService {
   }
 
   //Edit Profile user
-  Future<User> EditProfile(String pw, String description, String publicProfile, String? token, String? id) async{
+  Future<User> EditProfile(String pw, String description, String publicProfile, String img, String? token, String? id) async{
     print(token);
     try{
       final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/${id}');
@@ -163,6 +163,7 @@ class UserService {
             "password": pw,
             "description": description,
             "publicProfile": publicProfile,
+            "img": img,
 
       },
         headers: {"Authorization": 'Bearer $token'},
