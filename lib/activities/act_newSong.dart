@@ -169,7 +169,7 @@ class _newSongState extends State<newSong> {
         PlatformFile songFile = response.files.first;
         final File fileForFirebase = File(songFile.path!);
         _song = fileForFirebase;
-        OpenFile.open(songFile.path); //Para simulador movil cambiar bytes.toString() por path
+        OpenFile.open(songFile.path!); //Para simulador movil cambiar bytes.toString() por path
         //OpenFile.open(songFile.bytes.toString());
 
         _songURL = songFile.path!; //Para simulador movil cambiar bytes.toString() por path
@@ -191,7 +191,7 @@ class _newSongState extends State<newSong> {
         print("result" );
         final imageFile = response.files.first;
         _img = imageFile;
-        OpenFile.open(imageFile.path); //Para simulador movil cambiar bytes.toString() por path
+        OpenFile.open(imageFile.path!); //Para simulador movil cambiar bytes.toString() por path
         //OpenFile.open(imageFile.bytes.toString());
 
         _imageURL = imageFile.path!; //Para simulador movil cambiar bytes.toString() por path

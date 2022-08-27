@@ -33,7 +33,7 @@ class _editProfileState extends State<editProfile> {
 
   Future<void> GetUserId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    userId = prefs.getString('userId');
+    userId = prefs.getString('userId')!;
     if(userId!=null){
       token = prefs.getString('token');
       print("TokenEditProfile: ");
@@ -134,7 +134,8 @@ class _editProfileState extends State<editProfile> {
                     passwordController.text,
                     descriptionController.text,
                     publicProfileController.text,
-                    token
+                    token,
+                    userId
                   );
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   logger.d("Debug log");
