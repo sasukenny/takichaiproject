@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '../models/mod_Song.dart';
-import '../services/SongService.dart';
 
 import 'activities/act_nowPlaying.dart';
+import 'activities/act_Home.dart';
 import 'util/createMaterialColor.dart';
 
 void main() {
+
   runApp(const MyApp());
 }
-SongService ss = new SongService();
-Song song1 = ss.getSong('62f5f98c0a4d833d51136bbc');
+
+
 
 class MyApp extends StatelessWidget {
 
@@ -31,9 +32,9 @@ class MyApp extends StatelessWidget {
           headline6: TextStyle(color: Color(0xFF000000),fontFamily: 'Montserrat',fontSize: 20.0, fontWeight: FontWeight.w100),
         )
       ),
-       home: NowPlayingPage(song: song1),
+      // home: NowPlayingPage(songId: '62f5f98c0a4d833d51136bbc'),
       //home: const AboutUs(title: "About Us"),
-      //home: const Home(),
+      home: const Home(),
        //home: const editProfile(),
        // home: const register(),
 

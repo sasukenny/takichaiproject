@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
+import '../services/SongService.dart';
 import '../Wrapper/wrapper.dart';
 import '../components/comp_songDisplay.dart';
 import '../models/mod_Song.dart';
@@ -10,15 +11,19 @@ import '../util/playManager.dart';
 
 
 class NowPlayingPage extends StatefulWidget {
-  const NowPlayingPage({Key? key, required this.song}) : super(key: key);
+  NowPlayingPage({Key? key, required this.songId}) : super(key: key);
 
-  final Song song;
+  String songId;
+
 
   @override
   State<NowPlayingPage> createState() => _NowPlayingPageState();
 }
 
 class _NowPlayingPageState extends State<NowPlayingPage> {
+
+  SongService ss = SongService();
+  Song song = Song.emptySong();
 
   late final PlayManager _playManager;
   var logger = Logger(
@@ -27,12 +32,19 @@ class _NowPlayingPageState extends State<NowPlayingPage> {
     output: null, // Use the default LogOutput (-> send everything to console)
   );
   @override
-  void initState(){
+  void initState() {
+
+    ss.getSong(widget.songId).then((response) => {
+      setState(()=>{
+        song = response
+      })
+    });
+
     super.initState();
 
     logger.d("song.songUrl");
-    logger.d(widget.song.songUrl);
-    _playManager = PlayManager(widget.song.songUrl, widget.song.songId);
+    logger.d(song.songUrl);
+    _playManager = PlayManager(song.songUrl, widget.songId);
 
   }
 
@@ -55,9 +67,9 @@ class _NowPlayingPageState extends State<NowPlayingPage> {
           Container(
             margin: const EdgeInsets.only(top: 45),
             child: songDisplay(
-                songTitle: widget.song.name,
-                songArtist: widget.song.author,
-                songImage: widget.song.imageUrl!
+                songTitle: song.name,
+                songArtist: song.author,
+                songImage: song.imageUrl!
             ),
           ),
           Expanded(

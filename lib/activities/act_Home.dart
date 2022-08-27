@@ -12,6 +12,7 @@ import 'act_musiclist.dart';
 import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
 import 'act_mySongs.dart';
+import 'act_nowPlaying.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -73,7 +74,7 @@ class _HomeState extends State<Home> {
   Container elements(BuildContext context){
     comp_card firstComponent = const comp_card(titulo: 'Descubre nueva música', flexText: 7, img: "assets/images/heart.png", newRoute: MusicList(title: 'Descubre'),divide: 4.5, content: 'Encuentra nueva música que te puede gustar',imgbg: "assets/images/listentoMusic.jpg", );
     comp_card secondComponent = const comp_card(titulo: 'Escucha nuevos artistas', flexText: 9, newRoute: ArtistList(),divide: 4.5, content: 'Encuentra nueva artistas con estilos únicos',imgbg: "assets/images/playMusic.jpg", );
-    comp_card thirdComponent = const comp_card(titulo: 'Mis creaciones', flexText: 9, newRoute: MySongs(),divide: 2.19,  content: 'Comparte tus obras con el mundo',imgbg: "assets/images/create.jpeg",);
+    comp_card thirdComponent = comp_card(titulo: 'Mis creaciones', flexText: 9, newRoute: NowPlayingPage(songId: '62f5f98c0a4d833d51136bbc'),divide: 2.19,  content: 'Comparte tus obras con el mundo',imgbg: "assets/images/create.jpeg",);
     comp_card fourthComponent = const comp_card(titulo: 'Mi música favorita', flexText: 7, newRoute: MyFavoriteSongs(title: 'Mi música favorita'),divide: 4.5,  content: 'Guarda las canciones que más te gusten y ¡escuchalas sin parar!' ,imgbg: "assets/images/favoriteMusic.jpg",) ;
     comp_card fifthComponent = const comp_card(titulo: 'Mis Artistas favoritos', flexText: 7, newRoute: MyFavoriteArtist(),divide: 4.5,  content: 'Suscribete a tus artistas favoritos para estar enterado de sus últimas noticias' ,imgbg: "assets/images/myartists.jpeg") ;
     double dobleheight = MediaQuery.of(context).size.height/4;

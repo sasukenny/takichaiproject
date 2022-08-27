@@ -102,7 +102,7 @@ class SongCard extends StatelessWidget {
                     InkWell(
                       child: Icon(Icons.play_arrow, color: Colors.white,),
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) =>  NowPlayingPage(song: song)),);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>  NowPlayingPage(songId: '62f5f98c0a4d833d51136bbc')),);
                       },
                     )
                   ],

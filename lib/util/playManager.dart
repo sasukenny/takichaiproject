@@ -52,12 +52,12 @@ class PlayManager {
       if (progressNotifier.value.current >= const Duration(seconds: 10) && !played){
         played = true;
         SendPlayed(songId);
-        print("10 segundos pasaron");
+        print(songId+": 10 segundos pasaron");
       }
       if (progressNotifier.value.current == progressNotifier.value.total && !fullPlayed){
-        played = true;
+        fullPlayed = true;
         SendFullPlayed(songId);
-        print("Full played");
+        print(songId+": Full played");
       }
     });
 
@@ -109,39 +109,45 @@ class PlayManager {
 
   Future<void> SendPlayed(String id) async{
     String? token;
-    Map<String,Object>query = {
-      'id': id
+
+    final Map<String,Object>query = {
+      'reproductions': 'true'
     };
+
     try{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.getString('token');
-      final url = Uri.https('takichai-backend.herokuapp.com','/api/songs/stats/${id}?reproductions=true', query);
+      final url = Uri.https('takichai-backend.herokuapp.com','/api/songs/stats/${id}',query);
       final response = await http.patch(url,
         headers: {"Authorization": 'Bearer $token'},
       );
       print(jsonDecode(response.body));
     }catch(error){
+      print(error);
       throw Exception('Failed to send 10 seconds');
     }
   }
 
-  Future<void> SendFullPlayed(String id) async{
+  Future<void> SendFullPlayed(String id) async {
     String? token;
-    Map<String,Object>query = {
-      'id': id
+
+    final Map<String, Object>query = {
+      'fullReproductions': 'true'
     };
-    try{
+
+    try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.getString('token');
-      final url = Uri.https('takichai-backend.herokuapp.com','/api/songs/stats/${id}?fullReproductions=true', query);
+      final url = Uri.https(
+          'takichai-backend.herokuapp.com', '/api/songs/stats/${id}', query);
       final response = await http.patch(url,
         headers: {"Authorization": 'Bearer $token'},
       );
       print(jsonDecode(response.body));
-    }catch(error){
+    } catch (error) {
+      print(error);
       throw Exception('Failed to send full reproduction');
     }
-
   }
 
 }
