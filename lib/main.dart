@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           headline6: TextStyle(color: Color(0xFF000000),fontFamily: 'Montserrat',fontSize: 20.0, fontWeight: FontWeight.w100),
         )
       ),
-      // home: NowPlayingPage(songId: '62f5f98c0a4d833d51136bbc'),
+       //home: NowPlayingPage(song: song1),
       //home: const AboutUs(title: "About Us"),
       home: const Home(),
        //home: const editProfile(),

@@ -2,6 +2,7 @@
     package="com.example.takichaiproject">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
+        android:usesCleartextTraffic="true"
         android:label="takichaiproject"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
