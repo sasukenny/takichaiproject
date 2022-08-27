@@ -52,24 +52,24 @@ class Song {
     mood = json["song"]["mood"];
     /**/
   }
-/*
+
   Song.emptySong(){
-    name = "";
-    songUrl = "";
+    name = "Empty Song";
+    songUrl = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3";
     year = 0;
-    genre = "";
-    description = "";
+    genre = "Rock";
+    description = "Test song";
     //author = User.emptyUser();
-    author = "";
-    language = "esp";
+    author = "Dan";
+    //language = "esp";
     popularity = "";
-    imageUrl = "";
+    imageUrl = "https://i.scdn.co/image/ab67616d0000b273d65e2670b7176415b9d88a59";
     duration = "";
     instrumental = false;
     mood = "";
   }
 
-
+/*
 
   //Método constructor a partir de register
   Song.fromGetSong(Map<Object, dynamic> json) {
