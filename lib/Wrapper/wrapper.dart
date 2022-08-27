@@ -65,7 +65,7 @@ class _HomeState extends State<Wrapper> {
           IconButton(
             color: Color.fromRGBO(255, 255, 255, 1),
             padding: EdgeInsets.all(0),
-            icon: const Icon(Icons.download_sharp),
+            icon: const Icon(Icons.upload_sharp),
             tooltip: 'Show Snackbar',
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
