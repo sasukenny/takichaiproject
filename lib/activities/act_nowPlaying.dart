@@ -53,7 +53,7 @@ class _NowPlayingPageState extends State<NowPlayingPage> {
             child: songDisplay(
                 songTitle: widget.song.name,
                 songArtist: widget.song.author,
-                songImage: widget.song.imageUrl
+                songImage: widget.song.imageUrl!
             ),
           ),
           Expanded(
