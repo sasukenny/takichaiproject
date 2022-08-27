@@ -91,6 +91,8 @@ class ArtistService {
       throw Exception('Failed to load favorite artist list');
     }
   }
+
+
 }
 
 

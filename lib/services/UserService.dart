@@ -4,6 +4,7 @@ import 'dart:core';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/mod_Song.dart';
 import '../models/mod_User.dart';
 
 
@@ -28,7 +29,7 @@ class UserService {
       User newUser = User.fromRegister(jsonDecode(response.body));
       return newUser;
     }catch(error){
-      throw Exception('Failed to register new User');
+      throw Exception(error);
     }
   }
   //Login user
@@ -39,7 +40,7 @@ class UserService {
         "email": email,
         "password": pw,
       });
-      //print(jsonDecode(response.body));
+      print(jsonDecode(response.body));
       User userRes = User.fromLogin(jsonDecode(response.body));
       /*storing on localstorage*/
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -54,7 +55,7 @@ class UserService {
       return userRes;
     }catch(error){
       logger.e(error);
-      throw Exception('Failed to login User');
+      throw Exception(error);
     }
   }
 
@@ -82,7 +83,7 @@ class UserService {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       return userdata;
     }catch(error){
-      throw Exception('Failed to load User');
+      throw Exception(error);
     }
   }
 
@@ -93,7 +94,6 @@ class UserService {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.getString('token');
       final url = Uri.https('takichai-backend.herokuapp.com', '/api/user');
-
       final response = await http.get(url,
         headers: {
           'Content-type': 'application/json',
@@ -101,7 +101,7 @@ class UserService {
           'Authorization': 'Bearer $token',
         },
       );
-      print(jsonDecode(response.body));
+      logger.d(jsonDecode(response.body));
       User userdata = User.fromProfileData(jsonDecode(response.body));
       /*updating data*/
       prefs.setString('userID', userdata.userId);
@@ -113,7 +113,7 @@ class UserService {
       prefs.setStringList('subscriptions', userdata.subscriptions);
       return userdata;
     }catch(error){
-      throw Exception('Failed to load User');
+      throw Exception(error);
     }
   }
 
@@ -148,7 +148,7 @@ class UserService {
       return users;
     }catch(error){
       logger.e(error);
-      throw Exception('Failed to load User');
+      throw Exception(error);
     }
   }
 
@@ -184,9 +184,60 @@ class UserService {
       return userRes;
     }catch(error){
       logger.e(error);
-      throw Exception('Failed to Edit User Profile');
+      throw Exception(error);
     }
   }
+
+  Future<List<Song>> getMySongs() async{
+    String? token;
+    logger.d("inicio de get my songs");
+    List<Song> mySongsList = [];
+    try{
+      logger.d("inicio de get my songs");
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.getString('token');
+      final url = Uri.https('takichai-backend.herokuapp.com', '/api/user');
+      logger.d("inicio de get my songs");
+      final response = await http.get(url,
+        headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      logger.d("inicio de get my songs");
+      logger.d(jsonDecode(response.body));
+      User userdata = User.fromProfileData(jsonDecode(response.body));
+      Map<Object, dynamic> json = jsonDecode(response.body);
+      logger.d("json['user']['songs']");
+      logger.d(json['user']['songs']);
+      for(Map<Object, dynamic>  a in json['user']['songs']){
+        logger.d("mi cancion: " + a['name']);
+        logger.d(a['name']);
+        Song item = Song(
+
+          a['name'],
+          a['songUrl'],
+          a['year'],
+          a['genre'],
+          a['description'],
+          a['author'],
+          a['popularity'],
+          a['imageUrl'],
+          a['duration'],
+          a['instrumental'],
+          a['mood'],
+          a['songId'],
+          /**/
+        );
+        mySongsList.add(item);
+      }
+    }catch(error){
+      throw Exception(error);
+    }
+    return mySongsList;
+  }
+
 }
 
 
