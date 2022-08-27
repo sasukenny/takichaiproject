@@ -1,22 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../activities/act_nowPlaying.dart';
+import '../models/mod_Song.dart';
 import 'comp_playingBar.dart';
 
 class SongCard extends StatelessWidget {
 
   const SongCard({
     Key? key,
-    this.time="0:00" ,
-    this.title="0:00" ,
-    this.genre="rock" ,
-    required this.songId,
+    required this.song,
   }) : super(key: key);
-  
-  final String time;
-  final String title;
-  final String genre;
-  final String songId;
+
+  final Song song;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +64,7 @@ class SongCard extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             child: Text(
                                 textAlign: TextAlign.left,
-                                title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.white))
+                                song.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.white))
                           ),
                           Container(
                               alignment: Alignment(-1, 0),
@@ -80,13 +76,13 @@ class SongCard extends StatelessWidget {
                               alignment: Alignment(-1, 0),
                               child:  Text(
                                   textAlign: TextAlign.left,
-                                  'duración: ' + time, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white)),
+                                  'duración: ' + song.duration, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white)),
                           ),
                           Container(
                               alignment: Alignment(-1, 0),
                               child: Text(
                                   textAlign: TextAlign.left,
-                                  'genero: ' + genre, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white))
+                                  'genero: ' + song.genre, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 7, color: Colors.white))
                           ),
                         ],
                       ),
@@ -104,15 +100,10 @@ class SongCard extends StatelessWidget {
                       padding: EdgeInsets.all(7),
                       child: Icon(Icons.favorite, color: Colors.white),
                     ),
-                    Container(
-                      padding: EdgeInsets.all(7),
-                      child: Icon(Icons.play_arrow, color: Colors.white,),
-
-                    ),
                     InkWell(
                       child: Icon(Icons.play_arrow, color: Colors.white,),
                       onTap: () {
-                        //Navigator.push(context, MaterialPageRoute(builder: (context) =>  playingBar(timePlayed: ,songDuration: "",)),);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>  NowPlayingPage(song: song)),);
                       },
                     )
                   ],

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:just_audio/just_audio.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
+import 'package:logger/logger.dart';
 
 import '../Wrapper/wrapper.dart';
 import '../components/comp_header.dart';
@@ -24,11 +25,16 @@ class NowPlayingPage extends StatefulWidget {
 class _NowPlayingPageState extends State<NowPlayingPage> {
 
   late final PlayManager _playManager;
-
+  var logger = Logger(
+    filter: null, // Use the default LogFilter (-> only log in debug mode)
+    printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
+    output: null, // Use the default LogOutput (-> send everything to console)
+  );
   @override
   void initState(){
-
     super.initState();
+    logger.d("song.songUrl");
+    logger.d(widget.song.songUrl);
     _playManager = PlayManager(widget.song.songUrl);
   }
 

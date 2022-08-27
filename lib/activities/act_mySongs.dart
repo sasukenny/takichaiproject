@@ -108,7 +108,7 @@ class _MySongsState extends State<MySongs> {
                   shrinkWrap: true,
                   itemCount: mySongs.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return SongCard(time: mySongs[index].duration, title: mySongs[index].name,genre: mySongs[index].genre,songId: mySongs[index].songId);
+                    return SongCard(song: mySongs[index]);
                   },
                 ),
               )
