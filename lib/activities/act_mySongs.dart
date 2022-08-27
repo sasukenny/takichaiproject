@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:takichaiproject/components/comp_songcard.dart';
+import '../models/mod_Song.dart';
 import 'act_Login.dart';
 import 'act_newSong.dart';
 import '../Wrapper/wrapper.dart';
@@ -18,6 +19,7 @@ class MySongs extends StatefulWidget {
 
 class _MySongsState extends State<MySongs> {
   UserService userService = UserService();
+  List<Song> mySongs = [];
   User userdata = User('', '', '', [], [], true, '','') ;
   String? userId;
   var logger = Logger(
@@ -33,7 +35,11 @@ class _MySongsState extends State<MySongs> {
   }
   Future<void>getMySongs() async{
     logger.d("inicio de get my songs");
-    userService.getMySongs();
+    userService.getMySongs().then((response) => {
+      setState((){
+      mySongs=response;
+    })
+    });
     logger.d("fin de get my songs");
   }
   Future<void> GetUserId() async {
@@ -97,12 +103,13 @@ class _MySongsState extends State<MySongs> {
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                child: Column(
-                  children: [
-                    SongCard(time: "1:12", title: "Time"),
-                    SongCard(time: "4:23", title: "Comfortably"),
-
-                  ],
+                child: ListView.builder(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                  shrinkWrap: true,
+                  itemCount: mySongs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return SongCard(time: mySongs[index].duration, title: mySongs[index].name,genre: mySongs[index].genre,songId: mySongs[index].songId);
+                  },
                 ),
               )
             ])

@@ -1,18 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'comp_playingBar.dart';
+
 class SongCard extends StatelessWidget {
 
   const SongCard({
     Key? key,
     this.time="0:00" ,
     this.title="0:00" ,
-    this.genre="rock"
+    this.genre="rock" ,
+    required this.songId,
   }) : super(key: key);
   
   final String time;
   final String title;
   final String genre;
+  final String songId;
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +107,14 @@ class SongCard extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(7),
                       child: Icon(Icons.play_arrow, color: Colors.white,),
+
                     ),
+                    InkWell(
+                      child: Icon(Icons.play_arrow, color: Colors.white,),
+                      onTap: () {
+                        //Navigator.push(context, MaterialPageRoute(builder: (context) =>  playingBar(timePlayed: ,songDuration: "",)),);
+                      },
+                    )
                   ],
                 )
             ),

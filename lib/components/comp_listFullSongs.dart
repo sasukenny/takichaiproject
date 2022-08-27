@@ -11,12 +11,12 @@ class listFullSongs extends StatelessWidget {
     return Container(
         child: Column(
           children: [
-            SongCard(time: "1:12", title: "Takking off",),
-            SongCard(time: "4:23", title: "Dreamer",),
-            SongCard(time: "3:20", title: "Hey You"),
-            SongCard(time: "1:12", title: "Your Time",),
-            SongCard(time: "4:23", title: "is Over",),
-            SongCard(time: "3:20", title: "Hey You"),
+            SongCard(time: "1:12", title: "Takking off",songId: "62f5f9920a4d833d51136bc2",),
+            SongCard(time: "4:23", title: "Dreamer",songId: "62f5f9920a4d833d51136bc2",),
+            SongCard(time: "3:20", title: "Hey You",songId: "62f5f9920a4d833d51136bc2",),
+            SongCard(time: "1:12", title: "Your Time",songId: "62f5f9920a4d833d51136bc2",),
+            SongCard(time: "4:23", title: "is Over",songId: "62f5f9920a4d833d51136bc2",),
+            SongCard(time: "3:20", title: "Hey You",songId: "62f5f9920a4d833d51136bc2",),
           ],
         ),
     );
