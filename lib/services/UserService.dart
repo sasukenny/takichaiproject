@@ -207,12 +207,16 @@ class UserService {
       User userdata = User.fromProfileData(jsonDecode(response.body));
       Map<Object, dynamic> json = jsonDecode(response.body);
       logger.d("json['user']['songs']");
-      logger.d(json['user']['songs']);
+      int contador1= 0;
       for(Map<Object, dynamic>  a in json['user']['songs']){
         logger.d("mi cancion: " + a['name']);
         logger.d(a['name']);
-        Song item = Song(
 
+        logger.d("contador: "+ contador1.toString());
+        logger.d(a);
+        contador1++;
+
+        Song item = Song(
           a['name'],
           a['songUrl'],
           a['year'],
@@ -224,9 +228,10 @@ class UserService {
           a['duration'],
           a['instrumental'],
           a['mood'],
-          a['songId'],
+          (a['songId']!=null)?a['songId']:a['_id'],
           /**/
         );
+        logger.d(item.name);
         mySongsList.add(item);
       }
     }catch(error){

@@ -19,7 +19,6 @@ class Song {
   String mood = '';
   String songId = '';
 /**/
-
   Song(
       this.name,
       this.songUrl,
