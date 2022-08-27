@@ -29,7 +29,7 @@ class _NowPlayingPageState extends State<NowPlayingPage> {
   void initState(){
 
     super.initState();
-    _playManager = PlayManager(widget.song.songUrl);
+    _playManager = PlayManager(widget.song.songUrl, widget.song.songId);
   }
 
   @override
