@@ -1,16 +1,12 @@
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:just_audio/just_audio.dart';
-import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:logger/logger.dart';
 
 import '../Wrapper/wrapper.dart';
-import '../components/comp_header.dart';
 import '../components/comp_songDisplay.dart';
-import '../util/playManager.dart';
-
 import '../models/mod_Song.dart';
+import '../util/playManager.dart';
 
 
 class NowPlayingPage extends StatefulWidget {

@@ -1,15 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Wrapper/wrapper.dart';
 import '../components/comp_artistCard.dart';
 import '../components/comp_sectionTitle.dart';
 import '../models/mod_ArtistResumen.dart';
-import '../models/mod_User.dart';
 import '../services/ArtistService.dart';
-import '../services/UserService.dart';
 import 'act_Login.dart';
 
 class MyFavoriteArtist extends StatefulWidget {

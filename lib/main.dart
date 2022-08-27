@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'activities/act_Home.dart';
-import 'activities/act_EditProfile.dart';
-import 'activities/act_nowPlaying.dart';
 import '../models/mod_Song.dart';
-
+import 'activities/act_nowPlaying.dart';
 import 'util/createMaterialColor.dart';
 
 void main() {

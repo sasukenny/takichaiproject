@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'comp_songcard.dart';
 
 class listFullSongs extends StatelessWidget {
   const listFullSongs({

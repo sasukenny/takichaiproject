@@ -1,20 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:logger/logger.dart';
+import 'package:open_file/open_file.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:file_picker/file_picker.dart';
-import 'package:open_file/open_file.dart';
-
+import './act_Home.dart';
 import '../Wrapper/wrapper.dart';
 import '../components/comp_inputText.dart';
 import '../components/comp_textArea.dart';
 import '../models/mod_User.dart';
 import '../services/UserService.dart';
-import './act_Home.dart';
 import 'act_Login.dart';
 
 TextStyle labels = const TextStyle(

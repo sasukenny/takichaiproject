@@ -1,6 +1,6 @@
-import 'package:http/http.dart' as http; //importar para hacer peticiones
-import 'package:logger/logger.dart';
 import 'dart:convert'; //importar para hacer peticiones
+
+import 'package:logger/logger.dart';
 
 
 User userFromProfileData(String str) => User.fromProfileData(json.decode(str));

@@ -1,7 +1,4 @@
-import 'package:http/http.dart' as http; //importar para hacer peticiones
-import 'package:takichaiproject/services/UserService.dart';
-import 'dart:convert'; //importar para hacer peticiones
-import 'mod_User.dart';
+
 
 //Song songFromNewSong(String str) => Song.fromNewSong(jsonDecode(str));
 //Song songFromGetSong(String str) => Song.fromGetSong(jsonDecode(str));

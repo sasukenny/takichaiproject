@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import './act_Home.dart';
+import './act_Register.dart';
 import '../components/comp_inputText.dart';
 import '../models/mod_User.dart';
 import '../services/UserService.dart';
-import './act_Home.dart';
-import './act_Register.dart';
 
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);

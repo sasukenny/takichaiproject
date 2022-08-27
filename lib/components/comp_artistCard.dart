@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../activities/act_ArtistProfile.dart';
-import '../models/mod_ArtistResumen.dart';
 
 
 class ArtistCard extends StatelessWidget {

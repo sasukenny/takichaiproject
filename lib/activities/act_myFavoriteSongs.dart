@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:takichaiproject/components/comp_songcard.dart';
 
 import '../Wrapper/wrapper.dart';
 import '../components/comp_sectionTitle.dart';

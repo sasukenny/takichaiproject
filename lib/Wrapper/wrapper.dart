@@ -1,13 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../activities/act_Login.dart';
 import '../activities/act_Profile.dart';
 import '../components/comp_bottomNavBar.dart';
-import '../components/comp_TakichayAppbar.dart';
-import '../activities/act_Profile.dart';
 import '../services/UserService.dart';
 
 class Wrapper extends StatefulWidget {

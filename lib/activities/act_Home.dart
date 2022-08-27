@@ -6,15 +6,12 @@ import '../Wrapper/wrapper.dart';
 import '../components/comp_card.dart';
 import '../models/mod_User.dart';
 import '../services/UserService.dart';
-import 'act_AboutUs.dart';
 import 'act_ArtistList.dart';
 import 'act_Login.dart';
 import 'act_musiclist.dart';
 import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
 import 'act_mySongs.dart';
-import 'act_nowPlaying.dart';
-import '../globals/globalValues.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+
 import '../Wrapper/wrapper.dart';
 import '../components/comp_card.dart';
 import '../models/mod_User.dart';
 import '../services/UserService.dart';
+import 'act_EditProfile.dart';
 import 'act_Login.dart';
 import 'act_myFavoriteArtists.dart';
 import 'act_myFavoriteSongs.dart';
 import 'act_mySongs.dart';
-import 'act_EditProfile.dart';
 
 
 class Profile extends StatefulWidget {

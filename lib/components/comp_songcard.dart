@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../activities/act_nowPlaying.dart';
 import '../models/mod_Song.dart';
-import 'comp_playingBar.dart';
 
 class SongCard extends StatelessWidget {
 

@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http; //importar para hacer peticiones
-import 'dart:convert';
-
 import 'package:logger/logger.dart'; //importar para hacer peticiones
 
 //Clase modelo

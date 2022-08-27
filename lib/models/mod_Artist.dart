@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http; //importar para hacer peticiones
-import 'dart:convert'; //importar para hacer peticiones
+
 
 //Clase modelo
 class Artist {

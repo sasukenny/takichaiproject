@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../Wrapper/wrapper.dart';
-import '../components/comp_TextCard.dart';
-import '../components/comp_card.dart';
 import '../components/comp_listFullSongs.dart';
 import '../components/comp_sectionSubtitle.dart';
-import '../components/comp_sectionTitle.dart';
-import '../components/comp_songcard.dart';
 import '../models/mod_User.dart';
 import '../services/ArtistService.dart';
 import '../services/UserService.dart';
-import 'act_musiclist.dart';
-import 'act_nowPlaying.dart';
 
 class ArtistProfile extends StatefulWidget {
   const ArtistProfile({Key? key, required this.userId, this.isFollowing = true}) : super(key: key);

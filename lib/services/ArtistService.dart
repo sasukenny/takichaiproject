@@ -1,10 +1,9 @@
 // Dart
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-import '../globals/globalValues.dart';
 import '../models/mod_ArtistResumen.dart';
 import '../models/mod_User.dart';
 import '../models/mod_UserMessage.dart';
