@@ -24,12 +24,9 @@ class SongService{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('token');
       final url = Uri.https('takichai-backend.herokuapp.com','/api/songs');
-      logger.d("aaa: " + token!);
       final response = await http.post(url,
           headers: {
-        'Content-type': 'multipart/form-data',
-        'Accept': '*/*',
-        'Authorization': 'Bearer $token',
+            'Authorization': 'Bearer $token',
           },
           body:{
             'name': '$name',
@@ -43,7 +40,7 @@ class SongService{
       });
       logger.d("aaa");
       //print(jsonDecode(response.body));
-      logger.d(jsonDecode(response.body));
+      //logger.d(jsonDecode(response.body));
       //return newUser;
     }catch(error){
       throw Exception(error);
@@ -56,7 +53,8 @@ class SongService{
     try{
       //////////////////
       var request = http.MultipartRequest('POST', Uri.https('takichai-backend.herokuapp.com','/api/songs'));
-
+      Map<String, String> headers = { "Authorization": "Bearer $token"};
+      request.headers.addAll(headers);
       request.fields.addAll({
         'name': name,
         'year': '2000',
@@ -64,6 +62,7 @@ class SongService{
         'genre': genre,
         'mood': 'Melancolía',
         'instrumental': 'false',
+        'img': 'data:image/jpeg;base64,'+ image,
       });
       logger.d("a1");
       var stream  = new http.ByteStream(song.openRead());
@@ -73,11 +72,20 @@ class SongService{
       request.files.add(await http.MultipartFile('song', stream, length, filename: song.path));
       logger.d(song.path);
       logger.d("a2");
-      request.files.add(await http.MultipartFile.fromPath('img', image));
-      logger.d("a3");
+      /*
+      var streamImg  = new http.ByteStream(image.openRead());
+      stream.cast();
+      var lengthImg = await image.length();
+      request.files.add(await http.MultipartFile('img', streamImg, lengthImg, filename: image.path));
+      //logger.d(image.path);
+      logger.d("a3");*/
       http.StreamedResponse response = await request.send();
       logger.d(request.files.toString());
-      logger.d(response.toString());
+      logger.d(request.fields);
+      logger.d(request.files[0].filename);
+      logger.d(response.request.toString());
+      logger.d(response.request);
+
       if (response.statusCode == 200) {
         String str = await response.stream.bytesToString();
         print("yeihhh");
@@ -109,8 +117,9 @@ class SongService{
       Map<Object, dynamic> json = jsonDecode(response.body);
 
       for(Map<Object, dynamic> a in json['songs']){
-        print(a);
+        logger.d(a);
         Song item = Song(
+
             a['name'],
             a['songUrl'],
             a['year'],
@@ -124,6 +133,7 @@ class SongService{
             a['mood'],
             /**/
         );
+        logger.d("1");
         print('item: '+ item.name);
         songs.add(item);
       }
