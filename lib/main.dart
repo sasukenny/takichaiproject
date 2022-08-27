@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../models/mod_Song.dart';
+import '../services/SongService.dart';
+
 import 'activities/act_nowPlaying.dart';
 import 'util/createMaterialColor.dart';
 
 void main() {
   runApp(const MyApp());
 }
-
-Song song1 = Song.emptySong();
+SongService ss = new SongService();
+Song song1 = ss.getSong('62f5f98c0a4d833d51136bbc');
 
 class MyApp extends StatelessWidget {
 
