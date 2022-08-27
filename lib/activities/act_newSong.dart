@@ -61,101 +61,141 @@ class _newSongState extends State<newSong> {
   // TEXT FIELDS
 
   Widget _buildName(){
-    return TextFormField(
-      style: const TextStyle(
-        color: Colors.white
+    return Container (
+      margin: EdgeInsets.fromLTRB(50,0,50,20),
+      padding: EdgeInsets.fromLTRB(50,0,50,0),
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(245, 245, 245, 1),
+        borderRadius: BorderRadius.circular(50),
       ),
-      decoration: const InputDecoration(
-        labelText: "Título de la canción",
-        hintStyle: TextStyle(
-          color: Colors.white
+        child: TextFormField(
+          style: const TextStyle(
+            color: Colors.white
+          ),
+          decoration: const InputDecoration(
+            labelText: "Título",
+            hintStyle: TextStyle(
+              color: Colors.white
+            ),
+            fillColor: Colors.blue
+          ),
+          validator: (String? value){
+            return (value == null) ? 'El título es obligatorio' : null;
+          },
+          onChanged: (String? value){
+            _name = value!;
+          },
         ),
-        fillColor: Colors.blue
-      ),
-      validator: (String? value){
-        return (value == null) ? 'El título es obligatorio' : null;
-      },
-      onChanged: (String? value){
-        _name = value!;
-      },
     );
   }
 
   Widget _buildDescription(){
-    return TextFormField(
-      style: const TextStyle(
-          color: Colors.white,
+    return Container (
+      margin: EdgeInsets.fromLTRB(50,0,50,20),
+      padding: EdgeInsets.fromLTRB(50,0,50,0),
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(245, 245, 245, 1),
+        borderRadius: BorderRadius.circular(50),
+      ),
+      child: TextFormField(
+        style: const TextStyle(
+            color: Colors.white,
 
+        ),
+        decoration: const InputDecoration(
+          labelText: "Descripción de la canción",
+          fillColor: Colors.blue
+        ),
+        onChanged: (String? value){
+          _description = value!;
+        },
       ),
-      decoration: const InputDecoration(
-        labelText: "Descripción de la canción",
-        fillColor: Colors.blue
-      ),
-      onChanged: (String? value){
-        _description = value!;
-      },
     );
   }
 
 // DROPDOWNS
   Widget _buildLanguage(){
-    return DropdownButton(
-      value: _language,
-      items: <String>['Español', 'English', 'Quechua/RunaSimi', 'Aymara']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-      icon: const Icon(Icons.arrow_downward),
-      style: const TextStyle(color: Colors.black),
-      onChanged:(String? newValue){
-        value:newValue;
-        setState(() {
-          _language = newValue!;
-        });
-      },
+    return Container (
+      margin: EdgeInsets.fromLTRB(35,0,35,20),
+      padding: EdgeInsets.fromLTRB(50,0,25,0),
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(245, 245, 245, 1),
+        borderRadius: BorderRadius.circular(50),
+      ),
+      child:  DropdownButton(
+        value: _language,
+        items: <String>['Español', 'English', 'Quechua/RunaSimi', 'Aymara']
+            .map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+        icon: const Icon(Icons.arrow_downward),
+        style: const TextStyle(color: Colors.black),
+        onChanged:(String? newValue){
+          value:newValue;
+          setState(() {
+            _language = newValue!;
+          });
+        },
+      ),
     );
   }
 
   Widget _buildMood(){
-    return DropdownButton(
-      value: _mood,
-      items: <String>['Alegre', 'Triste', 'Melancólico', 'Reflexivo']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-      icon: const Icon(Icons.arrow_downward),
-      style: const TextStyle(color: Colors.black),
-      onChanged:(String? newValue){
-        setState(() {
-          _mood = newValue!;
-        });
-      },
+    return Container (
+      margin: EdgeInsets.fromLTRB(35,0,35,20),
+      padding: EdgeInsets.fromLTRB(50,0,25,0),
+      decoration: BoxDecoration(
+      color: Color.fromRGBO(245, 245, 245, 1),
+      borderRadius: BorderRadius.circular(50),
+      ),
+      child:  DropdownButton(
+          value: _mood,
+          items: <String>['Alegre', 'Triste', 'Melancólico', 'Reflexivo']
+              .map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+          icon: const Icon(Icons.arrow_downward),
+          style: const TextStyle(color: Colors.black),
+          onChanged:(String? newValue){
+            setState(() {
+              _mood = newValue!;
+            });
+          },
+        ),
     );
   }
 
   Widget _buildGenre(){
-    return DropdownButton(
-      value: _genre,
-      items: <String>['Huayno', 'Sikuri', 'Selvática', 'Cumbia', 'Afroperuana', 'Rock', 'Otro']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-      icon: const Icon(Icons.arrow_downward),
-      style: const TextStyle(color: Colors.black),
-      onChanged:(String? newValue){
-        setState(() {
-          _genre = newValue!;
-        });
-      },
+    return Container (
+      margin: EdgeInsets.fromLTRB(35,0,35,20),
+      padding: EdgeInsets.fromLTRB(50,0,25,0),
+      decoration: BoxDecoration(
+      color: Color.fromRGBO(245, 245, 245, 1),
+      borderRadius: BorderRadius.circular(50),
+      ),
+      child:  DropdownButton(
+          value: _genre,
+          items: <String>['Huayno', 'Sikuri', 'Selvática', 'Cumbia', 'Afroperuana', 'Rock', 'Otro']
+              .map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+          icon: const Icon(Icons.arrow_downward),
+          style: const TextStyle(color: Colors.black),
+          onChanged:(String? newValue){
+            setState(() {
+              _genre = newValue!;
+            });
+          },
+        ),
     );
   }
 
@@ -267,7 +307,7 @@ class _newSongState extends State<newSong> {
             Column(
               children: [
 
-                Text("Nombre", style: labels),
+                Text("Nombre de la canción", style: labels),
                 Container(
                     padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                         child: _buildName()
