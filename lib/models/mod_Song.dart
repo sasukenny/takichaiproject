@@ -16,11 +16,12 @@ class Song {
   //User author = User.emptyUser();
   String author = "";
   String popularity = '0';
-  String imageUrl = '';
+  String? imageUrl ;
   String duration = '';
   bool instrumental = false;
   String mood = '';
 /**/
+
   Song(
       this.name,
       this.songUrl,

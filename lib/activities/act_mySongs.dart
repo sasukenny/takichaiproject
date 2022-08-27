@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:takichaiproject/components/comp_songcard.dart';
 import 'act_Login.dart';
@@ -19,16 +20,26 @@ class _MySongsState extends State<MySongs> {
   UserService userService = UserService();
   User userdata = User('', '', '', [], [], true, '','') ;
   String? userId;
-
+  var logger = Logger(
+    filter: null, // Use the default LogFilter (-> only log in debug mode)
+    printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
+    output: null, // Use the default LogOutput (-> send everything to console)
+  );
   @protected
   @mustCallSuper
   initState(){
+    getMySongs();
     GetUserId();
   }
-
+  Future<void>getMySongs() async{
+    logger.d("inicio de get my songs");
+    userService.getMySongs();
+    logger.d("fin de get my songs");
+  }
   Future<void> GetUserId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     userId = prefs.getString('userId');
+
     if (userId != null) {
       userService.getUserData(userId!).then((response) =>
       {
@@ -42,6 +53,7 @@ class _MySongsState extends State<MySongs> {
           MaterialPageRoute(builder: (context) => login()),
         )
       });
+
     }
     else {
       Navigator.push(
@@ -89,10 +101,7 @@ class _MySongsState extends State<MySongs> {
                   children: [
                     SongCard(time: "1:12", title: "Time"),
                     SongCard(time: "4:23", title: "Comfortably"),
-                    SongCard(time: "3:20", title: "Hey You"),
-                    SongCard(time: "3:20", title: "Hey You"),
-                    SongCard(time: "3:20", title: "Hey You"),
-                    SongCard(time: "3:20", title: "Hey You"),
+
                   ],
                 ),
               )

@@ -4,6 +4,7 @@ import 'dart:core';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/mod_Song.dart';
 import '../models/mod_User.dart';
 
 
@@ -93,7 +94,6 @@ class UserService {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.getString('token');
       final url = Uri.https('takichai-backend.herokuapp.com', '/api/user');
-
       final response = await http.get(url,
         headers: {
           'Content-type': 'application/json',
@@ -101,7 +101,7 @@ class UserService {
           'Authorization': 'Bearer $token',
         },
       );
-      print(jsonDecode(response.body));
+      logger.d(jsonDecode(response.body));
       User userdata = User.fromProfileData(jsonDecode(response.body));
       /*updating data*/
       prefs.setString('userID', userdata.userId);
@@ -181,6 +181,41 @@ class UserService {
       throw Exception(error);
     }
   }
+
+  Future<void> getMySongs() async{
+    String? token;
+    logger.d("inicio de get my songs");
+    List<String> mySongsList = [];
+    try{
+      logger.d("inicio de get my songs");
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.getString('token');
+      final url = Uri.https('takichai-backend.herokuapp.com', '/api/user');
+      logger.d("inicio de get my songs");
+      final response = await http.get(url,
+        headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      logger.d("inicio de get my songs");
+      logger.d(jsonDecode(response.body));
+      User userdata = User.fromProfileData(jsonDecode(response.body));
+      Map<Object, dynamic> json = jsonDecode(response.body);
+      logger.d("json['user']['songs']");
+      logger.d(json['user']['songs']);
+      for(Map<Object, dynamic>  song in json['user']['songs']){
+        logger.d("mi cancion: " + song['name']);
+        logger.d(song['name']);
+        mySongsList.add(song['name']);
+      }
+    }catch(error){
+      throw Exception(error);
+    }
+    //return mySongsList;
+  }
+
 }
 
 

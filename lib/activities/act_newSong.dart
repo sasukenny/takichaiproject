@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -33,7 +34,10 @@ class _newSongState extends State<newSong> {
   String _imageURL = "";
   bool _instrumental = false;
   late File _song;
-  PlatformFile? _img;
+  late File _img;
+  String _songBase64 = "";
+  String _imgBase64 = "";
+
   var logger = Logger(
     filter: null, // Use the default LogFilter (-> only log in debug mode)
     printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
@@ -48,7 +52,7 @@ class _newSongState extends State<newSong> {
   }
   SubmitSong() async {
     SongService songService = SongService();
-    await songService.NewSong("Kennecio", "rock", "description",_song,_imageURL);
+    await songService.NewSong("Kennecio", "rock", "description",_song,_imgBase64);
     logger.d("response: " );
   }
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
@@ -165,16 +169,18 @@ class _newSongState extends State<newSong> {
           print("result null");
           return;
         }
-        print("result" );
+        print("result song" );
         PlatformFile songFile = response.files.first;
         final File fileForFirebase = File(songFile.path!);
         _song = fileForFirebase;
         OpenFile.open(songFile.path!); //Para simulador movil cambiar bytes.toString() por path
         //OpenFile.open(songFile.bytes.toString());
-
+        logger.d("werty");
+        List<int> fileBytes = await fileForFirebase.readAsBytes();
+        _songBase64 = base64Encode(fileBytes);
+        logger.d(_songBase64);
         _songURL = songFile.path!; //Para simulador movil cambiar bytes.toString() por path
         //_songURL = songFile.bytes.toString()!; //Para simulador movil cambiar bytes.toString() por path
-
 
       },
     );
@@ -188,15 +194,19 @@ class _newSongState extends State<newSong> {
         if(response == null){
           return;
         }
-        print("result" );
+        print("result img" );
         final imageFile = response.files.first;
-        _img = imageFile;
+        final File fileForFirebase = File(imageFile.path!);
+        _img = fileForFirebase;
         OpenFile.open(imageFile.path!); //Para simulador movil cambiar bytes.toString() por path
         //OpenFile.open(imageFile.bytes.toString());
 
         _imageURL = imageFile.path!; //Para simulador movil cambiar bytes.toString() por path
         //_songURL = imageFile.bytes.toString()!; //Para simulador movil cambiar bytes.toString() por path
-
+        logger.d("werty");
+        List<int> fileBytes = await fileForFirebase.readAsBytes();
+        _imgBase64 = base64Encode(fileBytes);
+        logger.d(_imgBase64);
       },
     );
   }
