@@ -20,6 +20,7 @@ class Song {
   String duration = '';
   bool instrumental = false;
   String mood = '';
+  String songId = '';
 /**/
 
   Song(
@@ -33,7 +34,8 @@ class Song {
       this.imageUrl,
       this.duration,
       this.instrumental,
-      this.mood
+      this.mood,
+      this.songId
       /**/
       );
 

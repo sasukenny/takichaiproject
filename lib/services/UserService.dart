@@ -188,10 +188,10 @@ class UserService {
     }
   }
 
-  Future<void> getMySongs() async{
+  Future<List<Song>> getMySongs() async{
     String? token;
     logger.d("inicio de get my songs");
-    List<String> mySongsList = [];
+    List<Song> mySongsList = [];
     try{
       logger.d("inicio de get my songs");
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -211,15 +211,31 @@ class UserService {
       Map<Object, dynamic> json = jsonDecode(response.body);
       logger.d("json['user']['songs']");
       logger.d(json['user']['songs']);
-      for(Map<Object, dynamic>  song in json['user']['songs']){
-        logger.d("mi cancion: " + song['name']);
-        logger.d(song['name']);
-        mySongsList.add(song['name']);
+      for(Map<Object, dynamic>  a in json['user']['songs']){
+        logger.d("mi cancion: " + a['name']);
+        logger.d(a['name']);
+        Song item = Song(
+
+          a['name'],
+          a['songUrl'],
+          a['year'],
+          a['genre'],
+          a['description'],
+          a['author'],
+          a['popularity'],
+          a['imageUrl'],
+          a['duration'],
+          a['instrumental'],
+          a['mood'],
+          a['songId'],
+          /**/
+        );
+        mySongsList.add(item);
       }
     }catch(error){
       throw Exception(error);
     }
-    //return mySongsList;
+    return mySongsList;
   }
 
 }
