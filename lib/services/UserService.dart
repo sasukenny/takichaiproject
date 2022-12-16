@@ -19,15 +19,16 @@ class UserService {
   );
   //Registrer a new user
   Future<User> RegisterUser(String name, String email, String pw, String desc) async{
+    print("Hola");
     try{
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users');
+      final url = Uri.http('localhost:3000', '/api/users');
       final response = await http.post(url, body:{
         "name": name,
         "email": email,
         "password": pw,
         "description": desc
       });
-      //print(jsonDecode(response.body));
+      print(jsonDecode(response.body));
       User newUser = User.fromRegister(jsonDecode(response.body));
       return newUser;
     }catch(error){
@@ -37,7 +38,7 @@ class UserService {
   //Login user
   Future<User> LoginUser(String email, String pw) async{
     try{
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/login');
+      final url = Uri.http('localhost:3000', '/api/users/login');
       final response = await http.post(url, body:{
         "email": email,
         "password": pw,
@@ -77,7 +78,7 @@ class UserService {
   //Get and Update User Data
   Future<User> getUserData(String id) async {
     try{
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/${id}');
+      final url = Uri.http('localhost:3000', '/api/users/${id}');
       final response = await http.get(url);
       print(jsonDecode(response.body));
       User userdata = User.fromProfileData(jsonDecode(response.body));
@@ -95,7 +96,7 @@ class UserService {
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.getString('token');
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/user');
+      final url = Uri.http('localhost:3000', '/api/user');
       final response = await http.get(url,
         headers: {
           'Content-type': 'application/json',
@@ -122,7 +123,7 @@ class UserService {
   //get all user - then this will become getAllArtist
   Future<List<User>> getAllUsers() async {
     try{
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/');
+      final url = Uri.http('localhost:3000', '/api/users/');
       final response = await http.get(url);
       List<User> users = [];
       Map<Object, dynamic> json = jsonDecode(response.body);
@@ -158,7 +159,7 @@ class UserService {
   Future<User> EditProfile(String pw, String description, String publicProfile, String img, String? token, String? id) async{
     print(token);
     try{
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/${id}');
+      final url = Uri.http('localhost:3000', '/api/users/${id}');
       final response = await http.put(
           url,
           body:{
@@ -193,7 +194,7 @@ class UserService {
       logger.d("inicio de get my songs");
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.getString('token');
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/user');
+      final url = Uri.http('localhost:3000', '/api/user');
       logger.d("inicio de get my songs");
       final response = await http.get(url,
         headers: {

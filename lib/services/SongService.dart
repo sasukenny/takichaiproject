@@ -21,7 +21,7 @@ class SongService{
     try{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('token');
-      final url = Uri.https('takichai-backend.herokuapp.com','/api/songs');
+      final url = Uri.http('localhost:3000','/api/songs');
       final response = await http.post(url,
           headers: {
             'Authorization': 'Bearer $token',
@@ -50,7 +50,7 @@ class SongService{
     String? token = prefs.getString('token');
     try{
       //////////////////
-      var request = http.MultipartRequest('POST', Uri.https('takichai-backend.herokuapp.com','/api/songs'));
+      var request = http.MultipartRequest('POST', Uri.http('localhost:3000','/api/songs'));
       Map<String, String> headers = { "Authorization": "Bearer $token"};
       request.headers.addAll(headers);
       request.fields.addAll({
@@ -110,7 +110,7 @@ class SongService{
     try{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.getString('token');
-      //final url = Uri.https('takichai-backend.herokuapp.com','/api/songs', query);
+      //final url = Uri.http('localhost:3000','/api/songs', query);
       final url = Uri.https('takichai-recommendations.herokuapp.com','/v1/recomendations');
       final response = await http.get(url, headers: {"Authorization": 'Bearer $token'});
       Map<Object, dynamic> json = jsonDecode(response.body);
@@ -151,7 +151,7 @@ class SongService{
     try{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.getString('token');
-      final url = Uri.https('takichai-backend.herokuapp.com','/api/song/$songId');
+      final url = Uri.http('localhost:3000','/api/song/$songId');
       final response = await http.get(url, headers: {"Authorization": 'Bearer $token'});
       Map<Object, dynamic> json = jsonDecode(response.body);
 

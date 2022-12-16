@@ -11,7 +11,7 @@ import '../models/mod_UserMessage.dart';
 class ArtistService {
   Future<User> getArtistData(String id) async {
     try{
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/${id}');
+      final url = Uri.http('localhost:3000', '/api/users/${id}');
       final response = await http.get(url);
       print(jsonDecode(response.body));
       User userdata = User.fromRegister(jsonDecode(response.body));
@@ -29,7 +29,7 @@ class ArtistService {
     try{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.getString('token');
-      final url = Uri.https('takichai-backend.herokuapp.com','/api/users/subscribe', query);
+      final url = Uri.http('localhost:3000','/api/users/subscribe', query);
       final response = await http.patch(url,
         headers: {"Authorization": 'Bearer $token'},
       );
@@ -49,7 +49,7 @@ class ArtistService {
     try{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.getString('token');
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/users/unsubscribe', query );
+      final url = Uri.http('localhost:3000', '/api/users/unsubscribe', query );
       final response = await http.patch(url,
         headers: {"Authorization": 'Bearer $token'},
       );
@@ -69,7 +69,7 @@ class ArtistService {
     try{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.getString('token');
-      final url = Uri.https('takichai-backend.herokuapp.com', '/api/user');
+      final url = Uri.http('localhost:3000', '/api/user');
 
       final response = await http.get(url,
         headers: {

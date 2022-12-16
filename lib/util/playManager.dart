@@ -117,7 +117,7 @@ class PlayManager {
     try{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.getString('token');
-      final url = Uri.https('takichai-backend.herokuapp.com','/api/songs/stats/${id}',query);
+      final url = Uri.http('localhost:3000','/api/songs/stats/${id}',query);
       final response = await http.patch(url,
         headers: {"Authorization": 'Bearer $token'},
       );
@@ -139,7 +139,7 @@ class PlayManager {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.getString('token');
       final url = Uri.https(
-          'takichai-backend.herokuapp.com', '/api/songs/stats/${id}', query);
+          'http://localhost:3000', '/api/songs/stats/${id}', query);
       final response = await http.patch(url,
         headers: {"Authorization": 'Bearer $token'},
       );
