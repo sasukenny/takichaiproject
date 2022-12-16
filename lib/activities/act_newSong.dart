@@ -50,7 +50,7 @@ class _newSongState extends State<newSong> {
   }
   SubmitSong() async {
     SongService songService = SongService();
-    await songService.NewSong("Kennecio", "rock", "description",_song,_imgBase64);
+    await songService.NewSong(_name, _genre, _description,_song,_imgBase64);
     logger.d("response: " );
   }
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
